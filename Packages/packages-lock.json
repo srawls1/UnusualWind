@@ -1,5 +1,28 @@
 {
   "dependencies": {
+    "com.srawls1.character-controller": {
+      "version": "https://github.com/srawls1/character-controllers.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "43c0a9e668892b49e7ec7911005c4a6d67bedff6"
+    },
+    "com.srawls1.core": {
+      "version": "https://github.com/srawls1/core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+      },
+      "hash": "46803c231469b82d536843a31327b16967dedfd4"
+    },
+    "com.srawls1.my-package-manager": {
+      "version": "https://github.com/srawls1/MyPackageManager.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4a593b505157426dc26f06e94cb23dd00917988e"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.9",
       "depth": 1,
