@@ -1,8 +1,5 @@
 {
   "dependencies": {
-    "com.srawls1.character-controller": "https://github.com/srawls1/character-controllers.git",
-    "com.srawls1.core": "https://github.com/srawls1/core.git",
-    "com.srawls1.my-package-manager": "https://github.com/srawls1/MyPackageManager.git",
     "com.unity.collab-proxy": "2.0.0",
     "com.unity.feature.2d": "1.0.0",
     "com.unity.ide.rider": "3.0.18",
