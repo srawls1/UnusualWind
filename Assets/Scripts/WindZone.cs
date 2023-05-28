@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WindZone : MonoBehaviour
 {
+	[SerializeField] private float windSpeed;
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		SeedInWind seed = collision.GetComponent<SeedInWind>();
@@ -24,6 +26,6 @@ public class WindZone : MonoBehaviour
 
 	public Vector2 GetWindVelocityAtPoint(Vector2 point)
 	{
-		return Vector2.right;
+		return windSpeed * Vector2.right;
 	}
 }
