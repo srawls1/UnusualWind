@@ -9,8 +9,7 @@ public class EarthRotation : MonoBehaviour
 
     private float radius2deg;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         radius2deg = Mathf.Rad2Deg / radius;
     }
@@ -22,10 +21,5 @@ public class EarthRotation : MonoBehaviour
         referencePoint.position -= xDif * Vector3.right;
         float angularDif = xDif * radius2deg;
         transform.Rotate(Vector3.forward, angularDif);
-
-            // c = 2*pi*r
-            // arc = 2*pi*r*angle/360
-            // angle = 360*arc/(2*pi*r)
-            // angle = 180*arc/(pi*r)
     }
 }
