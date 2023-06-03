@@ -38,11 +38,11 @@ public class SeedInWind : MonoBehaviour
 	private void FixedUpdate()
 	{
 		Vector2 windSpeed = GetAverageWindSpeed();
-		Vector2 diffFromWindSpeed = windSpeed - rigidbody.velocity;
-		float windCaught = Vector2.Dot(facingVector, diffFromWindSpeed) * dragCoefficient;
-		windCaught = Mathf.Max(0f, windCaught);
+		Vector2 adjustedWindVelocity = Mathf.Max(0f, Vector2.Dot(windSpeed, facingVector)) * facingVector;
+		Vector2 diffFromWindSpeed = adjustedWindVelocity - rigidbody.velocity;
+		Vector2 windCaught = diffFromWindSpeed * dragCoefficient;
 		Debug.Log($"windSpeed={windSpeed}, diffFromWindSpeed={diffFromWindSpeed}, facing={facingVector}, windCaught={windCaught}");
-		rigidbody.AddForce(windCaught * facingVector);
+		rigidbody.AddForce(windCaught);
 	}
 
 	private void UpdateDirection()

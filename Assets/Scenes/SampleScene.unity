@@ -702,9 +702,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingBlendSpeed: 20
   dragCoefficientBlendSpeed: 5
-  openDragCoefficient: 100
+  openDragCoefficient: 5
   closedDragCoefficient: 0
-  openGravityScale: 0.1
+  openGravityScale: 1
   closedGravityScale: 1
 --- !u!212 &1502400860
 SpriteRenderer:
