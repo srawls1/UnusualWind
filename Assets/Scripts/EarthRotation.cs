@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class EarthRotation : MonoBehaviour
 {
-    [SerializeField] private Transform referencePoint;
+    [SerializeField] private string referencePointTag;
     [SerializeField] private float radius;
 
+    private Transform referencePoint;
     private float radius2deg;
 
     void Awake()
     {
+        referencePoint = GameObject.FindGameObjectWithTag(referencePointTag).transform;
         radius2deg = Mathf.Rad2Deg / radius;
     }
 
