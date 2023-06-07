@@ -12,6 +12,7 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float closedDragCoefficient;
 	[SerializeField] private float openGravityScale;
 	[SerializeField] private float closedGravityScale;
+	[SerializeField] private float boostMagnitude;
 
 	private float dragCoefficient;
 	private float gravityScale;
@@ -33,6 +34,7 @@ public class SeedInWind : MonoBehaviour
 	{
 		UpdateDragCoefficient();
 		UpdateDirection();
+		SeedBoostCheck();
 	}
 
 	private void FixedUpdate()
@@ -87,4 +89,14 @@ public class SeedInWind : MonoBehaviour
 	{
 		windZones.Remove(zone);
 	}
+
+	private void SeedBoostCheck()
+    {
+		if (Input.GetKeyDown(KeyCode.P))
+        {
+			Vector2 direction = new Vector2(0f, 1f).normalized;
+			Vector2 force = direction * boostMagnitude;
+			rigidbody.AddForce(force, ForceMode2D.Impulse);
+        }
+    }
 }

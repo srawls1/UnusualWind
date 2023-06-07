@@ -523,6 +523,7 @@ MonoBehaviour:
   closedDragCoefficient: 0
   openGravityScale: 1
   closedGravityScale: 1
+  boostMagnitude: 21
 --- !u!212 &1502400860
 SpriteRenderer:
   m_ObjectHideFlags: 0
