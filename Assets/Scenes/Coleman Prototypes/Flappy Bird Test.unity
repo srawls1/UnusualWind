@@ -595,7 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frequency: 1
   dampingRatio: 1
-  addVelocity: 1.8
+  addVelocity: 2
   velocity: -1.5
   springPrefab: {fileID: 4226682802708875187, guid: 7a1c751525e5efa4f9431a0c995bdf42, type: 3}
 --- !u!70 &971708095
