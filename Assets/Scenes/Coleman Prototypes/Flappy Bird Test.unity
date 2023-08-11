@@ -593,11 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295c7279fac22e9459fdb161142fe851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequency: 1
-  dampingRatio: 1
-  addVelocity: 2
   velocity: -1.5
-  springPrefab: {fileID: 4226682802708875187, guid: 7a1c751525e5efa4f9431a0c995bdf42, type: 3}
+  velocityDown: -1.5
 --- !u!70 &971708095
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
