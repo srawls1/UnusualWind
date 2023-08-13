@@ -129,9 +129,13 @@ public class SeedInWind : MonoBehaviour
 			for (float dt = 0f; dt < reboundDuration; dt += Time.fixedDeltaTime)
 			{
 				float velocity = rigidbody.velocity.y;
-				float newPosition = Mathf.SmoothDamp(transform.position.y,
-					reboundTopAltitude, ref velocity, reboundDuration - dt);
-				transform.position = new Vector3(transform.position.x, newPosition);
+				if (velocity < 0) { float newPosition = Mathf.SmoothDamp(transform.position.y,
+						reboundTopAltitude, ref velocity, (reboundDuration - dt) / 3);
+					transform.position = new Vector3(transform.position.x, newPosition); }
+				else { float newPosition = Mathf.SmoothDamp(transform.position.y,
+						reboundTopAltitude, ref velocity, reboundDuration - dt);
+					transform.position = new Vector3(transform.position.x, newPosition); }
+
 				rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
 				Debug.DrawLine(transform.position, new Vector3(transform.position.x, reboundTopAltitude));
 				yield return new WaitForFixedUpdate();
