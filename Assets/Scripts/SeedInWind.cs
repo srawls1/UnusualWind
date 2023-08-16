@@ -32,9 +32,11 @@ public class SeedInWind : MonoBehaviour
 	private Player player;
 	new private Rigidbody2D rigidbody;
 	private Coroutine currentDive;
+	private Animator seedAnimator;
 
 	private void Awake()
 	{
+		seedAnimator = GetComponent<Animator>();
 		player = ReInput.players.GetPlayer(0);
 		rigidbody = GetComponent<Rigidbody2D>();
 		// ay = g
@@ -103,6 +105,10 @@ public class SeedInWind : MonoBehaviour
 	{
 		state = SeedMovementState.Diving;
 
+		seedAnimator.SetBool("Dive", true);
+		seedAnimator.SetBool("Rise", false);
+		seedAnimator.SetBool("Normal", false);
+
 		float fallStartAltitude = transform.position.y;
 		rigidbody.gravityScale = fallGravityScale;
 
@@ -112,6 +118,10 @@ public class SeedInWind : MonoBehaviour
 		}
 
 		state = SeedMovementState.Rising;
+		seedAnimator.SetBool("Rise", true);
+		seedAnimator.SetBool("Normal", false);
+		seedAnimator.SetBool("Dive", false);
+
 		rigidbody.gravityScale = 0f;
 
 		yield return new WaitForFixedUpdate();
@@ -143,6 +153,9 @@ public class SeedInWind : MonoBehaviour
 		}
 
 		state = SeedMovementState.FallingToEquilibrium;
+		seedAnimator.SetBool("Normal", true);
+		seedAnimator.SetBool("Dive", false);
+		seedAnimator.SetBool("Rise", false);
 
 		float dampDestination = equilibriumAltitude +
 			(transform.position.y > equilibriumAltitude ?

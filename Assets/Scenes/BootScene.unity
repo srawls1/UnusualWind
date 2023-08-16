@@ -231,7 +231,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.0069439393, y: -2.688531e-10, z: 1.8669445e-12, w: 0.9999759}
+  m_LocalRotation: {x: 0.0069439393, y: -2.6884328e-10, z: 1.8668767e-12, w: 0.9999759}
   m_LocalPosition: {x: 0, y: 3.073889, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -493,6 +493,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158117557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158117559}
+  - component: {fileID: 1158117558}
+  m_Layer: 0
+  m_Name: ColliderSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158117558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158117557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0c1230a30d13d499c6675d19e12347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 4
+  pipe: {fileID: 5419938167457816605, guid: 1946ceda8e84bef409fed4006ccb2a12, type: 3}
+  height: 10
+--- !u!4 &1158117559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158117557}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.25, y: 3.61, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349392546
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +602,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349392546}
-  m_LocalRotation: {x: 0.0069439393, y: -2.688531e-10, z: 1.8669445e-12, w: 0.9999759}
+  m_LocalRotation: {x: 0.0069439393, y: -2.6884328e-10, z: 1.8668767e-12, w: 0.9999759}
   m_LocalPosition: {x: 0, y: 3.073889, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -708,6 +755,7 @@ GameObject:
   - component: {fileID: 1502400859}
   - component: {fileID: 1502400862}
   - component: {fileID: 1502400863}
+  - component: {fileID: 1502400864}
   m_Layer: 0
   m_Name: SquareSeed
   m_TagString: Player
@@ -778,7 +826,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84c2d4ac11edabe43ae5b04027c33c2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -798,7 +846,7 @@ Transform:
   m_GameObject: {fileID: 1502400858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.91, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 798766707}
@@ -839,9 +887,29 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.24, y: 3.93}
   serializedVersion: 2
-  m_Radius: 0.62
+  m_Radius: 2.76
+--- !u!95 &1502400864
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502400858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 202a8cac67256ff4ebe7b1469b3ea392, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1584123332
 GameObject:
   m_ObjectHideFlags: 0
