@@ -844,7 +844,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.0069439393, y: -2.688531e-10, z: 1.8669445e-12, w: 0.9999759}
+  m_LocalRotation: {x: 0.0069439393, y: 2.6884317e-10, z: -1.8668758e-12, w: 0.9999759}
   m_LocalPosition: {x: 0, y: 3.073889, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1090,8 +1090,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneLoadChannel: {fileID: 11400000, guid: 89a9d242a918d854ab511621200a3ce6, type: 2}
   startingScene:
-    sceneAsset: {fileID: 102900000, guid: 8aa9fe7dd44adc9459dda7d0d067b55b, type: 3}
-    scenePath: Assets/Scenes/TestScene1.unity
+    sceneAsset: {fileID: 102900000, guid: d7f99c154736e8d42b85484848a49a0a, type: 3}
+    scenePath: Assets/Scenes/BlockOut.unity
 --- !u!4 &1145788522
 Transform:
   m_ObjectHideFlags: 0
@@ -1216,7 +1216,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349392546}
-  m_LocalRotation: {x: 0.0069439393, y: -2.688531e-10, z: 1.8669445e-12, w: 0.9999759}
+  m_LocalRotation: {x: 0.0069439393, y: 2.6884317e-10, z: -1.8668758e-12, w: 0.9999759}
   m_LocalPosition: {x: 0, y: 3.073889, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1310,7 +1310,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1482431303
@@ -1448,7 +1448,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1502400861
