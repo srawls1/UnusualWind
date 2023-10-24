@@ -115,7 +115,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_0
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 1139
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74b41fbcf018ce4e9823779970f566a
+      internalID: -1465695808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_1
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 1134
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b4d4df68410d143b4fd302542ebf18
+      internalID: -145887403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_2
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 1121
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b0ea65c72428f4997407b7204de7bc
+      internalID: 1725353462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_3
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 1123
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff873ce71495be843b3a765f963e8225
+      internalID: 1019930380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_4
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 1116
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 834b5316376a3ca4ca519e03a10fd5da
+      internalID: 1502845757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_5
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1122
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df29d1a8d62741146aac9e1a7925ec83
+      internalID: 751634317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1100
+        width: 35
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8558716ad6c046b48ba45fd5f8dc045d
+      internalID: -1535155430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1093
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c92e497c80aba24a9a0ba8c07ee6f6d
+      internalID: -1868549093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean1 to Ocean1 Transition_8
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 163
+        width: 2031
+        height: 959
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: babea078aedb4584ba83144a88172142
+      internalID: 9712298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +315,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ocean1 to Ocean1 Transition_1: -145887403
+      Ocean1 to Ocean1 Transition_3: 1019930380
+      Ocean1 to Ocean1 Transition_6: -1535155430
+      Ocean1 to Ocean1 Transition_5: 751634317
+      Ocean1 to Ocean1 Transition_2: 1725353462
+      Ocean1 to Ocean1 Transition_0: -1465695808
+      Ocean1 to Ocean1 Transition_7: -1868549093
+      Ocean1 to Ocean1 Transition_8: 9712298
+      Ocean1 to Ocean1 Transition_4: 1502845757
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

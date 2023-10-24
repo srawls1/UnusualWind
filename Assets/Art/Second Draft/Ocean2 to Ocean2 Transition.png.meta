@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 64, y: 213, z: 51, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -115,18 +115,260 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_0
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 1183
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f5397446686fc447a3a6f19f03e7665
+      internalID: 833791823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_1
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 1178
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e70be2015edaa64abb38dd1a7b2d3c6
+      internalID: 1581115128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_2
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 1161
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c5ce886ed85d164b819ad0b1fda229d
+      internalID: -584900306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_3
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 1177
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 760ba76beaa66924d92bcca39b90253f
+      internalID: 2042814501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_4
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 1172
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ddded0754d6de47bf1f6e414bf9f46
+      internalID: -1907991487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_5
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 1166
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9f03ec1717e3d048baac278a204a4f4
+      internalID: 1447079793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 210
+        width: 1987
+        height: 956
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ee2dca4c7bb1b43a4cd5808c051461
+      internalID: -1905004967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_7
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1158
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81b75ade2b09394dbc4cd04eef48cb7
+      internalID: -1238386717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_8
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1151
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39d4486ab296f88469a7e6f2a32dac21
+      internalID: 2125114952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_9
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1161
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2ced27906fa5d94a8215efae6776a1e
+      internalID: -1340080438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ocean2 to Ocean2 Transition_10
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 1131
+        width: 59
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a06fa3ffc416d449ab04ff33db35ad7
+      internalID: 128655065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ocean2 to Ocean2 Transition_1: 1581115128
+      Ocean2 to Ocean2 Transition_0: 833791823
+      Ocean2 to Ocean2 Transition_7: -1238386717
+      Ocean2 to Ocean2 Transition_4: -1907991487
+      Ocean2 to Ocean2 Transition_2: -584900306
+      Ocean2 to Ocean2 Transition_9: -1340080438
+      Ocean2 to Ocean2 Transition_5: 1447079793
+      Ocean2 to Ocean2 Transition_6: -1905004967
+      Ocean2 to Ocean2 Transition_8: 2125114952
+      Ocean2 to Ocean2 Transition_3: 2042814501
+      Ocean2 to Ocean2 Transition_10: 128655065
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
