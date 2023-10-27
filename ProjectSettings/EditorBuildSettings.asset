@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene2.unity
     guid: aee640bea34419f459a417de53a97f55
   - enabled: 1
-    path: Assets/Scenes/Coleman Prototypes/Art Test Scene.unity
+    path: 
     guid: 359914bebe61e6a408ef240f7b7eb31d
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: d7f99c154736e8d42b85484848a49a0a
   m_configObjects: {}
