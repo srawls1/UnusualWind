@@ -8,10 +8,14 @@ public class GameManager : MonoBehaviour
     private Transform sunset;
     private Transform moon;
     private Transform sunrise;
+    
     // Start is called before the first frame update
     void Start()
     {
         timeOfDayTracker = GameObject.Find("TimeOfDayTracker").GetComponent<Transform>();
+        sunset = GameObject.Find("Sunset").GetComponent<Transform>();
+        moon = GameObject.Find("Moon").GetComponent<Transform>();
+        sunrise = GameObject.Find("Sunrise").GetComponent<Transform>();
     }
 
     // Update is called once per frame
