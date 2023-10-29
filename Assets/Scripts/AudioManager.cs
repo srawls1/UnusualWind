@@ -12,7 +12,8 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        areaCheck = GameObject.Find("Daffodil").GetComponent<AreaCheck>();
+        //find object with player tag
+        areaCheck = GameObject.FindWithTag("Player").GetComponent<AreaCheck>();
     }
 
     // Update is called once per frame
