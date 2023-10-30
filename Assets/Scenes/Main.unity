@@ -4357,6 +4357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 218096457}
+  - component: {fileID: 218096458}
   m_Layer: 0
   m_Name: Background Objects
   m_TagString: Untagged
@@ -4380,6 +4381,20 @@ Transform:
   m_Father: {fileID: 759163519}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &218096458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218096456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b450c93c814334380c7869e4bf4446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1536542656}
+  relativePositionChange: 0.8
 --- !u!1001 &219314243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15290,6 +15305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 739187823}
   - component: {fileID: 739187822}
+  - component: {fileID: 739187824}
   m_Layer: 0
   m_Name: Sky to Sky Transition
   m_TagString: Untagged
@@ -15364,6 +15380,20 @@ Transform:
   m_Father: {fileID: 1820779946}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &739187824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739187821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b450c93c814334380c7869e4bf4446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1536542656}
+  relativePositionChange: 0.9
 --- !u!1 &739396603
 GameObject:
   m_ObjectHideFlags: 0
@@ -31518,8 +31548,8 @@ MonoBehaviour:
   minimumX: -2090
   maximumX: 2000
   minimumSize: 4
-  positionDamping: 0.5
-  sizeDamping: 0.5
+  positionDamping: 1
+  sizeDamping: 1
   lookaheadTime: 0.5
   xOffset: 11
 --- !u!1 &1555699401

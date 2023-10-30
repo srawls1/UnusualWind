@@ -40,6 +40,7 @@ public class SeedInWind : MonoBehaviour
 
 	private float reboundingHorizontalSpeedupRate;
 	private float m_horizontalSpeed;
+	private float reboundTopAltitude;
 
 	public float horizontalSpeed
 	{
@@ -122,6 +123,19 @@ public class SeedInWind : MonoBehaviour
 		rigidbody.velocity = new Vector2(horizontalSpeed, rigidbody.velocity.y);
 	}
 
+	public void SlowDown(float slowDownFactor)
+	{
+		rigidbody.velocity *= slowDownFactor;
+		horizontalSpeed *= slowDownFactor;
+		
+		if (state == SeedMovementState.Rising)
+		{
+			float remainingRiseDistance = reboundTopAltitude - transform.position.y;
+			remainingRiseDistance *= slowDownFactor * slowDownFactor;
+			reboundTopAltitude += remainingRiseDistance;
+		}
+	}
+
 	private IEnumerator DiveRoutine()
 	{
 		state = SeedMovementState.Diving;
@@ -155,7 +169,7 @@ public class SeedInWind : MonoBehaviour
 			// t = d * tf / df
 			float reboundDuration = Mathf.Sqrt(distanceFallen / fullReboundDistance) * fullReboundDuration;
 			float reboundDistance = fullReboundDistanceMultiplier * distanceFallen;
-			float reboundTopAltitude = Mathf.Min(topAltitude, transform.position.y + reboundDistance);
+			reboundTopAltitude = Mathf.Min(topAltitude, transform.position.y + reboundDistance);
 
 			for (float dt = 0f; dt < reboundDuration; dt += Time.fixedDeltaTime)
 			{
