@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.Serialization;
 using UnityEngine;
 using Rewired;
 
@@ -13,7 +14,7 @@ public class SeedInWind : MonoBehaviour
 		FallingToEquilibrium
 	}
 
-	[SerializeField] private float horizontalSpeed = 4f;
+	[SerializeField] [FormerlySerializedAs("horizontalSpeed")] private float baseHorizontalSpeed = 4f;
 	[SerializeField] private float groundAltitude;
 	[SerializeField] private float equilibriumAltitude;
 	[SerializeField] private float topAltitude;
@@ -23,6 +24,9 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float fullReboundDuration;
 	[SerializeField] private float fullReboundDistanceMultiplier = 1.2f;
 	[SerializeField] private float maxFallToEquilibriumDuration;
+	[SerializeField] private float fullReboundSpeedBoost = 3f;
+	[SerializeField] private float horizontalSpeedDecayRate = 2f;
+	[SerializeField] private float maxHorizontalSpeed = 15f;
 
 	private float fallGravityScale;
 	private float fullReboundDistance;
@@ -33,6 +37,18 @@ public class SeedInWind : MonoBehaviour
 	new private Rigidbody2D rigidbody;
 	private Coroutine currentDive;
 	private Animator seedAnimator;
+
+	private float reboundingHorizontalSpeedupRate;
+	private float m_horizontalSpeed;
+
+	public float horizontalSpeed
+	{
+		get => m_horizontalSpeed;
+		set
+		{
+			m_horizontalSpeed = Mathf.Clamp(value, baseHorizontalSpeed, maxHorizontalSpeed);
+		}
+	}
 
 	private void Awake()
 	{
@@ -49,6 +65,8 @@ public class SeedInWind : MonoBehaviour
 		float fallGravity = 2 * fullReboundDistance / (fallDuration * fallDuration);
 		fallGravityScale = fallGravity / Physics2D.gravity.magnitude;
 
+		reboundingHorizontalSpeedupRate = fullReboundSpeedBoost / fullReboundDuration;
+
 		// T = 2*pi*sqrt(m/k)
 		// T / (2pi) = sqrt(m/k)
 		// T^2 / (2pi)^2 = m/k
@@ -57,6 +75,7 @@ public class SeedInWind : MonoBehaviour
 			(equilibriumOscillationPeriod * equilibriumOscillationPeriod);
 
 		state = SeedMovementState.Equilibrium;
+		horizontalSpeed = baseHorizontalSpeed;
 	}
 
 	private void OnDrawGizmosSelected()
@@ -77,7 +96,7 @@ public class SeedInWind : MonoBehaviour
 	private void Update()
 	{
 		if (state != SeedMovementState.Diving
-			&& player.GetButtonDown("Fall"))
+			&& player.GetAnyButtonDown())
 		{
 			if (currentDive != null)
 			{
@@ -94,6 +113,8 @@ public class SeedInWind : MonoBehaviour
 		{
 			return;
 		}
+
+		horizontalSpeed -= horizontalSpeedDecayRate * Time.fixedDeltaTime;
 
 		Vector2 offsetFromEquilibrium = new Vector3(transform.position.x, equilibriumAltitude) - transform.position;
 		Vector2 oscillationSpringForce = equilibriumSpringCoefficient * offsetFromEquilibrium;
@@ -146,6 +167,8 @@ public class SeedInWind : MonoBehaviour
 						reboundTopAltitude, ref velocity, reboundDuration - dt);
 					transform.position = new Vector3(transform.position.x, newPosition); }
 
+				horizontalSpeed += reboundingHorizontalSpeedupRate * Time.fixedDeltaTime;
+
 				rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
 				Debug.DrawLine(transform.position, new Vector3(transform.position.x, reboundTopAltitude));
 				yield return new WaitForFixedUpdate();
@@ -172,6 +195,7 @@ public class SeedInWind : MonoBehaviour
 		for (float dt = 0f; dt < dampTime; dt += Time.fixedDeltaTime)
 		{
 			float velocity = rigidbody.velocity.y;
+			horizontalSpeed -= horizontalSpeedDecayRate * Time.fixedDeltaTime;
 			float newPosition = Mathf.SmoothDamp(transform.position.y,
 				dampDestination, ref velocity, dampTime - dt);
 			transform.position = new Vector3(transform.position.x, newPosition);
@@ -182,13 +206,5 @@ public class SeedInWind : MonoBehaviour
 
 		state = SeedMovementState.Equilibrium;
 		currentDive = null;
-	}
-
-	public void RegisterWind(WindZone zone)
-	{
-	}
-
-	public void DeregisterWind(WindZone zone)
-	{
 	}
 }

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5598658893029390221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.91, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,16 +101,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33b7966a3a9d684a8778963a91dba11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 4
-  groundAltitude: -0.77
+  baseHorizontalSpeed: 6
+  groundAltitude: -6.54
   equilibriumAltitude: 3.42
-  topAltitude: 10.78
+  topAltitude: 15.33
   equilibriumOscillationPeriod: 3
   equilibriumOscillationAmplitude: 0.5
   fallDuration: 1.2
   fullReboundDuration: 2
   fullReboundDistanceMultiplier: 1.56
   maxFallToEquilibriumDuration: 3
+  fullReboundSpeedBoost: 3
+  horizontalSpeedDecayRate: 2
+  maxHorizontalSpeed: 15
 --- !u!50 &5598658893029390217
 Rigidbody2D:
   serializedVersion: 4
