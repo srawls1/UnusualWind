@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.Serialization;
 using UnityEngine;
 using Rewired;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SeedInWind : MonoBehaviour
@@ -41,6 +42,7 @@ public class SeedInWind : MonoBehaviour
 	private float reboundingHorizontalSpeedupRate;
 	private float m_horizontalSpeed;
 	private float reboundTopAltitude;
+	private float reboundDuration;
 
 	public float horizontalSpeed
 	{
@@ -133,6 +135,7 @@ public class SeedInWind : MonoBehaviour
 			float remainingRiseDistance = reboundTopAltitude - transform.position.y;
 			remainingRiseDistance *= slowDownFactor * slowDownFactor;
 			reboundTopAltitude = transform.position.y + remainingRiseDistance;
+			reboundDuration *= slowDownFactor;
 		}
 	}
 
@@ -153,7 +156,38 @@ public class SeedInWind : MonoBehaviour
 			remainingRiseDistance *= speedUpFactor * speedUpFactor;
 			reboundTopAltitude += transform.position.y + remainingRiseDistance;
 			reboundTopAltitude = Mathf.Min(topAltitude, reboundTopAltitude);
+			reboundDuration *= speedUpFactor;
 		}
+	}
+
+	public void Drop(float duration)
+	{
+		if (currentDive != null)
+		{
+			StopCoroutine(currentDive);
+			currentDive = null;
+		}
+		currentDive = StartCoroutine(DropRoutine(duration));
+	}
+
+	private IEnumerator DropRoutine(float duration)
+	{
+		state = SeedMovementState.Diving;
+		seedAnimator.SetBool("Dive", true);
+		seedAnimator.SetBool("Rise", false);
+		seedAnimator.SetBool("Normal", false);
+
+		rigidbody.gravityScale = fallGravityScale;
+		yield return new WaitForSeconds(duration);
+
+		IEnumerator returnToEquilibriumEnumerator = ReturnToEquilibriumRoutine();
+		while (returnToEquilibriumEnumerator.MoveNext())
+		{
+			yield return returnToEquilibriumEnumerator.Current;
+		}
+
+		state = SeedMovementState.Equilibrium;
+		currentDive = null;
 	}
 
 	private IEnumerator DiveRoutine()
@@ -172,13 +206,6 @@ public class SeedInWind : MonoBehaviour
 			yield return null;
 		}
 
-		state = SeedMovementState.Rising;
-		seedAnimator.SetBool("Rise", true);
-		seedAnimator.SetBool("Normal", false);
-		seedAnimator.SetBool("Dive", false);
-
-		rigidbody.gravityScale = 0f;
-
 		yield return new WaitForFixedUpdate();
 
 		float distanceFallen = fallStartAltitude - transform.position.y;
@@ -187,28 +214,61 @@ public class SeedInWind : MonoBehaviour
 			// d / t = df / tf
 			// d * tf = t * df
 			// t = d * tf / df
-			float reboundDuration = Mathf.Sqrt(distanceFallen / fullReboundDistance) * fullReboundDuration;
+			reboundDuration = Mathf.Sqrt(distanceFallen / fullReboundDistance) * fullReboundDuration;
 			float reboundDistance = fullReboundDistanceMultiplier * distanceFallen;
 			reboundTopAltitude = Mathf.Min(topAltitude, transform.position.y + reboundDistance);
-
-			for (float dt = 0f; dt < reboundDuration; dt += Time.fixedDeltaTime)
+			IEnumerator reboundEnumerator = ReboundRoutine();
+			while (reboundEnumerator.MoveNext())
 			{
-				float velocity = rigidbody.velocity.y;
-				if (velocity < 0) { float newPosition = Mathf.SmoothDamp(transform.position.y,
-						reboundTopAltitude, ref velocity, (reboundDuration - dt) / 3);
-					transform.position = new Vector3(transform.position.x, newPosition); }
-				else { float newPosition = Mathf.SmoothDamp(transform.position.y,
-						reboundTopAltitude, ref velocity, reboundDuration - dt);
-					transform.position = new Vector3(transform.position.x, newPosition); }
-
-				horizontalSpeed += reboundingHorizontalSpeedupRate * Time.fixedDeltaTime;
-
-				rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
-				Debug.DrawLine(transform.position, new Vector3(transform.position.x, reboundTopAltitude));
-				yield return new WaitForFixedUpdate();
+				yield return reboundEnumerator.Current;
 			}
 		}
 
+		IEnumerator returnToEquilibriumEnumerator = ReturnToEquilibriumRoutine();
+		while (returnToEquilibriumEnumerator.MoveNext())
+		{
+			yield return returnToEquilibriumEnumerator.Current;
+		}
+
+		state = SeedMovementState.Equilibrium;
+		currentDive = null;
+	}
+
+	private IEnumerator ReboundRoutine()
+	{
+		state = SeedMovementState.Rising;
+		seedAnimator.SetBool("Rise", true);
+		seedAnimator.SetBool("Normal", false);
+		seedAnimator.SetBool("Dive", false);
+
+		rigidbody.gravityScale = 0f;
+
+		for (; reboundDuration > 0; reboundDuration -= Time.fixedDeltaTime)
+		{
+			float velocity = rigidbody.velocity.y;
+			if (velocity < 0)
+			{
+				float newPosition = Mathf.SmoothDamp(transform.position.y,
+					reboundTopAltitude, ref velocity, reboundDuration / 3);
+				transform.position = new Vector3(transform.position.x, newPosition);
+			}
+			else
+			{
+				float newPosition = Mathf.SmoothDamp(transform.position.y,
+					reboundTopAltitude, ref velocity, reboundDuration);
+				transform.position = new Vector3(transform.position.x, newPosition);
+			}
+
+			horizontalSpeed += reboundingHorizontalSpeedupRate * Time.fixedDeltaTime;
+
+			rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
+			Debug.DrawLine(transform.position, new Vector3(transform.position.x, reboundTopAltitude));
+			yield return new WaitForFixedUpdate();
+		}
+	}
+
+	private IEnumerator ReturnToEquilibriumRoutine()
+	{
 		state = SeedMovementState.FallingToEquilibrium;
 		seedAnimator.SetBool("Normal", true);
 		seedAnimator.SetBool("Dive", false);
@@ -237,8 +297,5 @@ public class SeedInWind : MonoBehaviour
 			Debug.DrawLine(transform.position, new Vector3(transform.position.x, dampDestination));
 			yield return new WaitForFixedUpdate();
 		}
-
-		state = SeedMovementState.Equilibrium;
-		currentDive = null;
 	}
 }
