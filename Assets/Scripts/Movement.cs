@@ -36,4 +36,13 @@ public class Movement : MonoBehaviour
             transform.position += new Vector3(movementSpeed * Time.deltaTime, 0f, 0f);
         }
     }
+
+    //if object collides with player, increase player speed
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isWindmill && collision.gameObject.tag == "Player")
+        {
+            //Call the speed up function in the player script
+        }
+    }
 }
