@@ -28,6 +28,7 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float fullReboundSpeedBoost = 3f;
 	[SerializeField] private float horizontalSpeedDecayRate = 2f;
 	[SerializeField] private float maxHorizontalSpeed = 15f;
+	[SerializeField] private float maxBosstedHorizontalSpeed = 25f;
 
 	private float fallGravityScale;
 	private float fullReboundDistance;
@@ -49,7 +50,7 @@ public class SeedInWind : MonoBehaviour
 		get => m_horizontalSpeed;
 		set
 		{
-			m_horizontalSpeed = Mathf.Clamp(value, baseHorizontalSpeed, maxHorizontalSpeed);
+			m_horizontalSpeed = Mathf.Clamp(value, 0, maxBosstedHorizontalSpeed);
 		}
 	}
 
@@ -117,7 +118,7 @@ public class SeedInWind : MonoBehaviour
 			return;
 		}
 
-		horizontalSpeed -= horizontalSpeedDecayRate * Time.fixedDeltaTime;
+		horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, baseHorizontalSpeed, horizontalSpeedDecayRate * Time.fixedDeltaTime);
 
 		Vector2 offsetFromEquilibrium = new Vector3(transform.position.x, equilibriumAltitude) - transform.position;
 		Vector2 oscillationSpringForce = equilibriumSpringCoefficient * offsetFromEquilibrium;
@@ -259,7 +260,7 @@ public class SeedInWind : MonoBehaviour
 				transform.position = new Vector3(transform.position.x, newPosition);
 			}
 
-			horizontalSpeed += reboundingHorizontalSpeedupRate * Time.fixedDeltaTime;
+			horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, maxHorizontalSpeed, reboundingHorizontalSpeedupRate * Time.fixedDeltaTime);
 
 			rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
 			Debug.DrawLine(transform.position, new Vector3(transform.position.x, reboundTopAltitude));
@@ -289,7 +290,7 @@ public class SeedInWind : MonoBehaviour
 		for (float dt = 0f; dt < dampTime; dt += Time.fixedDeltaTime)
 		{
 			float velocity = rigidbody.velocity.y;
-			horizontalSpeed -= horizontalSpeedDecayRate * Time.fixedDeltaTime;
+			horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, baseHorizontalSpeed, horizontalSpeedDecayRate * Time.fixedDeltaTime);
 			float newPosition = Mathf.SmoothDamp(transform.position.y,
 				dampDestination, ref velocity, dampTime - dt);
 			transform.position = new Vector3(transform.position.x, newPosition);
