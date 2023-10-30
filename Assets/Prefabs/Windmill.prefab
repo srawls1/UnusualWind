@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4042495650967986059}
   - component: {fileID: 6083916792040658719}
   - component: {fileID: 5311393384298509645}
+  - component: {fileID: 5882876118418634141}
   m_Layer: 0
   m_Name: rotor
   m_TagString: Untagged
@@ -151,6 +152,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.11}
   serializedVersion: 2
   m_Radius: 4.07
+--- !u!114 &5882876118418634141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311393384298509646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e42de79f17af842ae895cdf4846cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedUpFactor: 1.5
 --- !u!1 &6220154675159551678
 GameObject:
   m_ObjectHideFlags: 0

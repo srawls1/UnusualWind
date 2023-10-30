@@ -132,7 +132,27 @@ public class SeedInWind : MonoBehaviour
 		{
 			float remainingRiseDistance = reboundTopAltitude - transform.position.y;
 			remainingRiseDistance *= slowDownFactor * slowDownFactor;
-			reboundTopAltitude += remainingRiseDistance;
+			reboundTopAltitude = transform.position.y + remainingRiseDistance;
+		}
+	}
+
+	public void SpeedUp(float speedUpFactor)
+	{
+		if (state == SeedMovementState.Diving)
+		{
+			return;
+		}
+
+		horizontalSpeed *= speedUpFactor;
+
+		if (state == SeedMovementState.Rising)
+		{
+			rigidbody.velocity *= speedUpFactor;
+
+			float remainingRiseDistance = reboundTopAltitude - transform.position.y;
+			remainingRiseDistance *= speedUpFactor * speedUpFactor;
+			reboundTopAltitude += transform.position.y + remainingRiseDistance;
+			reboundTopAltitude = Mathf.Min(topAltitude, reboundTopAltitude);
 		}
 	}
 
