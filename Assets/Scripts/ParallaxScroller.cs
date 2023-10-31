@@ -1,25 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxScroller : MonoBehaviour
 {
-	[SerializeField] private HubRotatedChannelSO rotationChannel;
-    [SerializeField] private float relativeRotationChange;
+	[SerializeField] new private Camera camera;
+    [SerializeField] private float relativePositionChange;
 
-	private void OnEnable()
+	private Vector3 previousCameraPosition;
+
+	private void Start()
 	{
-		rotationChannel.Subscribe(UpdateRotation);
+		previousCameraPosition = camera.transform.position;
 	}
 
-	private void OnDisable()
+	private void Update()
 	{
-		rotationChannel.Unsubscribe(UpdateRotation);
-	}
-
-	private void UpdateRotation(float currentRotation, float rotationDelta)
-	{
-		transform.eulerAngles += new Vector3(0f, 0f, rotationDelta * relativeRotationChange);
+		Vector3 diff = camera.transform.position - previousCameraPosition;
+		previousCameraPosition = camera.transform.position;
+		diff = Vector3.Scale(diff, Vector3.right);
+		transform.Translate(diff * relativePositionChange);
 	}
 }

@@ -26,15 +26,15 @@ public class CameraMovement : MonoBehaviour
 	{
 		camera = transform.GetComponent<Camera>();
 
-		float bottom = minimumY;
-		float top = followTarget.position.y + paddingAboveTarget;
-		float height = top - bottom;
-		height = Mathf.Max(height, minimumSize);
-		float width = camera.aspect * height;
-		float x = Mathf.Clamp(followTarget.position.x, minimumX + width / 2, maximumX - width / 2);
-		float y = Mathf.Clamp((bottom + top) * .5f, minimumY + height / 2, maximumY - height / 2);
-		transform.position = new Vector3(x + xOffset, y, transform.position.z);
-		camera.orthographicSize = height * 0.5f;
+		//float bottom = minimumY;
+		//float top = followTarget.position.y + paddingAboveTarget;
+		//float height = top - bottom;
+		//height = Mathf.Max(height, minimumSize);
+		//float width = camera.aspect * height;
+		//float x = Mathf.Clamp(followTarget.position.x, minimumX + width / 2, maximumX - width / 2);
+		//float y = Mathf.Clamp((bottom + top) * .5f, minimumY + height / 2, maximumY - height / 2);
+		//transform.position = new Vector3(x + xOffset, y, transform.position.z);
+		//camera.orthographicSize = height * 0.5f;
 		previousPosition = followTarget.position;
 	}
 

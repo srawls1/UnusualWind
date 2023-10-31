@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6122094211587043741}
   - component: {fileID: 3570354662379199112}
   - component: {fileID: 8734444417871015497}
+  - component: {fileID: 5410411730296440952}
   m_Layer: 0
   m_Name: stormcloud4
   m_TagString: Untagged
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7315b42290141344981a39cdfecfc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seedDropDuration: 1
 --- !u!95 &8734444417871015497
 Animator:
   serializedVersion: 5
@@ -203,3 +205,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!58 &5410411730296440952
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3472461461089050812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.76

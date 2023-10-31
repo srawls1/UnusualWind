@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StormCloud : MonoBehaviour
 {
+    [SerializeField] private float seedDropDuration;
+
     private Animator animator;
     private GameObject lightning;
 
@@ -29,6 +31,8 @@ public class StormCloud : MonoBehaviour
             animator.SetTrigger("Strike");
 
             //Temporarily force player to drop
+            SeedInWind seed = collision.GetComponent<SeedInWind>();
+            seed.Drop(seedDropDuration);
         }
     }
 }
