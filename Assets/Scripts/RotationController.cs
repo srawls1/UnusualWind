@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationController : MonoBehaviour
+public class IntroPress : MonoBehaviour
 {
     public bool startScene = false;
     private float timer;
-    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -26,7 +25,6 @@ public class RotationController : MonoBehaviour
             if (timer > 3 && !startScene)
             {
                 startScene = true;
-                animator.SetBool("Resting", false);
             }
         }
         else

@@ -10,8 +10,12 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
 	[SerializeField] private float textDisappearDuration;
+	[SerializeField] private float timeToStart;
 
-	private Player player;
+    private float startTime;
+
+
+    private Player player;
 
 	private void Awake()
 	{
@@ -22,9 +26,11 @@ public class StartMenu : MonoBehaviour
 	{
 		if (player.GetAnyButtonDown())
 		{
+			startTime = Time.time;
 			StartCoroutine(StopTextGlowing());
 		}
-		if (player.GetAnyButtonUp())
+		
+		if (Time.time - startTime >= timeToStart && player.GetAnyButtonUp())
 		{
 			StartCoroutine(DisableMenu());
 		}

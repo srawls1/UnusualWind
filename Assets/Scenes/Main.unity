@@ -25793,6 +25793,7 @@ MonoBehaviour:
   menuTextGlow: {fileID: 1388783628}
   menuText: {fileID: 1388783629}
   textDisappearDuration: 1
+  timeToStart: 3
 --- !u!1 &1247466037
 GameObject:
   m_ObjectHideFlags: 0
@@ -40514,6 +40515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScene: 0
+  timer: 0
 --- !u!1 &1926335756
 GameObject:
   m_ObjectHideFlags: 0
