@@ -45,7 +45,7 @@ public class SeedInWind : MonoBehaviour
 	private float reboundTopAltitude;
 	private float reboundDuration;
 
-	private IntroPress introPress;
+	private RotationController rotationController;
 
 	public float horizontalSpeed
 	{
@@ -61,7 +61,7 @@ public class SeedInWind : MonoBehaviour
 		seedAnimator = GetComponent<Animator>();
 		player = ReInput.players.GetPlayer(0);
 		rigidbody = GetComponent<Rigidbody2D>();
-		introPress = GetComponent<IntroPress>();
+		rotationController = GetComponent<RotationController>();
 		// ay = g
 		// vy = -gt + v0
 		// y = -1/2 gt^2 + v0 t + y0
