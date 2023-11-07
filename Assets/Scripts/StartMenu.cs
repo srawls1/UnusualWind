@@ -10,33 +10,40 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
 	[SerializeField] private float textDisappearDuration;
-	[SerializeField] private float timeToStart;
+	
+	public float timeToStart;
 
     private float startTime;
-
 
     private Player player;
 
 	private void Awake()
 	{
 		player = ReInput.players.GetPlayer(0);
+		seedRigidBody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
 	}
 
 	private void Update()
 	{
-		if (player.GetAnyButtonDown())
+		if (startTime >= timeToStart)
 		{
-			startTime = Time.time;
-			StartCoroutine(StopTextGlowing());
-		}
-		
-		if (Time.time - startTime >= timeToStart && player.GetAnyButtonUp())
-		{
-			StartCoroutine(DisableMenu());
-		}
-	}
+			Debug.Log("Start");
+			menuText.text = "Release";
 
-	private IEnumerator DisableMenu()
+            if (player.GetAnyButtonUp())
+            {
+                StartCoroutine(DisableMenu());
+            }
+        }
+
+        if (player.GetAnyButton())
+        {
+            startTime += Time.deltaTime;
+            StartCoroutine(StopTextGlowing());
+        } else { startTime = 0; }
+    }
+
+    private IEnumerator DisableMenu()
 	{
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
 		cameraMovement.enabled = true;

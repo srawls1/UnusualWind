@@ -12,24 +12,28 @@ public class AreaCheck : MonoBehaviour
         if (collision.gameObject.name == "Forest 1")
         {
             forest1 = true;
+            forest2 = false;
         }
 
         //If collision is called wheat, wheat is true
         if (collision.gameObject.name == "Wheat")
         {
             wheat = true;
+            forest1 = false;
         }
 
         //If collision is called ocean, ocean is true
         if (collision.gameObject.name == "Ocean")
         {
             ocean = true;
+            wheat = false;
         }
 
         //If collision is called forest 2, forest 2 is true
         if (collision.gameObject.name == "Forest 2")
         {
             forest2 = true;
+            ocean = false;
         }
     }
 }

@@ -103,7 +103,7 @@ public class SeedInWind : MonoBehaviour
 	private void Update()
 	{
 		if (state != SeedMovementState.Diving
-			&& player.GetAnyButtonDown()) //introPress.startScene??
+			&& player.GetAnyButtonDown())
 		{
 			if (currentDive != null)
 			{
