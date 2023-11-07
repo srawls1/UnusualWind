@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class GlowingPetal : MonoBehaviour
 {
+    private GameObject gameManager; 
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        //Find the game manager
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     private void OnTriggerEnter2D (Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            //Add to petal count
-            //Play collect animation
-            //Destroy petal at end of animation
+            //Play the collect animation before destroying the object
+            Destroy(gameObject);
+            //Increase petal count from the game manager
+            gameManager.GetComponent<GameManager>().petalCount++;
         }
     }
 }

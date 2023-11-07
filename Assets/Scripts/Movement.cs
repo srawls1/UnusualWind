@@ -9,11 +9,7 @@ public class Movement : MonoBehaviour
     public bool isFish; //If true, object will move in an arc
     public float arcHeight; //How high the arc is
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float distanceToPlayer; //Make positive if entering from right, negative if entering from left
 
     // Update is called once per frame
     void Update()
@@ -35,6 +31,8 @@ public class Movement : MonoBehaviour
             //Movement
             transform.position += new Vector3(movementSpeed * Time.deltaTime, 0f, 0f);
         }
+
+        ActivatePrefab();
     }
 
     //if object collides with player, increase player speed
@@ -43,6 +41,16 @@ public class Movement : MonoBehaviour
         if (isWindmill && collision.gameObject.tag == "Player")
         {
             //Call the speed up function in the player script
+        }
+    }
+
+    private void ActivatePrefab()
+    {
+        //If player is within a certain distance of the object, activate the prefab
+        if ((transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < distanceToPlayer)
+        {
+            //Activate the prefab
+            gameObject.SetActive(true);
         }
     }
 }

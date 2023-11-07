@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
     private float moonRestingPosition = 12f;
     private float oceanMidpoint = 500f;
     public float dayNightChangeSpeed = 0.001f;
+
+    public int petalCount;
+    private TMP_Text petalText;
 
     //Ocean Values
     private float wheatTempMax = 50f;
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
         postProcessProfile = volume.profile;
         //initialize color grading
         colorGrading = volume.profile.GetSetting<ColorGrading>();
+        petalText = GameObject.Find("Petal Text").GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -55,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         SkyUpdate();
         CelestialPositionUpdate();
+        petalText.text = "Petals: " + petalCount.ToString();
     }
 
     private void SkyUpdate()

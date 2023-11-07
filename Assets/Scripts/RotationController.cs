@@ -51,6 +51,8 @@ public class RotationController : MonoBehaviour
             //If any key is held for 3 seconds, set startScene to true
             if (timer > timeToStart && !startScene)
             {
+                //Change sprite layer to "player"
+                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 animator.SetBool("Resting", false);
                 startScene = true;
             }
