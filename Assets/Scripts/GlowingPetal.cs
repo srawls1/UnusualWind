@@ -9,8 +9,8 @@ public class GlowingPetal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Find the game manager
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        //Find the game manager using the name
+        gameManager = GameObject.Find("GameManager");
     }
 
     private void OnTriggerEnter2D (Collider2D collision)

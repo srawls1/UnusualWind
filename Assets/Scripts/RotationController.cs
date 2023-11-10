@@ -11,6 +11,7 @@ public class RotationController : MonoBehaviour
     private StartMenu startMenu;
 
     private Animator animator;
+    private Rigidbody2D rigidbody2D;
     private TMP_Text startText;
     private GameObject mainCamera;
     private float cameraSize;
@@ -20,6 +21,7 @@ public class RotationController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         mainCamera = GameObject.Find("Main Camera");
         startMenu = GameObject.Find("StartMenu").GetComponent<StartMenu>();
         startMenu.timeToStart = timeToStart;
@@ -51,16 +53,22 @@ public class RotationController : MonoBehaviour
             //If any key is held for 3 seconds, set startScene to true
             if (timer > timeToStart && !startScene)
             {
-                //Change sprite layer to "player"
-                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
                 animator.SetBool("Resting", false);
                 startScene = true;
             }
-        }
+        } 
+
         else
         {
             timer = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
+        }
+
+        //If startscene is true and rigidbody2D velocity is greater than 0
+        if (startScene && rigidbody2D.velocity.magnitude > 0)
+        {
+            //Change sprite layer to "player"
+            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
     }
 }

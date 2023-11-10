@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 5951439994589816286}
   - component: {fileID: 9185650751779766601}
   - component: {fileID: 450485147020561945}
+  - component: {fileID: -8614482337849945120}
   m_Layer: 0
   m_Name: Glowing Petal
   m_TagString: Untagged
@@ -203,3 +204,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9beca6634d21ea74da73dfdffd2e28fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &-8614482337849945120
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6761939197875711146}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4.5

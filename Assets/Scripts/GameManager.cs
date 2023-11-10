@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private float moonRestingPosition = 12f;
     private float oceanMidpoint = 500f;
     public float dayNightChangeSpeed = 0.001f;
+    private Animator oceanAnimator;
 
     public int petalCount;
     private TMP_Text petalText;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         //find the player tag
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        oceanAnimator = GameObject.Find("Ocean").GetComponent<Animator>();
         sunset = GameObject.Find("Sunset").GetComponent<Transform>();
         moon = GameObject.Find("Moon").GetComponent<Transform>();
         sunrise = GameObject.Find("Sunrise").GetComponent<Transform>();
@@ -67,7 +69,8 @@ public class GameManager : MonoBehaviour
     {
         if (areaCheck.forest1)
         {
-            //nothing happens
+            oceanAnimator.SetBool("Pause1", true);
+            oceanAnimator.SetBool("Pause2", false);
         }
 
         if (areaCheck.wheat)
@@ -83,6 +86,18 @@ public class GameManager : MonoBehaviour
 
         if (areaCheck.ocean)
         {
+            if (playerTransform.position.x > GameObject.Find("Ocean").transform.position.x)
+            {
+                oceanAnimator.SetBool("Pause1", false);
+                oceanAnimator.SetBool("Regular", true);
+            }
+
+            if (playerTransform.position.x > GameObject.Find("Ocean End").transform.position.x)
+            {
+                oceanAnimator.SetBool("Regular", false);
+                oceanAnimator.SetBool("Pause2", true);
+            }
+
             if (moon.position.y < moonRestingPosition && playerTransform.position.x <= oceanMidpoint)
             {
                 moon.position = new Vector3(0, (playerTransform.position.x - ocean.position.x) * .05f, 0);
