@@ -68,7 +68,7 @@ public class RotationController : MonoBehaviour
         if (startScene && rigidbody2D.velocity.magnitude > 0)
         {
             //Change sprite layer to "player"
-            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+            //gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
     }
 }
