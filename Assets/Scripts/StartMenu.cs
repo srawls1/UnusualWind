@@ -33,10 +33,8 @@ public class StartMenu : MonoBehaviour
 				StartCoroutine(AdvanceText());
 			}
 
-			Debug.Log("timeHeld >= timeToStart");
 			if (player.GetAnyButtonUp())
             {
-				Debug.Log("Starting the disable coroutine");
                 StartCoroutine(DisableMenu());
             }
         }
@@ -51,12 +49,9 @@ public class StartMenu : MonoBehaviour
 
 	private IEnumerator AdvanceText()
 	{
-		Debug.Log("AdvanceText");
 		yield return StartCoroutine(FadeOutText());
-		Debug.Log("Setting text");
 		menuText.text = "Release";
 		yield return StartCoroutine(FadeInText());
-		Debug.Log("Fading back in");
 	}
 
 	private IEnumerator FadeOutText()
@@ -90,7 +85,6 @@ public class StartMenu : MonoBehaviour
 
 	private IEnumerator DisableMenu()
 	{
-		Debug.Log("DisableMenu");
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
 		cameraMovement.enabled = true;
 		yield return StartCoroutine(FadeOutText());

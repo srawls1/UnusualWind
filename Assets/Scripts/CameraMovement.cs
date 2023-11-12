@@ -45,6 +45,10 @@ public class CameraMovement : MonoBehaviour
 		runningAverageVelocity *= 0.9f;
 		runningAverageVelocity += velocityLastFrame * 0.1f;
 		previousPosition = followTarget.position;
+
+		// <temp>
+		runningAverageVelocity.y = 0;
+		// </temp>
 		Vector3 forecastedPosition = followTarget.position + runningAverageVelocity * lookaheadTime;
 
 		float bottom = minimumY;
