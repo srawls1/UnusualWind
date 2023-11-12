@@ -10,10 +10,11 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
 	[SerializeField] private float textDisappearDuration;
-	
-	public float timeToStart;
+	[SerializeField] private float timeToStart;
+	[SerializeField] private bool fart;
 
-    private float startTime;
+	private bool previouslyUnderTime;
+    private float timeHeld;
 
     private Player player;
 
@@ -25,56 +26,75 @@ public class StartMenu : MonoBehaviour
 
 	private void Update()
 	{
-		if (startTime >= timeToStart)
+		if (timeHeld >= timeToStart)
 		{
-			Debug.Log("Start");
-			menuText.text = "Release";
+			if (previouslyUnderTime)
+			{
+				StartCoroutine(AdvanceText());
+			}
 
-            if (player.GetAnyButtonUp())
+			Debug.Log("timeHeld >= timeToStart");
+			if (player.GetAnyButtonUp())
             {
+				Debug.Log("Starting the disable coroutine");
                 StartCoroutine(DisableMenu());
             }
         }
 
-        if (player.GetAnyButton())
-        {
-            startTime += Time.deltaTime;
-            StartCoroutine(StopTextGlowing());
-        } else { startTime = 0; }
-    }
+		previouslyUnderTime = timeHeld < timeToStart;
+		if (player.GetAnyButton())
+		{
+			timeHeld += Time.deltaTime;
+		}
+		else { timeHeld = 0; }
+	}
 
-    private IEnumerator DisableMenu()
+	private IEnumerator AdvanceText()
 	{
-		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
-		cameraMovement.enabled = true;
+		Debug.Log("AdvanceText");
+		yield return StartCoroutine(FadeOutText());
+		Debug.Log("Setting text");
+		menuText.text = "Release";
+		yield return StartCoroutine(FadeInText());
+		Debug.Log("Fading back in");
+	}
 
+	private IEnumerator FadeOutText()
+	{
 		Color startTextColor = menuText.color;
 		Color endTextColor = startTextColor;
 		endTextColor.a = 0;
 
-		for (float dt = 0f; dt < textDisappearDuration; dt += Time.deltaTime)
-		{
-			menuText.color = Color.Lerp(startTextColor, endTextColor, dt / textDisappearDuration);
-			yield return null;
-		}
-
-		menuText.color = endTextColor;
-		gameObject.SetActive(false);
+		return FadeText(startTextColor, endTextColor);
 	}
 
-	private IEnumerator StopTextGlowing()
+	private IEnumerator FadeInText()
 	{
-		float startMin = menuTextGlow.minGlowPower;
-		float startMax = menuTextGlow.maxGlowPower;
-		
+		Color startTextColor = menuText.color;
+		Color endTextColor = startTextColor;
+		endTextColor.a = 1;
+
+		return FadeText(startTextColor, endTextColor);
+	}
+
+	private IEnumerator FadeText(Color startColor, Color endColor)
+	{
 		for (float dt = 0f; dt < textDisappearDuration; dt += Time.deltaTime)
 		{
-			menuTextGlow.minGlowPower = Mathf.Lerp(startMin, 0, dt / textDisappearDuration);
-			menuTextGlow.maxGlowPower = Mathf.Lerp(startMax, 0, dt / textDisappearDuration);
+			menuText.color = Color.Lerp(startColor, endColor, dt / textDisappearDuration);
 			yield return null;
 		}
 
-		menuTextGlow.minGlowPower = 0;
-		menuTextGlow.maxGlowPower = 0;
+		menuText.color = endColor;
+	}
+
+	private IEnumerator DisableMenu()
+	{
+		Debug.Log("DisableMenu");
+		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
+		cameraMovement.enabled = true;
+		yield return StartCoroutine(FadeOutText());
+		
+		menuText.gameObject.SetActive(false);
 	}
 }

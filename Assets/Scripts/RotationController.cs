@@ -24,7 +24,6 @@ public class RotationController : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         mainCamera = GameObject.Find("Main Camera");
         startMenu = GameObject.Find("StartMenu").GetComponent<StartMenu>();
-        startMenu.timeToStart = timeToStart;
         cameraSize = Camera.main.orthographicSize;
         startText = GameObject.Find("StartText").GetComponent<TMP_Text>();
         timer = 0;
