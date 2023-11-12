@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 
             if (moon.position.y < moonRestingPosition && playerTransform.position.x <= oceanMidpoint)
             {
-                moon.position = new Vector3(0, (playerTransform.position.x - ocean.position.x) * .05f, 0);
+                moon.position = new Vector3(0, -10f + (playerTransform.position.x - ocean.position.x) * .1f, 0);
             }
 
             if (colorGrading.temperature.value > oceanTempMax)
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
             if (playerTransform.position.x > oceanMidpoint)
             {
-                moon.position -= new Vector3(0, playerTransform.position.x * .00001f, 0);
+                moon.position -= new Vector3(0, playerTransform.position.x * .00005f, 0);
                 //make sky gradually less purple
                 colorGrading.temperature.value += dayNightChangeSpeed;
                 colorGrading.tint.value -= dayNightChangeSpeed;
@@ -126,8 +126,8 @@ public class GameManager : MonoBehaviour
 
         if (areaCheck.forest2)
         {
-            sunrise.position = new Vector3(0, (playerTransform.position.x - forest2.position.x) * .05f, 0);
-            moon.position -= new Vector3(0, playerTransform.position.x * .00001f, 0);
+            sunrise.position = new Vector3(0, -10f + (playerTransform.position.x - forest2.position.x) * .1f, 0);
+            moon.position -= new Vector3(0, playerTransform.position.x * .00005f, 0);
             
             if (colorGrading.temperature.value < 0f)
             {             
