@@ -88,18 +88,21 @@ public class GameManager : MonoBehaviour
 
         if (areaCheck.ocean)
         {
+            //Start ocean animation (after you've passed the transition point)
             if (playerTransform.position.x > GameObject.Find("Ocean").transform.position.x)
             {
                 oceanRegular = true;
                 oceanPause1 = false;
             }
 
+            //End the ocean animation at the end of the section
             if (playerTransform.position.x > GameObject.Find("Ocean End").transform.position.x)
             {
                 oceanPause2 = true;
                 oceanRegular = false;
             }
 
+            //Increase moon to the point where it stays in the sky
             if (moon.position.y < moonRestingPosition && playerTransform.position.x <= oceanMidpoint)
             {
                 moon.position = new Vector3(0, -10f + (playerTransform.position.x - ocean.position.x) * .1f, 0);
@@ -115,9 +118,10 @@ public class GameManager : MonoBehaviour
                 colorGrading.tint.value += dayNightChangeSpeed * 3f;
             }
 
+            //Lower the moon
             if (playerTransform.position.x > oceanMidpoint)
             {
-                moon.position -= new Vector3(0, playerTransform.position.x * .00005f, 0);
+                moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
                 //make sky gradually less purple
                 colorGrading.temperature.value += dayNightChangeSpeed;
                 colorGrading.tint.value -= dayNightChangeSpeed;
@@ -127,7 +131,7 @@ public class GameManager : MonoBehaviour
         if (areaCheck.forest2)
         {
             sunrise.position = new Vector3(0, -10f + (playerTransform.position.x - forest2.position.x) * .1f, 0);
-            moon.position -= new Vector3(0, playerTransform.position.x * .00005f, 0);
+            moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
             
             if (colorGrading.temperature.value < 0f)
             {             

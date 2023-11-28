@@ -7,7 +7,7 @@ public class AnimalMovement : MonoBehaviour
     public bool isFish; //If true, object will move in an arc
     public float arcHeight; //How high the arc is
     public float speed; //How fast the object moves
-    public float distanceToPlayer;
+    public float distanceToPlayer; // negative if coming from left
 
     private float movementSpeed = 0f;
 
