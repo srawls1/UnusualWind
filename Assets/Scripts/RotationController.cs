@@ -9,6 +9,7 @@ public class RotationController : MonoBehaviour
     public float timeToStart = 2f;
     private float timer;
     private StartMenu startMenu;
+    private Transform pivot;
 
     private Animator animator;
     private Rigidbody2D rigidbody2D;
@@ -16,6 +17,7 @@ public class RotationController : MonoBehaviour
     private GameObject mainCamera;
     private float cameraSize;
     private float diveRotation = 30f;
+    private float rotationSpeed = 7f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,25 +29,35 @@ public class RotationController : MonoBehaviour
         cameraSize = Camera.main.orthographicSize;
         startText = GameObject.Find("StartText").GetComponent<TMP_Text>();
         timer = 0;
+        pivot = GameObject.Find("StartPivot").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (startScene && timer > timeToStart && !Input.anyKey)
+        {
+            animator.SetBool("Dive", false);
+            animator.SetBool("Rise", true);
+        }
         //If any button is pressed, rotate about the z-axis to -30 degrees
         if (Input.anyKey)
         {
+            if (startScene && timer > timeToStart)
+            {
+                animator.SetBool("Normal", false);
+                animator.SetBool("Dive", true);
+            }
 
             if (!startScene && timer <= timeToStart)
             {
                 timer += Time.deltaTime;
-                transform.rotation = Quaternion.Euler(0, 0, -timer * 10);
-                //gradually decrease main camera size
-                Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, cameraSize - (timer * .5f), Time.deltaTime * 2);
+                RotateAroundPivotPoint();
             }
 
             if (startScene && timer <= timeToStart)
             {
+                timer = 0;
                 transform.rotation = Quaternion.Euler(0, 0, -diveRotation);
             }
 
@@ -53,9 +65,10 @@ public class RotationController : MonoBehaviour
             if (timer > timeToStart && !startScene)
             {
                 animator.SetBool("Resting", false);
+                animator.SetBool("Normal", true);
                 startScene = true;
             }
-        } 
+        }
 
         else
         {
@@ -69,5 +82,15 @@ public class RotationController : MonoBehaviour
             //Change sprite layer to "player"
             //gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
+    }
+
+    private void RotateAroundPivotPoint()
+    {
+        //Rotate around pivot point
+        //transform.rotation = Quaternion.Euler(0, 0, -timer * 10);
+        transform.RotateAround(pivot.position, Vector3.forward, -rotationSpeed * Time.deltaTime);
+
+        //gradually decrease main camera size
+        Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, cameraSize - (timer * .5f), Time.deltaTime * 2);
     }
 }

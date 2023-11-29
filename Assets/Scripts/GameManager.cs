@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (areaCheck.ocean)
         {
             //Start ocean animation (after you've passed the transition point)
-            if (playerTransform.position.x > GameObject.Find("Ocean").transform.position.x)
+            if (playerTransform.position.x > GameObject.Find("Ocean (2)").transform.position.x)
             {
                 oceanRegular = true;
                 oceanPause1 = false;
