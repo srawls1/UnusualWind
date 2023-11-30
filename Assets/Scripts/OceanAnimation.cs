@@ -18,7 +18,6 @@ public class OceanAnimation : MonoBehaviour
     {
         if (gameManager.oceanPause1)
         {
-            Debug.Log("Pause1");
             animator.SetBool("Regular", false);
             animator.SetBool("Pause2", false);
             animator.SetBool("Pause1", true);
@@ -26,7 +25,6 @@ public class OceanAnimation : MonoBehaviour
 
         if (gameManager.oceanRegular)
         {
-            Debug.Log("Regular");
             animator.SetBool("Pause1", false);
             animator.SetBool("Pause2", false);
             animator.SetBool("Regular", true);
@@ -34,7 +32,6 @@ public class OceanAnimation : MonoBehaviour
 
         if (gameManager.oceanPause2)
         {
-            Debug.Log("Pause2");
             animator.SetBool("Pause1", false);
             animator.SetBool("Regular", false);
             animator.SetBool("Pause2", true);

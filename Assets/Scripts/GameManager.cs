@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class GameManager : MonoBehaviour
     private Transform playerTransform;
     private float playerInitialXPosition;
     private Transform forest1, wheat, ocean, forest2;
-    private Transform sunset;
-    private Transform moon;
-    private Transform sunrise;
-    private float moonRestingPosition = 12f;
+    
+    private Transform sunset, moon, sunrise;
+    private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;
+    private Color sunriseColor = Color.white, sunsetColor = Color.red, moonColor = new Color(129f, 217f, 255f);
+    public float sunsetColorSpeed, sunriseColorSpeed, moonColorSpeed;
+    public float sunsetSpeed = 0.01f, sunriseSpeed = 0.01f, moonSpeed = 0.01f;
+
+    private float moonRestingPosition = 12f, sunriseRestingPosition = 16f;
     private float oceanMidpoint = 500f;
-    public float dayNightChangeSpeed = 0.001f;
+    public float globalSkyLightSpeed = 0.1f, skyLightMaxIntensity = 0.7f, skyLightMidPoint = 0.4f;
     public Animator oceanAnimator;
 
     [HideInInspector]
@@ -24,38 +29,37 @@ public class GameManager : MonoBehaviour
 
     public int petalCount;
     private TMP_Text petalText;
-
-    //Ocean Values
-    private float wheatTempMax = 50f;
-    private float oceanTintMax = 50f, oceanTempMax = -20f;
-    
-    //initialize post processing volume
-    public PostProcessVolume volume;
-    //initialize post processing profile
-    private PostProcessProfile postProcessProfile;
-    //initialize color grading
-    private ColorGrading colorGrading;
     
     // Start is called before the first frame update
     void Start()
     {
         //find the player tag
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
+        //find the sun and moon and their lights
         sunset = GameObject.Find("Sunset").GetComponent<Transform>();
+        sunsetLight = GameObject.Find("Sunset Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         moon = GameObject.Find("Moon").GetComponent<Transform>();
+        moonLight = GameObject.Find("Moon Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         sunrise = GameObject.Find("Sunrise").GetComponent<Transform>();
-        //initialize post processing volume
-        volume = GameObject.Find("Post-process Volume").GetComponent<PostProcessVolume>();
+        sunriseLight = GameObject.Find("Sunrise Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+
+        //find the global sky light
+        globalSkyLight = GameObject.Find("Global Sky Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+
+        //turn off moon and sunrise lights
+        moonLight.gameObject.SetActive(false);
+        sunriseLight.gameObject.SetActive(false);
+
+        //sunrise goes red to white
+        sunriseLight.color = sunsetColor;
+
         //initialize area check
         areaCheck = GameObject.FindWithTag("Player").GetComponent<AreaCheck>();
         forest1 = GameObject.Find("Forest 1").GetComponent<Transform>();
         wheat = GameObject.Find("Wheat").GetComponent<Transform>();
         ocean = GameObject.Find("Ocean").GetComponent<Transform>();
         forest2 = GameObject.Find("Forest 2").GetComponent<Transform>();
-        //initialize post processing profile
-        postProcessProfile = volume.profile;
-        //initialize color grading
-        colorGrading = volume.profile.GetSetting<ColorGrading>();
         petalText = GameObject.Find("Petal Text").GetComponent<TMP_Text>();
     }
 
@@ -77,13 +81,19 @@ public class GameManager : MonoBehaviour
 
         if (areaCheck.wheat)
         {
-            sunset.position = new Vector3(0, Mathf.Abs(wheat.position.x - playerTransform.position.x) * .05f, 0);
+            sunset.position -= new Vector3(0, sunsetSpeed, 0);
             //make sky gradually more orange
-            //
+            sunsetLight.color = Color.Lerp(sunsetLight.color, sunsetColor, sunsetColorSpeed * Time.deltaTime);
+
+            //lower global sky light intensity to .4 using lerp
+            globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMidPoint, globalSkyLightSpeed);
         }
 
         if (areaCheck.ocean)
         {
+            sunsetLight.gameObject.SetActive(false);
+            moonLight.gameObject.SetActive(true);
+
             //Start ocean animation (after you've passed the transition point)
             if (playerTransform.position.x > GameObject.Find("Ocean (2)").transform.position.x)
             {
@@ -101,20 +111,41 @@ public class GameManager : MonoBehaviour
             //Increase moon to the point where it stays in the sky
             if (moon.position.y < moonRestingPosition && playerTransform.position.x <= oceanMidpoint)
             {
-                moon.position = new Vector3(0, -10f + (playerTransform.position.x - ocean.position.x) * .1f, 0);
+                moon.position += new Vector3(0, moonSpeed, 0);
+                moonLight.color = Color.Lerp(moonLight.color, moonColor, moonColorSpeed * Time.deltaTime);
+
+                //lower global sky light intensity to 0 using lerp
+                globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, 0, globalSkyLightSpeed);
             }
 
             //Lower the moon
             if (playerTransform.position.x > oceanMidpoint)
             {
-                moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
+                moon.position -= new Vector3(0, moonSpeed, 0);
+                moonLight.color = Color.Lerp(moonLight.color, sunriseColor, moonColorSpeed * Time.deltaTime);
+
+                //raise global sky light intensity to .4f using lerp
+                globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMidPoint, globalSkyLightSpeed);
             }
         }
 
         if (areaCheck.forest2)
         {
-            sunrise.position = new Vector3(0, -10f + (playerTransform.position.x - forest2.position.x) * .1f, 0);
-            moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
+            moonLight.gameObject.SetActive(false);
+            sunriseLight.gameObject.SetActive(true);
+
+            //make sky gradually more white
+            sunriseLight.color = Color.Lerp(sunriseLight.color, sunriseColor, sunriseColorSpeed * Time.deltaTime);
+
+            //raise global sky light intensity to .7f using lerp
+            globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMaxIntensity, globalSkyLightSpeed);
+
+            if (sunrise.position.y < sunriseRestingPosition)
+            {
+                sunrise.position += new Vector3(0, sunriseSpeed, 0);
+            }
+
+            moon.position -= new Vector3(0, moonSpeed, 0);
         }
     }
 
