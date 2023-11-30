@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750692194909149837}
   - component: {fileID: 750692194909149838}
-  - component: {fileID: 750692194909149839}
+  - component: {fileID: -4117472409655364743}
   m_Layer: 0
   m_Name: BuffaloHerd
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &750692194909149839
+--- !u!114 &-4117472409655364743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 750692194909149872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09e77fc51182034b9142f24ebe68287, type: 3}
+  m_Script: {fileID: 11500000, guid: 62c605aa99856a34c8a46855392f0dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: -4
+  isFish: 0
+  arcHeight: 0
+  speed: -10
+  distanceToPlayer: 30

@@ -79,11 +79,7 @@ public class GameManager : MonoBehaviour
         {
             sunset.position = new Vector3(0, Mathf.Abs(wheat.position.x - playerTransform.position.x) * .05f, 0);
             //make sky gradually more orange
-            if (colorGrading.temperature.value < wheatTempMax)
-            {
-                colorGrading.temperature.value += dayNightChangeSpeed;
-                colorGrading.tint.value += dayNightChangeSpeed * .02f;
-            }
+            //
         }
 
         if (areaCheck.ocean)
@@ -108,23 +104,10 @@ public class GameManager : MonoBehaviour
                 moon.position = new Vector3(0, -10f + (playerTransform.position.x - ocean.position.x) * .1f, 0);
             }
 
-            if (colorGrading.temperature.value > oceanTempMax)
-            {
-                colorGrading.temperature.value -= dayNightChangeSpeed;
-            }
-            if (colorGrading.tint.value < oceanTintMax)
-            {
-                //make sky gradually more purple
-                colorGrading.tint.value += dayNightChangeSpeed * 3f;
-            }
-
             //Lower the moon
             if (playerTransform.position.x > oceanMidpoint)
             {
                 moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
-                //make sky gradually less purple
-                colorGrading.temperature.value += dayNightChangeSpeed;
-                colorGrading.tint.value -= dayNightChangeSpeed;
             }
         }
 
@@ -132,16 +115,6 @@ public class GameManager : MonoBehaviour
         {
             sunrise.position = new Vector3(0, -10f + (playerTransform.position.x - forest2.position.x) * .1f, 0);
             moon.position -= new Vector3(0, playerTransform.position.x * dayNightChangeSpeed * .5f, 0);
-            
-            if (colorGrading.temperature.value < 0f)
-            {             
-                //make sky gradually more orange
-                colorGrading.temperature.value += dayNightChangeSpeed;
-            }
-            if (colorGrading.tint.value < 0f)
-            {
-                colorGrading.tint.value -= dayNightChangeSpeed;
-            }
         }
     }
 
