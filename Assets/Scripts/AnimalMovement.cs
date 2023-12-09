@@ -10,6 +10,28 @@ public class AnimalMovement : MonoBehaviour
     public float distanceToPlayer; // negative if coming from left
 
     private float movementSpeed = 0f;
+    private float passedAmount = 50;
+    private string naturalHabitat;
+
+    private GameManager gameManager;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //Set the natural habitat
+        if (isFish)
+        {
+            naturalHabitat = "Water";
+        }
+        else
+        {
+            naturalHabitat = "Forest";
+        }
+
+        //Find the game manager
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,6 +50,7 @@ public class AnimalMovement : MonoBehaviour
         }
 
         ActivateMovement();
+        CheckIfPassed();
     }
 
     private void ActivateMovement()
@@ -37,6 +60,19 @@ public class AnimalMovement : MonoBehaviour
         {
             //Activate the speed
             movementSpeed = speed;
+        }
+    }
+
+    private void CheckIfPassed()
+    {
+        if (isFish && transform.position.x - gameManager.forest2.position.x < passedAmount)
+        {
+            Destroy(gameObject);
+        }
+
+        if (!isFish && transform.position.x - gameManager.wheat.position.x < passedAmount)
+        {
+            Destroy(gameObject);
         }
     }
 }
