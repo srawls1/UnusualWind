@@ -31707,21 +31707,77 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: moon
+      value: 
+      objectReference: {fileID: 1503224953}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: ocean
+      value: 
+      objectReference: {fileID: 1723093178}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: wheat
+      value: 
+      objectReference: {fileID: 2135509140}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: sunset
+      value: 
+      objectReference: {fileID: 1021578628}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: volume
       value: 
       objectReference: {fileID: 145035784}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: forest1
+      value: 
+      objectReference: {fileID: 1431090302}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: forest2
+      value: 
+      objectReference: {fileID: 1946057918}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: sunrise
+      value: 
+      objectReference: {fileID: 1558310183}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: areaCheck
+      value: 
+      objectReference: {fileID: 1768001526}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: moonLight
+      value: 
+      objectReference: {fileID: 579437567}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: petalText
+      value: 
+      objectReference: {fileID: 1739119985}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: sunsetLight
+      value: 
+      objectReference: {fileID: 97468327}
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: sunsetSpeed
       value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: sunriseLight
+      value: 
+      objectReference: {fileID: 630777606}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: oceanAnimator
       value: 
       objectReference: {fileID: 564889069}
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: globalSkyLight
+      value: 
+      objectReference: {fileID: 1084083360}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: moonColorSpeed
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 266516543}
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: sunsetColorSpeed
       value: 0.01
@@ -57896,6 +57952,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
+--- !u!114 &1768001526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 864097230583951460, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
+  m_PrefabInstance: {fileID: 1768001525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986517207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbf8e23c79e2ec4a931eb0ed0b91e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1768950954
 PrefabInstance:
   m_ObjectHideFlags: 0

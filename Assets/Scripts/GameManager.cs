@@ -7,14 +7,14 @@ using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
-    private AreaCheck areaCheck;
+    [SerializeField] private AreaCheck areaCheck;
 
-    private Transform playerTransform;
+    [SerializeField] private Transform playerTransform;
     private float playerInitialXPosition;
-    private Transform forest1, wheat, ocean, forest2;
+    [SerializeField] private Transform forest1, wheat, ocean, forest2;
     
-    private Transform sunset, moon, sunrise;
-    private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;
+    [SerializeField] private Transform sunset, moon, sunrise;
+    [SerializeField] private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;
     private Color sunriseColor = Color.white, sunsetColor = Color.red, moonColor = new Color(129f, 217f, 255f);
     public float sunsetColorSpeed, sunriseColorSpeed, moonColorSpeed;
     public float sunsetSpeed = 0.01f, sunriseSpeed = 0.01f, moonSpeed = 0.01f;
@@ -28,39 +28,17 @@ public class GameManager : MonoBehaviour
     public bool oceanPause1 = true, oceanRegular, oceanPause2;
 
     public int petalCount;
-    private TMP_Text petalText;
+    [SerializeField] private TMP_Text petalText;
     
     // Start is called before the first frame update
     void Start()
     {
-        //find the player tag
-        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
-        //find the sun and moon and their lights
-        sunset = GameObject.Find("Sunset").GetComponent<Transform>();
-        sunsetLight = GameObject.Find("Sunset Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-        moon = GameObject.Find("Moon").GetComponent<Transform>();
-        moonLight = GameObject.Find("Moon Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-        sunrise = GameObject.Find("Sunrise").GetComponent<Transform>();
-        sunriseLight = GameObject.Find("Sunrise Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-
-        //find the global sky light
-        globalSkyLight = GameObject.Find("Global Sky Light").GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-
         //turn off moon and sunrise lights
         moonLight.gameObject.SetActive(false);
         sunriseLight.gameObject.SetActive(false);
 
         //sunrise goes red to white
         sunriseLight.color = sunsetColor;
-
-        //initialize area check
-        areaCheck = GameObject.FindWithTag("Player").GetComponent<AreaCheck>();
-        forest1 = GameObject.Find("Forest 1").GetComponent<Transform>();
-        wheat = GameObject.Find("Wheat").GetComponent<Transform>();
-        ocean = GameObject.Find("Ocean").GetComponent<Transform>();
-        forest2 = GameObject.Find("Forest 2").GetComponent<Transform>();
-        petalText = GameObject.Find("Petal Text").GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
