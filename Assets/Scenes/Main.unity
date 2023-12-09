@@ -3241,8 +3241,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 359.99997
-  m_PointLightOuterAngle: 359.99997
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 4.87
   m_PointLightOuterRadius: 68.23
   m_ShapeLightParametricSides: 5
@@ -8851,7 +8851,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 4.14, y: -0.47}
@@ -8875,6 +8875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.5
+  destroyWaitTime: 0.5
 --- !u!1 &263537255
 GameObject:
   m_ObjectHideFlags: 0
@@ -14617,6 +14618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1001 &477432123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18982,7 +18984,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 4.14, y: -0.47}
@@ -19006,6 +19008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.5
+  destroyWaitTime: 0.5
 --- !u!1 &597367258
 GameObject:
   m_ObjectHideFlags: 0
@@ -21159,7 +21162,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 4.14, y: -0.47}
@@ -21183,6 +21186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.5
+  destroyWaitTime: 0.5
 --- !u!1 &642391439
 GameObject:
   m_ObjectHideFlags: 0
@@ -22155,6 +22159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1 &669111710
 GameObject:
   m_ObjectHideFlags: 0
@@ -34744,7 +34749,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 4.14, y: -0.47}
@@ -34768,6 +34773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.5
+  destroyWaitTime: 0.5
 --- !u!1 &1038925362
 GameObject:
   m_ObjectHideFlags: 0
@@ -46180,7 +46186,7 @@ GameObject:
   - component: {fileID: 1431090303}
   m_Layer: 0
   m_Name: Forest 1
-  m_TagString: Untagged
+  m_TagString: Area Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54242,6 +54248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1 &1688557326
 GameObject:
   m_ObjectHideFlags: 0
@@ -55648,7 +55655,7 @@ GameObject:
   - component: {fileID: 1723093179}
   m_Layer: 0
   m_Name: Ocean
-  m_TagString: Untagged
+  m_TagString: Area Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56288,6 +56295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1 &1739119983
 GameObject:
   m_ObjectHideFlags: 0
@@ -56446,6 +56454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1 &1743933811
 GameObject:
   m_ObjectHideFlags: 0
@@ -59760,6 +59769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
+  destroyWaitTime: 0.5
 --- !u!1 &1861390998
 GameObject:
   m_ObjectHideFlags: 0
@@ -62036,7 +62046,7 @@ GameObject:
   - component: {fileID: 1946057919}
   m_Layer: 0
   m_Name: Forest 2
-  m_TagString: Untagged
+  m_TagString: Area Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68471,7 +68481,7 @@ GameObject:
   - component: {fileID: 2135509141}
   m_Layer: 0
   m_Name: Wheat
-  m_TagString: Untagged
+  m_TagString: Area Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

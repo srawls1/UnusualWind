@@ -11,14 +11,6 @@ public class AnimalMovement : MonoBehaviour
 
     private float movementSpeed = 0f;
     private float passedAmount = 50;
-    private float maxDistance = 3000f;
-    private float startPos;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        startPos = transform.position.x;
-    }
 
     // Update is called once per frame
     void Update()
@@ -57,10 +49,31 @@ public class AnimalMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-        if (transform.position.x - startPos > maxDistance)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //If the object collides with the player, destroy it
+        if (collision.gameObject.tag == "Area Marker" && !IsObjectOnScreen())
         {
             Destroy(gameObject);
         }
+    }
+
+    bool IsObjectOnScreen()
+    {
+        Camera mainCamera = Camera.main;
+
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main camera not found!");
+            return false;
+        }
+
+        // Convert the object's position to viewport space
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
+
+        // Check if the object is outside the viewport (not on the screen)
+        return viewportPoint.x > 1 || viewportPoint.x < 0 || viewportPoint.y > 1 || viewportPoint.y < 0;
     }
 }
