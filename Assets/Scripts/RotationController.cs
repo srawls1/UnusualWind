@@ -72,8 +72,19 @@ public class RotationController : MonoBehaviour
 
         else
         {
-            timer = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
+            if (!startScene)
+            {
+                timer = 0;
+                Quaternion newRotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
+                float newAngle = newRotation.eulerAngles.z;
+                float angleDiff = transform.eulerAngles.z - newAngle;
+				transform.RotateAround(pivot.position, Vector3.forward, -angleDiff);
+            }
+            else
+            {
+				timer = 0;
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
+			}
         }
 
         //If startscene is true and rigidbody2D velocity is greater than 0

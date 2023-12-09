@@ -85,6 +85,11 @@ public class SeedInWind : MonoBehaviour
 		horizontalSpeed = baseHorizontalSpeed;
 	}
 
+	private void OnEnable()
+	{
+		currentDive = StartCoroutine(DiveRoutine());
+	}
+
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.green;
