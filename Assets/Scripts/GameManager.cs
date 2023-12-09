@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private Transform playerTransform;
     private float playerInitialXPosition;
-    public Transform forest1, wheat, ocean, forest2;
+    private Transform forest1, wheat, ocean, forest2;
     
     private Transform sunset, moon, sunrise;
     private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;

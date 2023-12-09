@@ -11,26 +11,13 @@ public class AnimalMovement : MonoBehaviour
 
     private float movementSpeed = 0f;
     private float passedAmount = 50;
-    private string naturalHabitat;
-
-    private GameManager gameManager;
-
+    private float maxDistance = 3000f;
+    private float startPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Set the natural habitat
-        if (isFish)
-        {
-            naturalHabitat = "Water";
-        }
-        else
-        {
-            naturalHabitat = "Forest";
-        }
-
-        //Find the game manager
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        startPos = transform.position.x;
     }
 
     // Update is called once per frame
@@ -65,12 +52,13 @@ public class AnimalMovement : MonoBehaviour
 
     private void CheckIfPassed()
     {
-        if (isFish && transform.position.x - gameManager.forest2.position.x < passedAmount)
+        //If the object has passed the player, destroy it
+        if (transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x < -passedAmount)
         {
             Destroy(gameObject);
         }
 
-        if (!isFish && transform.position.x - gameManager.wheat.position.x < passedAmount)
+        if (transform.position.x - startPos > maxDistance)
         {
             Destroy(gameObject);
         }
