@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7122395749615201949}
   - component: {fileID: 7122395749615201948}
   - component: {fileID: 7122395749615201951}
+  - component: {fileID: 2443064435394305969}
+  - component: {fileID: 1992802039675027861}
   m_Layer: 0
   m_Name: Squirrel Idle
   m_TagString: Untagged
@@ -105,3 +107,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!58 &2443064435394305969
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122395749615201950}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.44, y: 0}
+  serializedVersion: 2
+  m_Radius: 7.76
+--- !u!114 &1992802039675027861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122395749615201950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15629ee41f52864bbe69b037d0d4b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowDownFactor: 0.496

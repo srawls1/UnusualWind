@@ -11,13 +11,4 @@ public class WindmillMovement : MonoBehaviour
     {
         transform.Rotate(0f, 0f, movementSpeed * Time.deltaTime);
     }
-
-    //if object collides with player, increase player speed
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //Call the speed up function in the player script
-        }
-    }
 }
