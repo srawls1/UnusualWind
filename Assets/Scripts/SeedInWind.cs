@@ -29,7 +29,9 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float horizontalSpeedDecayRate = 2f;
 	[SerializeField] private float maxHorizontalSpeed = 15f;
 	[SerializeField] private float maxBosstedHorizontalSpeed = 25f;
+	[SerializeField] private GameObject speedBoost;
 
+	private float normalVelocity = 15f;
 	private float fallGravityScale;
 	private float fullReboundDistance;
 	private float equilibriumSpringCoefficient;
@@ -102,7 +104,11 @@ public class SeedInWind : MonoBehaviour
 
 	private void Update()
 	{
-		if (state != SeedMovementState.Diving
+        if (rigidbody.velocity.x > normalVelocity)
+        {
+			speedBoost.SetActive(true);
+        } else { speedBoost.SetActive(false); }
+        if (state != SeedMovementState.Diving
 			&& player.GetAnyButtonDown())
 		{
 			if (currentDive != null)
