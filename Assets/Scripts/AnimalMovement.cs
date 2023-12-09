@@ -13,7 +13,7 @@ public class AnimalMovement : MonoBehaviour
     private float passedAmount = 50;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (isFish)
         {
