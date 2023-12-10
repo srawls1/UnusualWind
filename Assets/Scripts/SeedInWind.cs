@@ -15,7 +15,7 @@ public class SeedInWind : MonoBehaviour
 		FallingToEquilibrium
 	}
 
-	[SerializeField] [FormerlySerializedAs("horizontalSpeed")] private float baseHorizontalSpeed = 4f;
+	[SerializeField] [FormerlySerializedAs("horizontalSpeed")] public float baseHorizontalSpeed = 4f;
 	[SerializeField] private float groundAltitude;
 	[SerializeField] private float equilibriumAltitude;
 	[SerializeField] private float topAltitude;

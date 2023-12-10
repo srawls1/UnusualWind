@@ -7,7 +7,7 @@ public class GlowingPetal : MonoBehaviour
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameObject player;
     private Animator animator;
-    private float collectSpeed = 15f;
+    private float collectSpeed = 50f;
     private float moveAwaySpeed = 10f;
     private bool moveTowardsPlayer = false;
     private bool moveAway = false;
@@ -23,6 +23,12 @@ public class GlowingPetal : MonoBehaviour
         {
             //Move towards the player
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, collectSpeed * Time.deltaTime);
+
+            if (transform.position == player.transform.position)
+            {
+                //Destroy the petal
+                Destroy(gameObject);
+            }
         }
 
         if (moveAway && !moveTowardsPlayer)
@@ -52,11 +58,5 @@ public class GlowingPetal : MonoBehaviour
     private void MoveAway()
     {
         moveAway = true;
-    }
-
-    private void DestroyPetal()
-    {
-        //Destroy the petal
-        Destroy(gameObject);
     }
 }

@@ -20,4 +20,15 @@ public class AreaSpeedChange : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (ocean)
+            {
+                collision.gameObject.GetComponent<SeedInWind>().baseHorizontalSpeed = 35f;
+            }
+        }
+    }
 }
