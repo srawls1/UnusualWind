@@ -175,6 +175,14 @@ public class SeedInWind : MonoBehaviour
 		}
 	}
 
+	public void LongTermChangeSpeed(float baseSpeed, float maxSpeed, float maxBoostedSpeed, float speedDecayRate)
+	{
+		this.baseHorizontalSpeed = baseSpeed;
+		this.maxHorizontalSpeed = maxSpeed;
+		this.maxBosstedHorizontalSpeed = maxBoostedSpeed;
+		this.horizontalSpeedDecayRate = speedDecayRate;
+	}
+
 	public void Drop(float duration)
 	{
 		if (currentDive != null)

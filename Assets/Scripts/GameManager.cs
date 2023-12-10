@@ -4,9 +4,21 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class GameManager : MonoBehaviour
 {
+    [System.Serializable]
+    private class MoveSpeedChangeParameters
+    {
+        public float baseSpeed;
+        public float maxSpeed;
+        public float maxBoostedSpeed;
+        public float speedDecayRate;
+    }
+
+    [SerializeField] private MoveSpeedChangeParameters baseMovementParameters;
+    [SerializeField] private MoveSpeedChangeParameters oceanMovementParameters;
     [SerializeField] private AreaCheck areaCheck;
 
     [SerializeField] private Transform playerTransform;
@@ -29,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     public int petalCount;
     [SerializeField] private TMP_Text petalText;
+
+    private SeedInWind seed;
     
     // Start is called before the first frame update
     void Start()
@@ -39,6 +53,8 @@ public class GameManager : MonoBehaviour
 
         //sunrise goes red to white
         sunriseLight.color = sunsetColor;
+
+        seed = playerTransform.GetComponent<SeedInWind>();
     }
 
     // Update is called once per frame
@@ -46,10 +62,29 @@ public class GameManager : MonoBehaviour
     {
         SkyUpdate();
         CelestialPositionUpdate();
+        MovementSpeedUpdate();
         petalText.text = "Petals: " + petalCount.ToString();
     }
 
-    private void SkyUpdate()
+    private bool previouslyInOcean = false;
+
+	private void MovementSpeedUpdate()
+	{
+        if (areaCheck.ocean && !previouslyInOcean)
+        {
+            seed.LongTermChangeSpeed(oceanMovementParameters.baseSpeed, oceanMovementParameters.maxSpeed, 
+                oceanMovementParameters.maxBoostedSpeed, oceanMovementParameters.speedDecayRate);
+        }
+        else if (!areaCheck.ocean && previouslyInOcean)
+        {
+			seed.LongTermChangeSpeed(oceanMovementParameters.baseSpeed, oceanMovementParameters.maxSpeed,
+				oceanMovementParameters.maxBoostedSpeed, oceanMovementParameters.speedDecayRate);
+		}
+
+        previouslyInOcean = areaCheck.ocean;
+	}
+
+	private void SkyUpdate()
     {
         if (areaCheck.forest1)
         {

@@ -31794,6 +31794,38 @@ PrefabInstance:
       propertyPath: dayNightChangeSpeed
       value: 0.005
       objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: baseMovementParameters.maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: baseMovementParameters.baseSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: oceanMovementParameters.maxSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: oceanMovementParameters.baseSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: baseMovementParameters.speedDecayRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: baseMovementParameters.maxBoostedSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: oceanMovementParameters.speedDecayRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: oceanMovementParameters.maxBoostedSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8147698345490530173, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -40385,6 +40417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedRigidBody: {fileID: 995284572}
+  seed: {fileID: 1768001530}
   cameraMovement: {fileID: 1536542660}
   menuTextGlow: {fileID: 1388783628}
   menuText: {fileID: 1388783629}
@@ -57899,6 +57932,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6916520281968219751, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916520281968219751, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
       propertyPath: speedBoost
       value: 
       objectReference: {fileID: 1668425118}
@@ -57961,6 +57998,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dbf8e23c79e2ec4a931eb0ed0b91e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1768001530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6916520281968219751, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
+  m_PrefabInstance: {fileID: 1768001525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986517207}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33b7966a3a9d684a8778963a91dba11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1768950954
