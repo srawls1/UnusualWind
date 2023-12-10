@@ -6,6 +6,7 @@ using TMPro;
 public class StartMenu : MonoBehaviour
 {
 	[SerializeField] private Rigidbody2D seedRigidBody;
+	[SerializeField] private SeedInWind seed;
 	[SerializeField] private CameraMovement cameraMovement;
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
@@ -21,7 +22,6 @@ public class StartMenu : MonoBehaviour
 	private void Awake()
 	{
 		player = ReInput.players.GetPlayer(0);
-		seedRigidBody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
 	}
 
 	private void Update()
@@ -86,6 +86,7 @@ public class StartMenu : MonoBehaviour
 	private IEnumerator DisableMenu()
 	{
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
+		seed.enabled = true;
 		cameraMovement.enabled = true;
 		yield return StartCoroutine(FadeOutText());
 		

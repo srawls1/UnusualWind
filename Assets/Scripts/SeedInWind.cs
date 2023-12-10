@@ -87,6 +87,11 @@ public class SeedInWind : MonoBehaviour
 		horizontalSpeed = baseHorizontalSpeed;
 	}
 
+	private void OnEnable()
+	{
+		currentDive = StartCoroutine(DiveRoutine());
+	}
+
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.green;
@@ -168,6 +173,14 @@ public class SeedInWind : MonoBehaviour
 			reboundTopAltitude = Mathf.Min(topAltitude, reboundTopAltitude);
 			reboundDuration *= speedUpFactor;
 		}
+	}
+
+	public void LongTermChangeSpeed(float baseSpeed, float maxSpeed, float maxBoostedSpeed, float speedDecayRate)
+	{
+		this.baseHorizontalSpeed = baseSpeed;
+		this.maxHorizontalSpeed = maxSpeed;
+		this.maxBosstedHorizontalSpeed = maxBoostedSpeed;
+		this.horizontalSpeedDecayRate = speedDecayRate;
 	}
 
 	public void Drop(float duration)
