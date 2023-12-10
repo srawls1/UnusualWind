@@ -23,11 +23,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform playerTransform;
     private float playerInitialXPosition;
-    [SerializeField] private Transform forest1, wheat, wheatMidPoint, ocean, forest2;
+    [SerializeField] private Transform forest1, wheat, wheatMidPoint, ocean, oceanMidpoint, forest2, house;
     [SerializeField] private Transform oceanMid, oceanEnd;
     [SerializeField] private Transform sunset, moon, sunrise;
     [SerializeField] private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;
-    private float oceanMidpoint = 500f;
     public Animator oceanAnimator;
 
     [HideInInspector]
@@ -37,17 +36,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text petalText;
 
     //light intensity variables
-    public float globalSkyLightSpeed = 1000f, skyLightMaxIntensity = 0.9f, skyLightMidPoint = 0;
-    private float moonLightIntensitySpeed = .02f, moonLightMaxIntensity = .05f;
-    private float sunsetIntensitySpeed = .01f;
-    private float sunriseIntensitySpeed = .02f, sunriseMaxIntensity = .8f;
+    public float skyLightMidPoint = .3f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
+    private float moonLightMinIntensity = 0f, moonLightMaxIntensity = .05f;
+    private float sunriseMinIntensity = 0f, sunriseMaxIntensity = .8f;
+    private float sunsetMinIntensity = 0f, sunsetMaxIntensity = .8f;
 
     //light color variables
-    private Color sunriseColor = Color.white, sunsetColor = Color.red, moonColor = new Color(129f, 217f, 255f);
+    private Color sunriseEndColor = Color.white, sunsetEndColor = Color.red, moonEndColor = new Color(129f, 217f, 255f);
+    private Color sunriseStartColor = Color.yellow, sunsetStartColor = Color.white, moonStartColor = Color.white;
     public float sunsetColorSpeed = 10f, sunriseColorSpeed = .04f, moonColorSpeed = .03f;
 
     //celestial position variables
     public float sunsetSpeed = 1000f, sunriseSpeed = 0.01f, moonSpeed = 0.01f;
+    private Vector3 sunsetStartPosition, sunsetEndPosition, sunriseStartPosition, sunriseEndPosition, moonStartPosition, moonEndPosition;
     private float moonRestingPosition = 12f, sunriseRestingPoition = 16f;
 
     private SeedInWind seed;
@@ -56,6 +57,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         seed = playerTransform.GetComponent<SeedInWind>();
+
+        sunsetStartPosition = sunset.position;
+        sunsetEndPosition = new Vector3(playerTransform.position.x, -20f, playerTransform.position.z);
+        sunriseStartPosition = sunrise.position;
+        sunriseEndPosition = new Vector3(playerTransform.position.x, 16f, playerTransform.position.z);
+        moonStartPosition = moon.position;
+        moonEndPosition = new Vector3(playerTransform.position.x, 12f, playerTransform.position.z);
     }
 
     // Update is called once per frame
@@ -96,15 +104,12 @@ public class GameManager : MonoBehaviour
         if (areaCheck.wheat)
         {
             float p = Mathf.InverseLerp(wheat.position.x, ocean.position.x, playerTransform.position.x);
-            sunset.position = Vector3.Lerp( , , p); // change to mimic player movement (start position, end position)
-
-            float t = Mathf.InverseLerp(wheat.position.x, ocean.position.x, playerTransform.position.x);
+            
+            sunset.position = Vector3.Lerp(sunsetStartPosition, new Vector3(playerTransform.position.x, 0, playerTransform.position.z), p);
             //make sky gradually more orange and less bright
-            sunsetLight.color = Color.Lerp(sunsetLight.color, sunsetColor, t);
-            sunsetLight.intensity = Mathf.Lerp(sunsetLight.intensity, 0, sunsetIntensitySpeed * Time.deltaTime);
-
-            //lower global sky light intensity to .3 using lerp
-            globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMidPoint, globalSkyLightSpeed * Time.deltaTime);
+            sunsetLight.color = Color.Lerp(sunsetStartColor, sunsetEndColor, p);
+            sunsetLight.intensity = Mathf.Lerp(sunsetMaxIntensity, sunsetMinIntensity, p);
+            globalSkyLight.intensity = Mathf.Lerp(skyLightMaxIntensity, skyLightMidPoint, p);
         }
 
         if (areaCheck.ocean)
@@ -124,44 +129,43 @@ public class GameManager : MonoBehaviour
             }
 
             //Increase moon to the point where it stays in the sky
-            if (playerTransform.position.x <= oceanMidpoint)
+            if (playerTransform.position.x <= oceanMidpoint.position.x)
             {
-                if (moon.position.y < moonRestingPosition)
-                {
-                    moon.position += new Vector3(0, moonSpeed, 0);
-                }
-                moonLight.color = Color.Lerp(moonLight.color, moonColor, moonColorSpeed * Time.deltaTime);
-                moonLight.intensity = Mathf.Lerp(moonLight.intensity, moonLightMaxIntensity, moonLightIntensitySpeed * Time.deltaTime);
+                float p = Mathf.InverseLerp(ocean.position.x, oceanMidpoint.position.x, playerTransform.position.x);
+
+                moon.position = Vector3.Lerp(moonStartPosition, moonEndPosition, p);
+                moonLight.color = Color.Lerp(moonStartColor, moonEndColor, p);
+                moonLight.intensity = Mathf.Lerp(moonLightMinIntensity, moonLightMaxIntensity, p);
 
                 //lower global sky light intensity to 0 using lerp
-                globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, 0, globalSkyLightSpeed * Time.deltaTime);
+                globalSkyLight.intensity = Mathf.Lerp(skyLightMidPoint, skyLightMinIntensity, p);
             }
 
             //Lower the moon
-            if (playerTransform.position.x > oceanMidpoint)
+            if (playerTransform.position.x > oceanMidpoint.position.x)
             {
-                moon.position -= new Vector3(0, moonSpeed, 0);
-                moonLight.color = Color.Lerp(moonLight.color, sunriseColor, moonColorSpeed * Time.deltaTime);
-                moonLight.intensity = Mathf.Lerp(moonLight.intensity, 0, moonLightIntensitySpeed * Time.deltaTime);
+                float p = Mathf.InverseLerp(oceanMidpoint.position.x, forest2.position.x, playerTransform.position.x);
+
+                moon.position = Vector3.Lerp(moonEndPosition, moonStartPosition, p);
+                moonLight.intensity = Mathf.Lerp(moonLightMaxIntensity, moonLightMinIntensity, p);
 
                 //raise global sky light intensity to .3f using lerp
-                globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMidPoint, globalSkyLightSpeed * Time.deltaTime);
+                globalSkyLight.intensity = Mathf.Lerp(skyLightMinIntensity, skyLightMidPoint, p);
             }
         }
 
         if (areaCheck.forest2)
         {
+            float p = Mathf.InverseLerp(forest2.position.x, house.position.x, playerTransform.position.x);
+
+            sunrise.position = Vector3.Lerp(sunriseStartPosition, sunriseStartPosition, p);
+
             //make sky gradually more white
-            sunriseLight.color = Color.Lerp(sunriseLight.color, sunriseColor, sunriseColorSpeed * Time.deltaTime);
-            sunriseLight.intensity = Mathf.Lerp(sunriseLight.intensity, sunriseMaxIntensity, sunriseIntensitySpeed * Time.deltaTime);
+            sunriseLight.color = Color.Lerp(sunriseStartColor, sunriseEndColor, p);
+            sunriseLight.intensity = Mathf.Lerp(sunriseMinIntensity, sunriseMaxIntensity, p);
 
             //raise global sky light intensity to .7f using lerp
-            globalSkyLight.intensity = Mathf.Lerp(globalSkyLight.intensity, skyLightMaxIntensity, globalSkyLightSpeed * Time.deltaTime);
-
-            if (sunrise.position.y < sunriseRestingPoition)
-            {
-                sunrise.position += new Vector3(0, sunriseSpeed, 0);
-            }
+            globalSkyLight.intensity = Mathf.Lerp(skyLightMidPoint, skyLightMaxIntensity, p);
 
             moon.position -= new Vector3(0, moonSpeed, 0);
         }
