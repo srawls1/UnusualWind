@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Transform playerTransform;
     private float playerInitialXPosition;
-    [SerializeField] private Transform forest1, wheat, ocean, forest2;
+    [SerializeField] private Transform forest1, wheat, wheatMidPoint, ocean, forest2;
     [SerializeField] private Transform oceanMid, oceanEnd;
     [SerializeField] private Transform sunset, moon, sunrise;
     [SerializeField] private Light2D sunsetLight, moonLight, sunriseLight, globalSkyLight;
@@ -95,10 +95,12 @@ public class GameManager : MonoBehaviour
 
         if (areaCheck.wheat)
         {
-            sunset.position -= new Vector3(0, sunsetSpeed * Time.deltaTime, 0);
-            
+            float p = Mathf.InverseLerp(wheat.position.x, ocean.position.x, playerTransform.position.x);
+            sunset.position = Vector3.Lerp( , , p); // change to mimic player movement (start position, end position)
+
+            float t = Mathf.InverseLerp(wheat.position.x, ocean.position.x, playerTransform.position.x);
             //make sky gradually more orange and less bright
-            sunsetLight.color = Color.Lerp(sunsetLight.color, sunsetColor, sunsetColorSpeed * Time.deltaTime);
+            sunsetLight.color = Color.Lerp(sunsetLight.color, sunsetColor, t);
             sunsetLight.intensity = Mathf.Lerp(sunsetLight.intensity, 0, sunsetIntensitySpeed * Time.deltaTime);
 
             //lower global sky light intensity to .3 using lerp

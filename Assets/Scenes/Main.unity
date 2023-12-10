@@ -21152,6 +21152,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6024189511454626051, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
   m_PrefabInstance: {fileID: 638321196}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639043182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639043183}
+  m_Layer: 0
+  m_Name: WheatMidPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639043183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639043182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1810142879}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639143893 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 441833626047348963, guid: 5fb65d55e4b3ca84eab9722a3890f4fc, type: 3}
@@ -31774,6 +31805,10 @@ PrefabInstance:
       propertyPath: oceanAnimator
       value: 
       objectReference: {fileID: 564889069}
+    - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
+      propertyPath: wheatMidPoint
+      value: 
+      objectReference: {fileID: 639043183}
     - target: {fileID: 8147698345490530172, guid: 3dce9b218ad8d664c845d0328824628e, type: 3}
       propertyPath: globalSkyLight
       value: 
@@ -56209,7 +56244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1723093178}
   - component: {fileID: 1723093179}
-  - component: {fileID: 1723093180}
   m_Layer: 0
   m_Name: Ocean
   m_TagString: Area Marker
@@ -56230,7 +56264,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1810142879}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1723093179
 BoxCollider2D:
@@ -56258,18 +56292,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.43, y: 52.7}
   m_EdgeRadius: 0
---- !u!114 &1723093180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723093177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d91ba6bc36fbb594dbe3ef5831e4531a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1723121610
 GameObject:
   m_ObjectHideFlags: 0
@@ -59139,6 +59161,7 @@ Transform:
   m_Children:
   - {fileID: 1431090302}
   - {fileID: 2135509140}
+  - {fileID: 639043183}
   - {fileID: 1723093178}
   - {fileID: 1946057918}
   m_Father: {fileID: 759163519}
@@ -62680,7 +62703,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1810142879}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1946057919
 BoxCollider2D:
@@ -62720,6 +62743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91ba6bc36fbb594dbe3ef5831e4531a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ocean: 0
 --- !u!1001 &1946154137
 PrefabInstance:
   m_ObjectHideFlags: 0
