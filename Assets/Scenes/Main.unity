@@ -5197,7 +5197,7 @@ GameObject:
   - component: {fileID: 151820422}
   - component: {fileID: 151820423}
   m_Layer: 0
-  m_Name: Clouds (1)
+  m_Name: Background Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5248,7 +5248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1536542656}
-  relativePositionChange: 0.3
+  relativePositionChange: 0.6
 --- !u!1 &164465680
 GameObject:
   m_ObjectHideFlags: 0
@@ -45795,10 +45795,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 33.75
   m_fontSizeBase: 42
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -56311,7 +56311,7 @@ GameObject:
   - component: {fileID: 1723121611}
   - component: {fileID: 1723121612}
   m_Layer: 0
-  m_Name: Clouds
+  m_Name: Background Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56369,7 +56369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1536542656}
-  relativePositionChange: 0.3
+  relativePositionChange: 0.6
 --- !u!1 &1723804274
 GameObject:
   m_ObjectHideFlags: 0
@@ -56980,10 +56980,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 33.75
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -60930,7 +60930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1536542656}
-  relativePositionChange: 0.8
+  relativePositionChange: 0.6
 --- !u!1 &1880065798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 441833626047348963, guid: 5fb65d55e4b3ca84eab9722a3890f4fc, type: 3}
@@ -62751,7 +62751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91ba6bc36fbb594dbe3ef5831e4531a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ocean: 0
 --- !u!1001 &1946154137
 PrefabInstance:
   m_ObjectHideFlags: 0
