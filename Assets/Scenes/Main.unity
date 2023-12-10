@@ -60930,7 +60930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1536542656}
-  relativePositionChange: 0.6
+  relativePositionChange: 0.8
 --- !u!1 &1880065798 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 441833626047348963, guid: 5fb65d55e4b3ca84eab9722a3890f4fc, type: 3}
