@@ -17,6 +17,7 @@ public class GlowingPetal : MonoBehaviour
     [SerializeField] private SpriteRenderer glow;
     [SerializeField] private Light2D light2D;
     private bool fadeOut = false;
+    private int petalPoints = 1;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class GlowingPetal : MonoBehaviour
 
             if (transform.position == player.transform.position)
             {
+                gameManager.GetComponent<GameManager>().petalCount += petalPoints;
                 //Destroy the petal
                 Destroy(gameObject);
             }
@@ -45,7 +47,6 @@ public class GlowingPetal : MonoBehaviour
 
         if (fadeOut)
         {
-            Debug.Log("fade out");
             //decrease alpha value of sprite
             sprite.color = new Color(1f, 1f, 1f, sprite.color.a - alphaDecrease);
             glow.color = new Color(1f, 1f, 1f, glow.color.a - alphaDecrease);
@@ -53,7 +54,8 @@ public class GlowingPetal : MonoBehaviour
             light2D.intensity -= alphaDecrease;
 
             if (sprite.color.a <= 0)
-            {
+            {                
+                gameManager.GetComponent<GameManager>().petalCount += petalPoints;
                 Destroy(gameObject);
             }
         }
@@ -66,7 +68,6 @@ public class GlowingPetal : MonoBehaviour
             //Trigger the animation
             animator.SetTrigger("Collect");
             //Increase petal count from the game manager
-            gameManager.GetComponent<GameManager>().petalCount++;
         }
     }
 
