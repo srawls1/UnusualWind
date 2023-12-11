@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MoveSpeedChangeParameters baseMovementParameters;
     [SerializeField] private MoveSpeedChangeParameters oceanMovementParameters;
     [SerializeField] private AreaCheck areaCheck;
+    [SerializeField] private GameObject title;
+    private float alphaDecrease = 0.01f;
 
     [SerializeField] private Transform playerTransform;
     private float playerInitialXPosition;
@@ -73,6 +75,12 @@ public class GameManager : MonoBehaviour
         CelestialPositionUpdate();
         MovementSpeedUpdate();
         petalText.text = "Petals: " + petalCount.ToString();
+
+        if (title == null && petalText.color.a < 1f)
+        {
+            //set alpha of petal text to 1
+            petalText.color = new Color(1f, 1f, 1f, petalText.color.a + alphaDecrease);
+        }
     }
 
     private bool previouslyInOcean = false;

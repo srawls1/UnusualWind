@@ -45,7 +45,7 @@ public class StartMenu : MonoBehaviour
 			timeHeld += Time.deltaTime;
 		}
 		else { timeHeld = 0; }
-	}
+    }
 
 	private IEnumerator AdvanceText()
 	{
