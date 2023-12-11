@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GlowingPetal : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameObject player;
     private Animator animator;
-    private float collectSpeed = 50f;
+    private float collectSpeed = 15f;
     private float moveAwaySpeed = 10f;
     private bool moveTowardsPlayer = false;
     private bool moveAway = false;
+    private float alphaDecrease = .01f;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer glow;
+    [SerializeField] private Light2D light2D;
+    private bool fadeOut = false;
 
     private void Start()
     {
@@ -36,6 +42,21 @@ public class GlowingPetal : MonoBehaviour
             //Move away from the player
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -moveAwaySpeed * Time.deltaTime);
         }
+
+        if (fadeOut)
+        {
+            Debug.Log("fade out");
+            //decrease alpha value of sprite
+            sprite.color = new Color(1f, 1f, 1f, sprite.color.a - alphaDecrease);
+            glow.color = new Color(1f, 1f, 1f, glow.color.a - alphaDecrease);
+            //decrease intensity of light
+            light2D.intensity -= alphaDecrease;
+
+            if (sprite.color.a <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnTriggerEnter2D (Collider2D collision)
@@ -58,5 +79,10 @@ public class GlowingPetal : MonoBehaviour
     private void MoveAway()
     {
         moveAway = true;
+    }
+
+    private void FadeOut()
+    {
+        fadeOut = true;
     }
 }

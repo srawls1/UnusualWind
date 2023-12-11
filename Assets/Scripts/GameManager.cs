@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     //light intensity variables
     public float skyLightMidPoint = .3f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
-    private float moonLightMinIntensity = 0f, moonLightMaxIntensity = .05f;
+    private float moonLightMinIntensity = 0f, moonLightMaxIntensity = 0.005f;
     private float sunriseMinIntensity = 0f, sunriseMaxIntensity = .8f;
     private float sunsetMinIntensity = 0f, sunsetMaxIntensity = .8f;
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         seed = playerTransform.GetComponent<SeedInWind>();
 
         sunsetStartPosition = sunset.position;
-        sunsetEndPosition = new Vector3(playerTransform.position.x, -20f, playerTransform.position.z);
+        sunsetEndPosition = new Vector3(playerTransform.position.x, -25f, playerTransform.position.z);
         sunriseStartPosition = sunrise.position;
         sunriseEndPosition = new Vector3(playerTransform.position.x, 16f, playerTransform.position.z);
         moonStartPosition = moon.position;
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         {
             float p = Mathf.InverseLerp(wheat.position.x, ocean.position.x, playerTransform.position.x);
             
-            sunset.position = Vector3.Lerp(sunsetStartPosition, new Vector3(playerTransform.position.x, 0, playerTransform.position.z), p);
+            sunset.position = Vector3.Lerp(sunsetStartPosition, sunsetEndPosition, p);
             //make sky gradually more orange and less bright
             sunsetLight.color = Color.Lerp(sunsetStartColor, sunsetEndColor, p);
             sunsetLight.intensity = Mathf.Lerp(sunsetMaxIntensity, sunsetMinIntensity, p);

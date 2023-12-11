@@ -5249,6 +5249,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1536542656}
   relativePositionChange: 0.6
+--- !u!212 &157174870 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 917885311157861003, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+  m_PrefabInstance: {fileID: 671125418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &164465680
 GameObject:
   m_ObjectHideFlags: 0
@@ -22570,9 +22575,21 @@ PrefabInstance:
       value: Glowing Petal
       objectReference: {fileID: 0}
     - target: {fileID: 917885310939424108, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+      propertyPath: glow
+      value: 
+      objectReference: {fileID: 157174870}
+    - target: {fileID: 917885310939424108, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 986517207}
+    - target: {fileID: 917885310939424108, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 1738054224}
+    - target: {fileID: 917885310939424108, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+      propertyPath: light2D
+      value: 
+      objectReference: {fileID: 674587912}
     - target: {fileID: 917885310939424108, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
       propertyPath: gameManager
       value: 
@@ -22663,6 +22680,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &674587912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 917885311512123768, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+  m_PrefabInstance: {fileID: 671125418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &675709596
 GameObject:
   m_ObjectHideFlags: 0
@@ -56996,6 +57024,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowDownFactor: 0.509
   destroyWaitTime: 0.5
+--- !u!212 &1738054224 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 917885310939424109, guid: 664d51bc55efe5340b7039c05ee817d9, type: 3}
+  m_PrefabInstance: {fileID: 671125418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1739119983
 GameObject:
   m_ObjectHideFlags: 0
