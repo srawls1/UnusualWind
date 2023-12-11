@@ -57,6 +57,9 @@ TagManager:
   - name: Player
     uniqueID: 328475937
     locked: 0
+  - name: Medium Animals
+    uniqueID: 1546808807
+    locked: 0
   - name: Foreground
     uniqueID: 4189860087
     locked: 0

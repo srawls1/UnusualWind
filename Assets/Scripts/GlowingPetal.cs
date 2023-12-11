@@ -8,7 +8,7 @@ public class GlowingPetal : MonoBehaviour
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameObject player;
     private Animator animator;
-    private float collectSpeed = 15f;
+    private float collectSpeed = 10f;
     private float moveAwaySpeed = 10f;
     private bool moveTowardsPlayer = false;
     private bool moveAway = false;

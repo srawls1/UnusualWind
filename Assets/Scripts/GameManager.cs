@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         seed = playerTransform.GetComponent<SeedInWind>();
 
         sunsetStartPosition = sunset.position;
-        sunsetEndPosition = new Vector3(playerTransform.position.x, -25f, playerTransform.position.z);
+        sunsetEndPosition = new Vector3(playerTransform.position.x, -20f, playerTransform.position.z);
         sunriseStartPosition = sunrise.position;
         sunriseEndPosition = new Vector3(playerTransform.position.x, 16f, playerTransform.position.z);
         moonStartPosition = moon.position;
