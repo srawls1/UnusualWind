@@ -5,24 +5,32 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     //private player transform
-    private AreaCheck areaCheck;
-    private RotationController rotationController;
-    public AudioSource intro, layer1, layer2, layer3, layer4;
+    [SerializeField] private RotationController rotationController;
+    [SerializeField] private AreaCheck areaCheck;
+    [SerializeField] private AudioSource intro, layer1, layer2, layer3, layer4;
+    [SerializeField] private AudioSource wind1, wind2, wind3;
+    [SerializeField] private AudioSource oceanAudio;
     private bool introCanPlay = false;
 
     // Start is called before the first frame update
     void Start()
     {
         intro.loop = true;
-
-        //find object with player tag
-        areaCheck = GameObject.FindWithTag("Player").GetComponent<AreaCheck>();
-        rotationController = GameObject.FindWithTag("Player").GetComponent<RotationController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.anyKey && !rotationController.startScene)
+        {
+            wind3.volume = Mathf.Lerp(wind3.volume, 1f, Time.deltaTime);
+        }
+
+        else if (!rotationController.startScene)
+        {
+            wind3.volume = Mathf.Lerp(wind3.volume, 0, Time.deltaTime);
+        }
+
         if (rotationController.startScene)
         {
             intro.loop = false;
@@ -34,6 +42,9 @@ public class AudioManager : MonoBehaviour
 
                 //Checks which layers to play
                 MusicLayerCheck();
+
+                //Checks which wind to play
+                WindCheck();
             }
         } 
     }
@@ -106,6 +117,26 @@ public class AudioManager : MonoBehaviour
             layer2.volume = Mathf.Lerp(layer2.volume, 1f, Time.deltaTime);
             layer3.volume = Mathf.Lerp(layer3.volume, 1f, Time.deltaTime);
             layer4.volume = Mathf.Lerp(layer4.volume, 0f, Time.deltaTime);
+        }
+    }
+
+    private void WindCheck()
+    {
+        
+        if (areaCheck.ocean)
+        {
+            wind1.volume = Mathf.Lerp(wind1.volume, .2f, Time.deltaTime);
+            wind3.volume = Mathf.Lerp(wind3.volume, 0, Time.deltaTime);
+            wind2.volume = Mathf.Lerp(wind2.volume, 0, Time.deltaTime);
+            oceanAudio.volume = Mathf.Lerp(oceanAudio.volume, .2f, Time.deltaTime);
+        } 
+
+        else
+        {
+            wind1.volume = Mathf.Lerp(wind1.volume, .35f, Time.deltaTime);
+            wind2.volume = Mathf.Lerp(wind2.volume, .15f, Time.deltaTime);
+            wind3.volume = Mathf.Lerp(wind3.volume, .25f, Time.deltaTime);
+            oceanAudio.volume = Mathf.Lerp(oceanAudio.volume, 0, Time.deltaTime);
         }
     }
 }

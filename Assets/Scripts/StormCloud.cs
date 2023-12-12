@@ -8,18 +8,14 @@ public class StormCloud : MonoBehaviour
 
     private Animator animator;
     private GameObject lightning;
+    private AudioSource lightningAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         lightning = transform.GetChild(0).gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        lightningAudio = GetComponent<AudioSource>();
     }
 
     //Whenever player collides with cloud, lightning strikes
@@ -29,6 +25,9 @@ public class StormCloud : MonoBehaviour
         {
             //flash lightning on and off twice
             animator.SetTrigger("Strike");
+            //Set lightning audio to a random pitch
+            lightningAudio.pitch = Random.Range(.8f, 1.2f);
+            lightningAudio.Play();
 
             //Temporarily force player to drop
             SeedInWind seed = collision.GetComponent<SeedInWind>();

@@ -49,9 +49,8 @@ public class GameManager : MonoBehaviour
     public float sunsetColorSpeed = 10f, sunriseColorSpeed = .04f, moonColorSpeed = .03f;
 
     //celestial position variables
-    public float sunsetSpeed = 1000f, sunriseSpeed = 0.01f, moonSpeed = 0.01f;
+    private float moonSpeed = 0.01f;
     private Vector3 sunsetStartPosition, sunsetEndPosition, sunriseStartPosition, sunriseEndPosition, moonStartPosition, moonEndPosition;
-    private float moonRestingPosition = 12f, sunriseRestingPoition = 16f;
 
     private SeedInWind seed;
     

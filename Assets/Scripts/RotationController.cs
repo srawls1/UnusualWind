@@ -7,7 +7,7 @@ public class RotationController : MonoBehaviour
 {
     public bool startScene = false;
     public float timeToStart = 2f;
-    private float timer;
+    public float timer;
     private StartMenu startMenu;
     private Transform pivot;
 
