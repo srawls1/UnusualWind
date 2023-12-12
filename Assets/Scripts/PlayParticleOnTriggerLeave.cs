@@ -8,7 +8,7 @@ public class PlayParticleOnTriggerLeave : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.CompareTag("Player"))
+		//if (collision.CompareTag("Player"))
 		{
 			Vector2 velocity = collision.attachedRigidbody.velocity;
 			Instantiate(particle, collision.attachedRigidbody.position,

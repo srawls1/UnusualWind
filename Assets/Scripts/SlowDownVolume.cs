@@ -6,6 +6,12 @@ public class SlowDownVolume : MonoBehaviour
 {
 	[SerializeField, Range(0f, 1f)] private float slowDownFactor;
 	[SerializeField] private float destroyWaitTime = .5f;
+	private AudioSource sfx;
+
+	private void Awake()
+	{
+        sfx = GetComponent<AudioSource>();
+    }
 
 	/*private void OnTriggerExit2D(Collider2D collision)
 	{
@@ -30,6 +36,11 @@ public class SlowDownVolume : MonoBehaviour
 
             StartCoroutine(destroyVolume(destroyWaitTime));
         }
+    }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		sfx.Play();
     }
 
 	private IEnumerator destroyVolume(float destroyWaitTime)
