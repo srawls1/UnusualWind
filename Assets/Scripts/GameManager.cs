@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text petalText;
 
     //light intensity variables
-    public float skyLightMidPoint = .1f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
+    public float skyLightMidPoint = .3f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
     private float moonLightMinIntensity = 0f, moonLightMaxIntensity = 0.005f;
     private float sunriseMinIntensity = 0f, sunriseMaxIntensity = .8f;
     private float sunsetMinIntensity = .1f, sunsetMaxIntensity = .8f;

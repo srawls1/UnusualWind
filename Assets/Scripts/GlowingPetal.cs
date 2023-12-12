@@ -7,6 +7,8 @@ public class GlowingPetal : MonoBehaviour
 {
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameObject player;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private AudioSource collectSfx;
     private Animator animator;
     private float collectSpeed = 10f;
     private float moveAwaySpeed = 10f;
@@ -67,7 +69,11 @@ public class GlowingPetal : MonoBehaviour
         {
             //Trigger the animation
             animator.SetTrigger("Collect");
-            //Increase petal count from the game manager
+
+            audioManager.PlayCollectSfx();
+
+            //turn off the collider
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 

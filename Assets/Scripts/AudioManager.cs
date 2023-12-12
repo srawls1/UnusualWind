@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AreaCheck areaCheck;
     [SerializeField] private AudioSource intro, layer1, layer2, layer3, layer4;
     [SerializeField] private AudioSource wind1, wind2, wind3;
-    [SerializeField] private AudioSource oceanAudio;
+    [SerializeField] private AudioSource oceanAudio, collectSfx;
     private bool introCanPlay = false;
 
     // Start is called before the first frame update
@@ -137,6 +137,14 @@ public class AudioManager : MonoBehaviour
             wind2.volume = Mathf.Lerp(wind2.volume, .15f, Time.deltaTime);
             wind3.volume = Mathf.Lerp(wind3.volume, .25f, Time.deltaTime);
             oceanAudio.volume = Mathf.Lerp(oceanAudio.volume, 0, Time.deltaTime);
+        }
+    }
+
+    public void PlayCollectSfx()
+    {
+        if (!collectSfx.isPlaying)
+        {
+            collectSfx.Play();
         }
     }
 }
