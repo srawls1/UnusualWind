@@ -118,6 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowDownFactor: 0.9
   destroyWaitTime: 0.5
+  sfx:
+  - {fileID: 4366800656736808488}
 --- !u!114 &8576050543927562680
 MonoBehaviour:
   m_ObjectHideFlags: 0
