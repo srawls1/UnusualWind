@@ -53,6 +53,7 @@ public class CameraMovement : MonoBehaviour
 
 		float bottom = minimumY;
 		float top = forecastedPosition.y + paddingAboveTarget;
+		top = Mathf.Clamp(top, minimumY + paddingAboveTarget * 2f, maximumY);
 		float height = top - bottom;
 		height = Mathf.Max(height, minimumSize) * 0.5f;
 		float width = camera.aspect * height;
