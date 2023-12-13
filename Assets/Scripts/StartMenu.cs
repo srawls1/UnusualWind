@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Rewired;
 using TMPro;
+using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private CameraMovement cameraMovement;
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
+	[SerializeField] private Image titleImage;
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
 	[SerializeField] private bool fart;

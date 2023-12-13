@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3799136157891896827}
   - component: {fileID: 1976084459008384726}
   - component: {fileID: 8964582561689577692}
+  - component: {fileID: 381905115689657383}
   m_Layer: 0
   m_Name: Cloud Particle Effect
   m_TagString: Untagged
@@ -4812,3 +4813,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &381905115689657383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198833881331566835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f64eaf84d0e06641bdb8897a1ceacaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
