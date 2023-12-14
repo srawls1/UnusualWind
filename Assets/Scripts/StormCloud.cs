@@ -25,9 +25,13 @@ public class StormCloud : MonoBehaviour
         {
             //flash lightning on and off twice
             animator.SetTrigger("Strike");
-            //Set lightning audio to a random pitch
-            lightningAudio.pitch = Random.Range(.8f, 1.2f);
-            lightningAudio.Play();
+            //If lightning audio is not playing, play it
+            if (!lightningAudio.isPlaying)
+            {
+                //Set lightning audio to a random pitch
+                lightningAudio.pitch = Random.Range(.8f, 1.2f);
+                lightningAudio.Play();
+            }
 
             //Temporarily force player to drop
             SeedInWind seed = collision.GetComponent<SeedInWind>();
