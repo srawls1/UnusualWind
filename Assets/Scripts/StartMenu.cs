@@ -11,9 +11,11 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private CameraMovement cameraMovement;
 	[SerializeField] private GlowingText menuTextGlow;
 	[SerializeField] private TextMeshProUGUI menuText;
+	[SerializeField] private TextMeshProUGUI petalText;
 	[SerializeField] private Image titleImage;
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
+	[SerializeField] private float titleDisappearDuration;
 	[SerializeField] private bool fart;
 
 	private bool previouslyUnderTime;
@@ -32,6 +34,7 @@ public class StartMenu : MonoBehaviour
 		{
 			if (previouslyUnderTime)
 			{
+				StartCoroutine(AdvanceTitleText());
 				StartCoroutine(AdvanceText());
 			}
 
@@ -49,11 +52,32 @@ public class StartMenu : MonoBehaviour
 		else { timeHeld = 0; }
     }
 
+	private IEnumerator AdvanceTitleText()
+	{
+		yield return StartCoroutine(FadeOutTitle());
+		yield return StartCoroutine(FadeText(petalText, Color.clear, Color.white));
+	}
+
 	private IEnumerator AdvanceText()
 	{
 		yield return StartCoroutine(FadeOutText());
 		menuText.text = "Release";
 		yield return StartCoroutine(FadeInText());
+	}
+
+	private IEnumerator FadeOutTitle()
+	{
+		Color startColor = titleImage.color;
+		Color endColor = startColor;
+		endColor.a = 0;
+
+		for (float dt = 0f; dt < titleDisappearDuration; dt += Time.deltaTime)
+		{
+			titleImage.color = Color.Lerp(startColor, endColor, dt / titleDisappearDuration);
+			yield return null;
+		}
+
+		titleImage.color = endColor;
 	}
 
 	private IEnumerator FadeOutText()
@@ -62,7 +86,7 @@ public class StartMenu : MonoBehaviour
 		Color endTextColor = startTextColor;
 		endTextColor.a = 0;
 
-		return FadeText(startTextColor, endTextColor);
+		return FadeText(menuText, startTextColor, endTextColor);
 	}
 
 	private IEnumerator FadeInText()
@@ -71,18 +95,18 @@ public class StartMenu : MonoBehaviour
 		Color endTextColor = startTextColor;
 		endTextColor.a = 1;
 
-		return FadeText(startTextColor, endTextColor);
+		return FadeText(menuText, startTextColor, endTextColor);
 	}
 
-	private IEnumerator FadeText(Color startColor, Color endColor)
+	private IEnumerator FadeText(TextMeshProUGUI text, Color startColor, Color endColor)
 	{
 		for (float dt = 0f; dt < textDisappearDuration; dt += Time.deltaTime)
 		{
-			menuText.color = Color.Lerp(startColor, endColor, dt / textDisappearDuration);
+			text.color = Color.Lerp(startColor, endColor, dt / textDisappearDuration);
 			yield return null;
 		}
 
-		menuText.color = endColor;
+		text.color = endColor;
 	}
 
 	private IEnumerator DisableMenu()
