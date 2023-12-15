@@ -8,13 +8,9 @@ public class RotationController : MonoBehaviour
     public bool startScene = false;
     public float timeToStart = 2f;
     public float timer;
-    private StartMenu startMenu;
     private Transform pivot;
 
     private Animator animator;
-    private Rigidbody2D rigidbody2D;
-    private TMP_Text startText;
-    private GameObject mainCamera;
     private float cameraSize;
     private float diveRotation = 30f;
     private float rotationSpeed = 7f;
@@ -23,11 +19,7 @@ public class RotationController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        mainCamera = GameObject.Find("Main Camera");
-        startMenu = GameObject.Find("StartMenu").GetComponent<StartMenu>();
         cameraSize = Camera.main.orthographicSize;
-        startText = GameObject.Find("StartText").GetComponent<TMP_Text>();
         timer = 0;
         pivot = GameObject.Find("StartPivot").transform;
     }
@@ -85,13 +77,6 @@ public class RotationController : MonoBehaviour
 				timer = 0;
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
 			}
-        }
-
-        //If startscene is true and rigidbody2D velocity is greater than 0
-        if (startScene && rigidbody2D.velocity.magnitude > 0)
-        {
-            //Change sprite layer to "player"
-            //gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
     }
 

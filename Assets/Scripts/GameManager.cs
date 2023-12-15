@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MoveSpeedChangeParameters baseMovementParameters;
     [SerializeField] private MoveSpeedChangeParameters oceanMovementParameters;
     [SerializeField] private AreaCheck areaCheck;
-    [SerializeField] private GameObject title;
-    private float alphaDecrease = 0.01f;
 
     [SerializeField] private Transform playerTransform;
     private float playerInitialXPosition;
@@ -34,11 +32,23 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool oceanPause1 = true, oceanRegular, oceanPause2;
 
-    public int petalCount;
     [SerializeField] private TMP_Text petalText;
 
-    //light intensity variables
-    public float skyLightMidPoint = .3f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
+    private const string PETAL_TEXT_FORMAT = "Petals: {0}";
+
+    private int m_petalCount;
+	public int petalCount
+    {
+        get { return m_petalCount; }
+        set
+        {
+            m_petalCount = value;
+            petalText.text = string.Format(PETAL_TEXT_FORMAT, value);
+        }
+    }
+
+	//light intensity variables
+	public float skyLightMidPoint = .3f, skyLightMinIntensity = 0f, skyLightMaxIntensity = 0.9f;
     private float moonLightMinIntensity = 0f, moonLightMaxIntensity = 0.005f;
     private float sunriseMinIntensity = 0f, sunriseMaxIntensity = .8f;
     private float sunsetMinIntensity = .3f, sunsetMaxIntensity = .8f;
@@ -58,6 +68,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         seed = playerTransform.GetComponent<SeedInWind>();
+        petalCount = 0;
 
         sunsetStartPosition = sunset.position;
         sunsetEndPosition = new Vector3(playerTransform.position.x, -15f, playerTransform.position.z);
@@ -74,13 +85,6 @@ public class GameManager : MonoBehaviour
         SkyUpdate();
         CelestialPositionUpdate();
         MovementSpeedUpdate();
-        petalText.text = "Petals: " + petalCount.ToString();
-
-        if (title == null && petalText.color.a < 1f)
-        {
-            //set alpha of petal text to 1
-            petalText.color = new Color(1f, 1f, 1f, petalText.color.a + alphaDecrease);
-        }
     }
 
     private bool previouslyInOcean = false;
