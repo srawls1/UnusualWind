@@ -7,6 +7,7 @@ public class SlowDownVolume : MonoBehaviour
 	[SerializeField, Range(0f, 1f)] private float slowDownFactor;
 	[SerializeField] private float destroyWaitTime = .5f;
 	public AudioSource[] sfx;
+    public bool constantSlow;
 
 	/*private void OnTriggerExit2D(Collider2D collision)
 	{
@@ -21,7 +22,7 @@ public class SlowDownVolume : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (enabled)
+		if (enabled || constantSlow)
 		{
             SeedInWind seed = collision.GetComponent<SeedInWind>();
             if (seed != null)
