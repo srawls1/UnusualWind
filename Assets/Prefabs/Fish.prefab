@@ -136,8 +136,9 @@ MonoBehaviour:
   slowDownFactor: 0.5
   destroyWaitTime: 0.5
   sfx:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2167225352338884767}
+  - {fileID: 8760273871907808848}
+  constantSlow: 0
 --- !u!82 &2167225352338884767
 AudioSource:
   m_ObjectHideFlags: 0
