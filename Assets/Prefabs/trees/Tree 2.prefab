@@ -70,6 +70,7 @@ MonoBehaviour:
   sfx:
   - {fileID: 2059663461676278064}
   - {fileID: -509642460146848899}
+  constantSlow: 0
 --- !u!114 &8022712876643830550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ GameObject:
   - component: {fileID: 5292868733897950415}
   - component: {fileID: 753064419258170427}
   - component: {fileID: 1991711360861544809}
+  - component: {fileID: 3148112886096817160}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -358,3 +360,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3148112886096817160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356093154376320168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f497096823b91b4fa18f3844a762455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerName: Foreground
+  orderInLayer: 1

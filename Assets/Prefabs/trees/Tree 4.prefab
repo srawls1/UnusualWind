@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3199296721512768202}
   - component: {fileID: 2183210996956222869}
   - component: {fileID: 4237081760105338760}
+  - component: {fileID: 8077850441259402038}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -98,6 +99,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8077850441259402038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213381177896854977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f497096823b91b4fa18f3844a762455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerName: Foreground
+  orderInLayer: 1
 --- !u!1 &5953612779220541917
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +217,7 @@ MonoBehaviour:
   sfx:
   - {fileID: 3929518198154987013}
   - {fileID: -8348104637680652217}
+  constantSlow: 0
 --- !u!114 &-603203097505177002
 MonoBehaviour:
   m_ObjectHideFlags: 0
