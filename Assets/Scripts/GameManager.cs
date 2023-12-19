@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool oceanPause1 = true, oceanRegular, oceanPause2;
 
-    [SerializeField] private TMP_Text petalText;
+    //[SerializeField] private TMP_Text petalText;
 
-    private const string PETAL_TEXT_FORMAT = "Petals: {0}";
+    //private const string PETAL_TEXT_FORMAT = "Petals: {0}";
 
     private int m_petalCount;
 	public int petalCount
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         set
         {
             m_petalCount = value;
-            petalText.text = string.Format(PETAL_TEXT_FORMAT, value);
+            //petalText.text = string.Format(PETAL_TEXT_FORMAT, value);
         }
     }
 

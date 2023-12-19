@@ -50,9 +50,12 @@ public class SlowDownVolume : MonoBehaviour
             }
         }
         
-        //random range between length of sfx array
-        int randomSfx = Random.Range(0, sfx.Length - 1);
-		sfx[randomSfx].Play();
+        if (enabled)
+        {
+            //random range between length of sfx array
+            int randomSfx = Random.Range(0, sfx.Length - 1);
+            sfx[randomSfx].Play();
+        }
     }
 
 	private IEnumerator destroyVolume(float destroyWaitTime)

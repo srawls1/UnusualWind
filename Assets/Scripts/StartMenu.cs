@@ -3,6 +3,7 @@ using UnityEngine;
 using Rewired;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class StartMenu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI menuText;
 	[SerializeField] private TextMeshProUGUI petalText;
 	[SerializeField] private Image titleImage;
+	[SerializeField] private Light2D titleLight;
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
 	[SerializeField] private float titleDisappearDuration;
@@ -74,6 +76,8 @@ public class StartMenu : MonoBehaviour
 		for (float dt = 0f; dt < titleDisappearDuration; dt += Time.deltaTime)
 		{
 			titleImage.color = Color.Lerp(startColor, endColor, dt / titleDisappearDuration);
+			titleLight.intensity = Mathf.Lerp(1, 0, dt / titleDisappearDuration);
+
 			yield return null;
 		}
 

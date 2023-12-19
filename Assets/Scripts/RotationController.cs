@@ -8,7 +8,7 @@ public class RotationController : MonoBehaviour
     public bool startScene = false;
     public float timeToStart = 2f;
     public float timer;
-    private Transform pivot;
+    [SerializeField] private Transform pivot;
 
     private Animator animator;
     private float cameraSize;
@@ -21,7 +21,6 @@ public class RotationController : MonoBehaviour
         animator = GetComponent<Animator>();
         cameraSize = Camera.main.orthographicSize;
         timer = 0;
-        pivot = GameObject.Find("StartPivot").transform;
     }
 
     // Update is called once per frame

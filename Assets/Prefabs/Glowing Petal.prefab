@@ -105,9 +105,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   player: {fileID: 0}
+  audioManager: {fileID: 0}
+  collectSfx: {fileID: 0}
   sprite: {fileID: 0}
   glow: {fileID: 0}
   light2D: {fileID: 0}
+  plantedFlower: {fileID: 2701670717953125589, guid: fc58cd680e6296540a96203b532d5a7d, type: 3}
+  lilypadPlanted: {fileID: 2032085818712668970, guid: 5205a4ef41fe98f48b46c2a1427ad838, type: 3}
 --- !u!58 &917885310939424107
 CircleCollider2D:
   m_ObjectHideFlags: 0

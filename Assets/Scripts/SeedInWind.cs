@@ -72,7 +72,7 @@ public class SeedInWind : MonoBehaviour
 		// g = 2 * equilibriumAltitude / fallDuration^2
 		fullReboundDistance = equilibriumAltitude - groundAltitude;
 		float fallGravity = 2 * fullReboundDistance / (fallDuration * fallDuration);
-		fallGravityScale = fallGravity / Physics2D.gravity.magnitude;
+		fallGravityScale = 2 * fallGravity / Physics2D.gravity.magnitude;
 
 		reboundingHorizontalSpeedupRate = fullReboundSpeedBoost / fullReboundDuration;
 
