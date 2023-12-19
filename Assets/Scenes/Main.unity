@@ -21438,7 +21438,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 359.99997
-  m_PointLightOuterAngle: 359.99997
+  m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 4.87
   m_PointLightOuterRadius: 68.23
   m_ShapeLightParametricSides: 5
@@ -60938,11 +60938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7835608335161156476, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2297.9
+      value: -2069
       objectReference: {fileID: 0}
     - target: {fileID: 7835608335161156476, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.8385763
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7835608335161156476, guid: 11f80bbf2a020c6418938578697dc956, type: 3}
       propertyPath: m_LocalPosition.z
