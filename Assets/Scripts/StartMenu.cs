@@ -18,6 +18,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
 	[SerializeField] private float titleDisappearDuration;
+	[SerializeField] private float cameraExpansionTime = 0.3f;
 	[SerializeField] private bool fart;
 
 	private bool previouslyUnderTime;
@@ -117,8 +118,20 @@ public class StartMenu : MonoBehaviour
 	{
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
 		seed.enabled = true;
+		float startingMinTopY = cameraMovement.currentTopY;
+		float endingMinTopY = cameraMovement.minTopY;
+		cameraMovement.minTopY = startingMinTopY;
 		cameraMovement.enabled = true;
-		yield return StartCoroutine(FadeOutText());
+
+		Coroutine fadeOutTextCoroutine = StartCoroutine(FadeOutText());
+		for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
+		{
+			cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
+			yield return null;
+		}
+
+		cameraMovement.minTopY = endingMinTopY;
+		yield return fadeOutTextCoroutine;
 		
 		menuText.gameObject.SetActive(false);
 	}

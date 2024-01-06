@@ -42324,7 +42324,8 @@ MonoBehaviour:
   textDisappearDuration: 0.5
   timeToStart: 2
   titleDisappearDuration: 1.5
-  fart: 0
+  cameraExpansionTime: 1
+  fart: 1
 --- !u!1 &1243050826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 441833626047348963, guid: 5fb65d55e4b3ca84eab9722a3890f4fc, type: 3}
@@ -48569,7 +48570,7 @@ RectTransform:
   m_GameObject: {fileID: 1395124521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.65549487, y: 0.65549487, z: 0.65549487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2083564590}
@@ -48578,8 +48579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04229166, y: 0.75762963}
   m_AnchorMax: {x: 0.4723125, y: 0.96400005}
-  m_AnchoredPosition: {x: 0.5, y: 0.5}
-  m_SizeDelta: {x: 426.73822, y: 115.97583}
+  m_AnchoredPosition: {x: 0.0010375977, y: 0}
+  m_SizeDelta: {x: -0.0020447, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395124523
 MonoBehaviour:
@@ -52541,6 +52542,7 @@ MonoBehaviour:
   sizeDamping: 1
   lookaheadTime: 1
   xOffset: 4
+  m_minTopY: 11.54
 --- !u!114 &1536542661
 MonoBehaviour:
   m_ObjectHideFlags: 0
