@@ -52528,15 +52528,15 @@ MonoBehaviour:
   followTarget: {fileID: 7835608336652266633}
   minimumY: -9
   maximumY: 24.5
-  paddingAboveTarget: 6
+  paddingAroundTarget: 6
   minimumX: -2090
   maximumX: 2000
   minimumSize: 4
-  positionDamping: 1
-  sizeDamping: 1
+  positionDamping: 3
+  sizeDamping: 3.01
   lookaheadTime: 1
-  xOffset: 4
-  m_minTopY: 11.54
+  rightEdgeMinLookaheadTime: 3
+  m_minTopY: 5
 --- !u!114 &1536542661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72745,7 +72745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7835608336522308071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2069.1, y: -4, z: 0}
+  m_LocalPosition: {x: -2069, y: -4, z: 0}
   m_LocalScale: {x: 0.30000013, y: 0.30000013, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
