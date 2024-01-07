@@ -61,6 +61,7 @@ public class StartMenu : MonoBehaviour
 		else { timeHeld = 0; }
 
 		if (upDownCount > 0) {
+			Debug.Log("Following");
 			//Gradually move menu text to the player's position plus the offset
 			menuText.transform.position = Vector3.Lerp(menuText.transform.position, 
 				Camera.main.WorldToScreenPoint(seedRigidBody.gameObject.transform.position) + menuTextOffset, Time.deltaTime * 5);
@@ -80,14 +81,20 @@ public class StartMenu : MonoBehaviour
 	private IEnumerator AdvanceText()
 	{
 		yield return StartCoroutine(FadeOutText());
-		menuText.text = "Release";
+		if (menuText.alpha == 0)
+		{
+			menuText.text = "Release";
+		}
 		yield return StartCoroutine(FadeInText());
 	}
 
 	private IEnumerator RevertText()
 	{
 		yield return StartCoroutine(FadeOutText());
-		menuText.text = "Hold any key";
+		if (menuText.alpha == 0)
+		{
+			menuText.text = "Hold any key";
+		}
 		yield return StartCoroutine(FadeInText());
 	}
 
@@ -139,35 +146,40 @@ public class StartMenu : MonoBehaviour
 
 	private IEnumerator DisableMenu()
 	{
-		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
-		seed.enabled = true;
 		float startingMinTopY = cameraMovement.currentTopY;
 		float endingMinTopY = cameraMovement.minTopY;
 		cameraMovement.minTopY = startingMinTopY;
 		cameraMovement.enabled = true;
 
 		timeToStart = timeToStartTutorial;
-		upDownCount++;
 		menuTextAlpha = menuTextAlphaTutorial;
 		menuTextAlphaTutorial -= .05f;
 		CoroutineStopper();
 
+
 		if (upDownCount == 0) {
+			seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
+			seed.enabled = true;
+			upDownCount++;
+
 			for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
 			{
 				cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
-				yield return null;
+				yield return StartCoroutine(RevertText());
 			}
 
 			cameraMovement.minTopY = endingMinTopY;
-			yield return null;
+			yield return StartCoroutine(RevertText());
 		}
-		else if (upDownCount <= 5) {
+		
+		if (upDownCount <= 5) {
 			yield return StartCoroutine(RevertText());
 		}
 		else {
 			yield return StartCoroutine(FadeOutText());
 		}
+		
+		upDownCount++;
 	}
 
 	void CoroutineStopper() {

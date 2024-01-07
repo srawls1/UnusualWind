@@ -8,11 +8,14 @@ public class SeedHouseTrigger : MonoBehaviour
     private SeedInWind seedInWind;
     private RotationController rotationController;
     private Transform impactStartPoint;
-    private float impactSpeed = 2f;
+    private float impactSpeed;
+    private float impactSpeedHolder = 2f;
     [SerializeField] private GameObject houseAnimator;
     private Animator mainAnimator;
     private Rigidbody2D rig;
     private bool isHouse = false;
+
+    private float velocityHolder;
 
     // Swap the Animator on the GameObject
 
@@ -38,8 +41,10 @@ public class SeedHouseTrigger : MonoBehaviour
         if (impactStartPoint != null)
         {
             //Move towards impact point using lerp
-            transform.position = Vector3.Lerp(impactStartPoint.position, impactPoint.transform.position, impactSpeed * Time.deltaTime);
-            rig.velocity = Vector2.zero;
+            transform.position = Vector3.Lerp(impactStartPoint.position, impactPoint.transform.position, impactSpeedHolder * Time.deltaTime);
+            //Change impact speed from velocity holder to impact speed holder using lerp
+            impactSpeed = Mathf.Lerp(velocityHolder, impactSpeedHolder, 0.5f * Time.deltaTime);
+            rig.velocity = new Vector2(0, 0);
             rig.isKinematic = true;
             GetComponent<Collider2D>().enabled = false;
 
@@ -64,6 +69,8 @@ public class SeedHouseTrigger : MonoBehaviour
         {
             impactStartPoint = transform;
         }
+        velocityHolder = rig.velocity.magnitude;
+        mainAnimator.SetBool("Resting", true);
 
         //Turn off seed in wind script
         seedInWind.enabled = false;

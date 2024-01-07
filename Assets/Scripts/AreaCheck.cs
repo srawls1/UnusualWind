@@ -5,11 +5,11 @@ using UnityEngine;
 public class AreaCheck : MonoBehaviour
 {
     public bool forest1 = true, wheat, ocean, forest2;
-    private SeedHouseTrigger seedHouseTrigger;
+    //private SeedHouseTrigger seedHouseTrigger;
 
     private void Start()
     {
-        seedHouseTrigger = GetComponent<SeedHouseTrigger>();
+        //seedHouseTrigger = GetComponent<SeedHouseTrigger>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,10 +42,10 @@ public class AreaCheck : MonoBehaviour
             ocean = false;
         }
 
-        //If collision is house, call house function
+        /*/If collision is house, call house function
         if (collision.gameObject.name == "HouseTrigger")
         {
             seedHouseTrigger.HouseStart();
-        }
+        }*/
     }
 }
