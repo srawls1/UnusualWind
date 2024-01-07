@@ -19,6 +19,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private float timeToStart;
 	[SerializeField] private float timeToStartTutorial = .5f;
 	[SerializeField] private float titleDisappearDuration;
+	[SerializeField] private float cameraExpansionTime = 0.3f;
 	[SerializeField] private bool fart;
 	[SerializeField] private int upDownCount = 0;
 	[SerializeField] private Vector3 menuTextOffset = new Vector3(0, 0, 0);
@@ -140,18 +141,42 @@ public class StartMenu : MonoBehaviour
 	{
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
 		seed.enabled = true;
+		float startingMinTopY = cameraMovement.currentTopY;
+		float endingMinTopY = cameraMovement.minTopY;
+		cameraMovement.minTopY = startingMinTopY;
 		cameraMovement.enabled = true;
+
 		timeToStart = timeToStartTutorial;
 		upDownCount++;
 		menuTextAlpha = menuTextAlphaTutorial;
 		menuTextAlphaTutorial -= .05f;
-		StopAllCoroutines();
-		StartCoroutine(FadeOutTitle());
-		if (upDownCount <= 5) {
+
+		if (upDownCount == 0) {
+			Coroutine fadeOutTextCoroutine = StartCoroutine(FadeOutText());
+			for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
+			{
+				cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
+				yield return null;
+			}
+
+			cameraMovement.minTopY = endingMinTopY;
+			yield return fadeOutTextCoroutine;
+			
+			menuText.gameObject.SetActive(false);
+		}
+		else if (upDownCount <= 5) {
 			yield return StartCoroutine(RevertText());
 		}
 		else {
 			yield return StartCoroutine(FadeOutText());
 		}
+	}
+
+	void CoroutineStopper() {
+		StopCoroutine(AdvanceTitleText());
+		StopCoroutine(AdvanceText());
+		StopCoroutine(RevertText());
+		StopCoroutine(FadeInText());
+		StopCoroutine(DisableMenu());
 	}
 }

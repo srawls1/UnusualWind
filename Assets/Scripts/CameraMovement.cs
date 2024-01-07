@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -16,11 +16,23 @@ public class CameraMovement : MonoBehaviour
 	[SerializeField] private float sizeDamping;
 	[SerializeField] private float lookaheadTime;
 	[SerializeField] private float xOffset;
+	[SerializeField, FormerlySerializedAs("minTopY")] private float m_minTopY;
 
 	new private Camera camera;
 	private Vector3 previousPosition;
 	private Vector3 runningAverageVelocity;
 	private Vector3 unclampedPosition;
+
+	public float minTopY
+	{
+		get { return m_minTopY; }
+		set { m_minTopY = value; }
+	}
+
+	public float currentTopY
+	{
+		get { return transform.position.y + camera.orthographicSize; }
+	}
 
 	private void Awake()
 	{
@@ -53,7 +65,7 @@ public class CameraMovement : MonoBehaviour
 
 		float bottom = minimumY;
 		float top = forecastedPosition.y + paddingAboveTarget;
-		top = Mathf.Clamp(top, minimumY + paddingAboveTarget * 2f, maximumY);
+		top = Mathf.Clamp(top, minTopY, maximumY);
 		float height = top - bottom;
 		height = Mathf.Max(height, minimumSize) * 0.5f;
 		float width = camera.aspect * height;
@@ -79,6 +91,10 @@ public class CameraMovement : MonoBehaviour
 		float centerY = (minimumY + maximumY) * 0.5f;
 		float width = maximumX - minimumX;
 		float height = maximumY - minimumY;
+		Gizmos.DrawWireCube(new Vector3(centerX, centerY), new Vector3(width, height));
+		Gizmos.color = Color.green;
+		centerY = (minimumY + minTopY) * 0.5f;
+		height = minTopY - minimumY;
 		Gizmos.DrawWireCube(new Vector3(centerX, centerY), new Vector3(width, height));
 	}
 }
