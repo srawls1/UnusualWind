@@ -17,8 +17,15 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private Light2D titleLight;
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
+	[SerializeField] private float timeToStartTutorial = .5f;
 	[SerializeField] private float titleDisappearDuration;
 	[SerializeField] private bool fart;
+	[SerializeField] private int upDownCount = 0;
+	[SerializeField] private Vector3 menuTextOffset = new Vector3(0, 0, 0);
+	[SerializeField] private float menuTextAlpha = 1f;
+	[SerializeField] private float menuTextAlphaTutorial = 1f;
+
+
 
 	private bool previouslyUnderTime;
     private float timeHeld;
@@ -45,13 +52,22 @@ public class StartMenu : MonoBehaviour
                 StartCoroutine(DisableMenu());
             }
         }
-
 		previouslyUnderTime = timeHeld < timeToStart;
 		if (player.GetAnyButton())
 		{
 			timeHeld += Time.deltaTime;
 		}
 		else { timeHeld = 0; }
+
+		if (upDownCount > 0) {
+			//Gradually move menu text to the player's position plus the offset
+			menuText.transform.position = Vector3.Lerp(menuText.transform.position, 
+				Camera.main.WorldToScreenPoint(seedRigidBody.gameObject.transform.position) + menuTextOffset, Time.deltaTime * 5);
+		} 
+
+		if (upDownCount > 5 && menuText.alpha == 0) {
+			menuText.gameObject.SetActive(false);
+		}
     }
 
 	private IEnumerator AdvanceTitleText()
@@ -64,6 +80,13 @@ public class StartMenu : MonoBehaviour
 	{
 		yield return StartCoroutine(FadeOutText());
 		menuText.text = "Release";
+		yield return StartCoroutine(FadeInText());
+	}
+
+	private IEnumerator RevertText()
+	{
+		yield return StartCoroutine(FadeOutText());
+		menuText.text = "Hold any key";
 		yield return StartCoroutine(FadeInText());
 	}
 
@@ -97,7 +120,7 @@ public class StartMenu : MonoBehaviour
 	{
 		Color startTextColor = menuText.color;
 		Color endTextColor = startTextColor;
-		endTextColor.a = 1;
+		endTextColor.a = menuTextAlpha;
 
 		return FadeText(menuText, startTextColor, endTextColor);
 	}
@@ -118,8 +141,17 @@ public class StartMenu : MonoBehaviour
 		seedRigidBody.bodyType = RigidbodyType2D.Dynamic;
 		seed.enabled = true;
 		cameraMovement.enabled = true;
-		yield return StartCoroutine(FadeOutText());
-		
-		menuText.gameObject.SetActive(false);
+		timeToStart = timeToStartTutorial;
+		upDownCount++;
+		menuTextAlpha = menuTextAlphaTutorial;
+		menuTextAlphaTutorial -= .05f;
+		StopAllCoroutines();
+		StartCoroutine(FadeOutTitle());
+		if (upDownCount <= 5) {
+			yield return StartCoroutine(RevertText());
+		}
+		else {
+			yield return StartCoroutine(FadeOutText());
+		}
 	}
 }

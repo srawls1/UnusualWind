@@ -9,13 +9,19 @@ public class SeedHouseTrigger : MonoBehaviour
     private RotationController rotationController;
     private Transform impactStartPoint;
     private float impactSpeed = 2f;
-    private Animator animator;
+    [SerializeField] private GameObject houseAnimator;
+    private Animator mainAnimator;
+    private Rigidbody2D rig;
+
+    // Swap the Animator on the GameObject
+
 
     private void Start()
     {
         seedInWind = GetComponent<SeedInWind>();
         rotationController = GetComponent<RotationController>();
-        animator = GetComponent<Animator>();
+        mainAnimator = GetComponent<Animator>();
+        rig = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -48,8 +54,19 @@ public class SeedHouseTrigger : MonoBehaviour
         //If collision is called house, call house function
         if (collision.gameObject.name == "House")
         {
-            //Trigger house animation
-            animator.SetTrigger("House");
+            HouseStart();
+            SwapAnimator();
         }
+    }
+
+    void SwapAnimator()
+    {
+        rig.velocity = Vector2.zero;
+        rig.isKinematic = true;
+        
+        GetComponent<Collider2D>().enabled = false;
+        mainAnimator.enabled = false;
+        houseAnimator.SetActive(true);
+        transform.parent = houseAnimator.transform;
     }
 }
