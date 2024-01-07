@@ -150,9 +150,9 @@ public class StartMenu : MonoBehaviour
 		upDownCount++;
 		menuTextAlpha = menuTextAlphaTutorial;
 		menuTextAlphaTutorial -= .05f;
+		CoroutineStopper();
 
 		if (upDownCount == 0) {
-			Coroutine fadeOutTextCoroutine = StartCoroutine(FadeOutText());
 			for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
 			{
 				cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
@@ -160,9 +160,7 @@ public class StartMenu : MonoBehaviour
 			}
 
 			cameraMovement.minTopY = endingMinTopY;
-			yield return fadeOutTextCoroutine;
-			
-			menuText.gameObject.SetActive(false);
+			yield return null;
 		}
 		else if (upDownCount <= 5) {
 			yield return StartCoroutine(RevertText());
@@ -173,10 +171,7 @@ public class StartMenu : MonoBehaviour
 	}
 
 	void CoroutineStopper() {
-		StopCoroutine(AdvanceTitleText());
-		StopCoroutine(AdvanceText());
-		StopCoroutine(RevertText());
-		StopCoroutine(FadeInText());
-		StopCoroutine(DisableMenu());
+		StopAllCoroutines();
+		StartCoroutine(FadeOutTitle());
 	}
 }
