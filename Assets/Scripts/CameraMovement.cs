@@ -8,20 +8,20 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Transform followTarget;
     [SerializeField] private float minimumY;
 	[SerializeField] private float maximumY;
-	[SerializeField] private float paddingAboveTarget;
+	[SerializeField, FormerlySerializedAs("paddingAboveTarget")] private float paddingAroundTarget;
 	[SerializeField] private float minimumX;
 	[SerializeField] private float maximumX;
 	[SerializeField] private float minimumSize;
 	[SerializeField] private float positionDamping;
 	[SerializeField] private float sizeDamping;
 	[SerializeField] private float lookaheadTime;
-	[SerializeField] private float xOffset;
+	[SerializeField] private float rightEdgeMinLookaheadTime;
 	[SerializeField, FormerlySerializedAs("minTopY")] private float m_minTopY;
 
 	new private Camera camera;
-	private Vector3 previousPosition;
-	private Vector3 runningAverageVelocity;
-	private Vector3 unclampedPosition;
+	private Queue<float> previousFrameVelocities;
+	private float previousPosition;
+	private float runningAverageVelocity;
 
 	public float minTopY
 	{
@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
 	private void Awake()
 	{
 		camera = transform.GetComponent<Camera>();
+		previousFrameVelocities = new Queue<float>();
 
 		//float bottom = minimumY;
 		//float top = followTarget.position.y + paddingAboveTarget;
@@ -47,30 +48,94 @@ public class CameraMovement : MonoBehaviour
 		//float y = Mathf.Clamp((bottom + top) * .5f, minimumY + height / 2, maximumY - height / 2);
 		//transform.position = new Vector3(x + xOffset, y, transform.position.z);
 		//camera.orthographicSize = height * 0.5f;
-		previousPosition = followTarget.position;
+		previousPosition = followTarget.position.x;
 	}
+
+	// Desired bottom: minimumY
+	// Desired top: forecastedPosition.y + padding, clamped
+	// Desired left: min(forecastedPosition.x - screenWidth, followPosition.x - padding)
+	// Desired right: max(forecastedPosition.x + screenWidth, followPosition.x + padding, rightEdgeMinLookahead)
+	// Calculate desired width and height
+	// If it's too wide:
+	// - Raise the top accordingly
+	// - If the top gets too high:
+	// - - we'll have to begrudgingly move the right edge in
+	// If it's too tall:
+	// - Move left and right out equally
+
 
 	private void FixedUpdate()
 	{
-		Vector3 diff = followTarget.position - previousPosition;
-		Vector3 velocityLastFrame = diff / Time.deltaTime;
-		runningAverageVelocity *= 0.9f;
-		runningAverageVelocity += velocityLastFrame * 0.1f;
-		previousPosition = followTarget.position;
+		float diff = followTarget.position.x - previousPosition;
+		float velocityLastFrame = diff / Time.deltaTime;
+		runningAverageVelocity *= previousFrameVelocities.Count;
+		runningAverageVelocity += velocityLastFrame;
+		previousFrameVelocities.Enqueue(velocityLastFrame);
 
-		// <temp>
-		runningAverageVelocity.y = 0;
-		// </temp>
-		Vector3 forecastedPosition = followTarget.position + runningAverageVelocity * lookaheadTime;
+		if (previousFrameVelocities.Count > 50)
+		{
+			float dequeuedVelocity = previousFrameVelocities.Dequeue();
+			runningAverageVelocity -= dequeuedVelocity;
+		}
+
+		runningAverageVelocity /= previousFrameVelocities.Count;
+		previousPosition = followTarget.position.x;
+
+		float velocityUsedForForecast = previousFrameVelocities.Count >= 50 ?
+			runningAverageVelocity : 0f;
+		Vector3 forecastedPosition = followTarget.position + Vector3.right * velocityUsedForForecast * lookaheadTime;
+		float rightEdgeForecast = followTarget.position.x + velocityUsedForForecast * rightEdgeMinLookaheadTime;
 
 		float bottom = minimumY;
-		float top = forecastedPosition.y + paddingAboveTarget;
-		top = Mathf.Clamp(top, minTopY, maximumY);
+		float top = Mathf.Clamp(forecastedPosition.y + paddingAroundTarget, minTopY, maximumY);
+		float left = followTarget.position.x - paddingAroundTarget;
+		float right = Mathf.Max(followTarget.position.x + paddingAroundTarget, rightEdgeForecast);
+
+		Debug.DrawLine(new Vector2(left, bottom), new Vector2(right, bottom));
+		Debug.DrawLine(new Vector2(left, bottom), new Vector2(left, top));
+		Debug.DrawLine(new Vector2(left, top), new Vector2(right, top));
+		Debug.DrawLine(new Vector2(right, bottom), new Vector2(right, top));
+
 		float height = top - bottom;
-		height = Mathf.Max(height, minimumSize) * 0.5f;
-		float width = camera.aspect * height;
-		
-		unclampedPosition = new Vector3(forecastedPosition.x + xOffset, (bottom + top) * 0.5f, transform.position.z);
+		float width = right - left;
+
+		// If it's too wide
+		if (width > camera.aspect * height)
+		{
+			height = width / camera.aspect;
+			top = bottom + height;
+			if (top > maximumY)
+			{
+				top = maximumY;
+				height = top - bottom;
+				width = height * camera.aspect;
+				right = left + width;
+			}
+
+			Debug.DrawLine(new Vector2(left, bottom), new Vector2(right, bottom), Color.red);
+			Debug.DrawLine(new Vector2(left, bottom), new Vector2(left, top), Color.red);
+			Debug.DrawLine(new Vector2(left, top), new Vector2(right, top), Color.red);
+			Debug.DrawLine(new Vector2(right, bottom), new Vector2(right, top), Color.red);
+		}
+		// If it's too tall
+		else
+		{
+			float idealWidth = width;
+			width = height * camera.aspect;
+			float widthReduction = idealWidth - width;
+			left += widthReduction * 0.5f;
+			right -= widthReduction * 0.5f;
+
+			Debug.DrawLine(new Vector2(left, bottom), new Vector2(right, bottom), Color.blue);
+			Debug.DrawLine(new Vector2(left, bottom), new Vector2(left, top), Color.blue);
+			Debug.DrawLine(new Vector2(left, top), new Vector2(right, top), Color.blue);
+			Debug.DrawLine(new Vector2(right, bottom), new Vector2(right, top), Color.blue);
+		}
+
+		width *= 0.5f;
+		height *= 0.5f;
+
+		Vector3 unclampedPosition = new Vector3((left + right) * 0.5f, (top + bottom) * 0.5f, transform.position.z);
 		unclampedPosition = Vector3.Lerp(transform.position, unclampedPosition, positionDamping * Time.deltaTime);
 
 		float nextSize = Mathf.Lerp(camera.orthographicSize, height, sizeDamping * Time.deltaTime);
