@@ -12836,7 +12836,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.928
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.26
+  m_Intensity: 0.4
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 1d02d9879ff0dfaffda04cc8bbeebfbf00000000f730bcf9f1eae330b5a1bc1e21259413
@@ -57044,6 +57044,10 @@ PrefabInstance:
       propertyPath: speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
+      propertyPath: distanceToPlayer
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 340309600778283776, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -60175,6 +60179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactPoint: {fileID: 1927646884}
   houseAnimator: {fileID: 7041291000055074754}
+  duration: 5
 --- !u!1001 &1768950954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71797,9 +71802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbf8e23c79e2ec4a931eb0ed0b91e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forest1: 1
+  forest1: 0
   wheat: 0
-  ocean: 0
+  ocean: 1
   forest2: 0
 --- !u!95 &1651863800525494590
 Animator:
@@ -72202,7 +72207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7835608336522308071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1039, y: -4, z: 0}
+  m_LocalPosition: {x: 1000, y: -4, z: 0}
   m_LocalScale: {x: 0.30000013, y: 0.30000013, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:

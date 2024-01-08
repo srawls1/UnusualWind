@@ -13,11 +13,8 @@ public class SeedHouseTrigger : MonoBehaviour
     private Animator mainAnimator;
     private Rigidbody2D rig;
     private bool isHouse = false;
-
-    private float velocityHolder;
-
-    // Swap the Animator on the GameObject
-
+    public static bool isHouseTriggered = false;
+    [SerializeField] private float duration = 5f;
 
     private void Start()
     {
@@ -37,11 +34,14 @@ public class SeedHouseTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (impactStartPoint != null)
+        if (isHouseTriggered)
         {
-            //Lower y position to impact point y position only using lerp
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, impactPoint.transform.position.y, transform.position.z), 0.5f * Time.deltaTime);
+            //Lower y position to impact point position only using movetowards
+            //transform.position = Vector3.Lerp(impactStartPoint.position, impactPoint.transform.position, time/duration);
+            //time += Time.deltaTime;
             
+            rig.velocity = new Vector2(0, 0);
+
             rig.isKinematic = true;
             GetComponent<Collider2D>().enabled = false;
 
@@ -65,14 +65,11 @@ public class SeedHouseTrigger : MonoBehaviour
 
     public void HouseStart()
     {
-        if (impactStartPoint == null)
-        {
-            impactStartPoint = transform;
-        }
-        velocityHolder = rig.velocity.magnitude;
+        isHouseTriggered = true;
 
-        //Turn off seed in wind script
         seedInWind.enabled = false;
+
+        StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -80,24 +77,34 @@ public class SeedHouseTrigger : MonoBehaviour
         //If collision is called house, call house function
         if (collider.gameObject.name == "HouseTrigger")
         {
-            Debug.Log("House Collision");
             HouseStart();
         }
     }
 
     void SwapAnimator()
     {
-
         //Turn off rotation controller script
         rotationController.enabled = false;
         transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        rig.velocity = new Vector2(0, 0);
 
         mainAnimator.enabled = false;
         isHouse = true;
         
         houseAnimator.SetActive(true);
         transform.parent = houseAnimator.transform;
+    }
+
+    IEnumerator LerpPosition(Vector3 targetPosition, float duration)
+    {
+        float time = 0;
+        Vector3 startPosition = transform.position;
+
+        while (time < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
     }
 }

@@ -129,7 +129,7 @@ public class SeedInWind : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (state != SeedMovementState.Equilibrium)
+		if (state != SeedMovementState.Equilibrium && !SeedHouseTrigger.isHouseTriggered)
 		{
 			return;
 		}
