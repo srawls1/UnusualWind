@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine.Serialization;
 using UnityEngine;
-using Rewired;
-using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SeedInWind : MonoBehaviour
@@ -38,7 +36,6 @@ public class SeedInWind : MonoBehaviour
 	private float equilibriumSpringCoefficient;
 	private SeedMovementState state;
 
-	private Player player;
 	new private Rigidbody2D rigidbody;
 	private Coroutine currentDive;
 	private Animator seedAnimator;
@@ -47,6 +44,10 @@ public class SeedInWind : MonoBehaviour
 	private float m_horizontalSpeed;
 	private float reboundTopAltitude;
 	private float reboundDuration;
+
+	private bool anyKeyPreviouslyHeld;
+	private bool anyKeyHeld;
+	private bool anyKeyPressed;
 
 	private RotationController rotationController;
 
@@ -62,7 +63,6 @@ public class SeedInWind : MonoBehaviour
 	private void Awake()
 	{
 		seedAnimator = GetComponent<Animator>();
-		player = ReInput.players.GetPlayer(0);
 		rigidbody = GetComponent<Rigidbody2D>();
 		rotationController = GetComponent<RotationController>();
 		// ay = g
@@ -110,12 +110,13 @@ public class SeedInWind : MonoBehaviour
 
 	private void Update()
 	{
+		UpdateInput();
         if (rigidbody.velocity.x > normalVelocity)
         {
 			speedBoost.SetActive(true);
         } else { speedBoost.SetActive(false); }
         if (state != SeedMovementState.Diving
-			&& player.GetAnyButtonDown())
+			&& anyKeyPressed)
 		{
 			if (currentDive != null)
 			{
@@ -190,6 +191,14 @@ public class SeedInWind : MonoBehaviour
 		currentDive = StartCoroutine(DropRoutine(duration));
 	}
 
+	private void UpdateInput()
+	{
+		bool anyKeyCurrentlyPressed = Input.anyKey && !Input.GetButton("Pause");
+		anyKeyHeld = anyKeyCurrentlyPressed;
+		anyKeyPressed = anyKeyHeld && !anyKeyPreviouslyHeld;
+		anyKeyPreviouslyHeld = anyKeyHeld;
+	}
+
 	private IEnumerator DropRoutine(float duration)
 	{
 		state = SeedMovementState.Diving;
@@ -225,7 +234,7 @@ public class SeedInWind : MonoBehaviour
 		float fallStartAltitude = transform.position.y;
 		rigidbody.gravityScale = fallGravityScale;
 
-		while (player.GetButton("Fall"))
+		while (anyKeyHeld)
 		{
 			yield return null;
 		}

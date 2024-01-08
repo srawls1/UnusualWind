@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Rewired;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
@@ -27,19 +26,15 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private float menuTextAlphaTutorial = 1f;
 
 
-
+	private bool anyKeyPreviouslyHeld;
+	private bool anyKeyHeld;
+	private bool anyKeyReleased;
 	private bool previouslyUnderTime;
     private float timeHeld;
 
-    private Player player;
-
-	private void Awake()
-	{
-		player = ReInput.players.GetPlayer(0);
-	}
-
 	private void Update()
 	{
+		UpdateInput();
 		if (timeHeld >= timeToStart)
 		{
 			if (previouslyUnderTime)
@@ -48,20 +43,19 @@ public class StartMenu : MonoBehaviour
 				StartCoroutine(AdvanceText());
 			}
 
-			if (player.GetAnyButtonUp())
+			if (anyKeyReleased)
             {
                 StartCoroutine(DisableMenu());
             }
         }
 		previouslyUnderTime = timeHeld < timeToStart;
-		if (player.GetAnyButton())
+		if (anyKeyHeld)
 		{
 			timeHeld += Time.deltaTime;
 		}
 		else { timeHeld = 0; }
 
 		if (upDownCount > 0) {
-			Debug.Log("Following");
 			//Gradually move menu text to the player's position plus the offset
 			menuText.transform.position = Vector3.Lerp(menuText.transform.position, 
 				Camera.main.WorldToScreenPoint(seedRigidBody.gameObject.transform.position) + menuTextOffset, Time.deltaTime * 5);
@@ -71,6 +65,14 @@ public class StartMenu : MonoBehaviour
 			menuText.gameObject.SetActive(false);
 		}
     }
+
+	private void UpdateInput()
+	{
+		bool anyKeyCurrentlyPressed = Input.anyKey && !Input.GetButton("Pause");
+		anyKeyHeld = anyKeyCurrentlyPressed;
+		anyKeyReleased = !anyKeyHeld && anyKeyPreviouslyHeld;
+		anyKeyPreviouslyHeld = anyKeyHeld;
+	}
 
 	private IEnumerator AdvanceTitleText()
 	{

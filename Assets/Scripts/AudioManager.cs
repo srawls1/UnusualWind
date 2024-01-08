@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey && !rotationController.startScene)
+        if (Input.anyKey && !Input.GetButton("Pause") && !rotationController.startScene)
         {
             wind3.volume = Mathf.Lerp(wind3.volume, 1f, Time.deltaTime);
         }

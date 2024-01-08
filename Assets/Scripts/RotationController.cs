@@ -15,8 +15,12 @@ public class RotationController : MonoBehaviour
     private float diveRotation = 30f;
     private float rotationSpeed = 7f;
 
-    // Start is called before the first frame update
-    void Start()
+	private bool anyKeyPreviouslyHeld;
+	private bool anyKeyHeld;
+	private bool anyKeyReleased;
+
+	// Start is called before the first frame update
+	void Start()
     {
         animator = GetComponent<Animator>();
         cameraSize = Camera.main.orthographicSize;
@@ -26,13 +30,15 @@ public class RotationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startScene && timer > timeToStart && !Input.anyKey)
+        UpdateInput();
+
+        if (startScene && timer > timeToStart && anyKeyReleased)
         {
             animator.SetBool("Dive", false);
             animator.SetBool("Rise", true);
         }
         //If any button is pressed, rotate about the z-axis to -30 degrees
-        if (Input.anyKey)
+        if (anyKeyHeld)
         {
             if (startScene && timer > timeToStart)
             {
@@ -77,9 +83,17 @@ public class RotationController : MonoBehaviour
 				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.deltaTime * 2);
 			}
         }
-    }
+	}
 
-    private void RotateAroundPivotPoint()
+	private void UpdateInput()
+	{
+		bool anyKeyCurrentlyPressed = Input.anyKey && !Input.GetButton("Pause");
+		anyKeyHeld = anyKeyCurrentlyPressed;
+		anyKeyReleased = !anyKeyHeld && anyKeyPreviouslyHeld;
+		anyKeyPreviouslyHeld = anyKeyHeld;
+	}
+
+	private void RotateAroundPivotPoint()
     {
         //Rotate around pivot point
         //transform.rotation = Quaternion.Euler(0, 0, -timer * 10);

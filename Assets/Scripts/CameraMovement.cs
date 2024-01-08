@@ -68,7 +68,7 @@ public class CameraMovement : MonoBehaviour
 	{
 		float diff = followTarget.position.x - previousPosition;
 		float velocityLastFrame = diff / Time.deltaTime;
-		runningAverageVelocity *= previousFrameVelocities.Count;
+		runningAverageVelocity *= 50;
 		runningAverageVelocity += velocityLastFrame;
 		previousFrameVelocities.Enqueue(velocityLastFrame);
 
@@ -78,11 +78,11 @@ public class CameraMovement : MonoBehaviour
 			runningAverageVelocity -= dequeuedVelocity;
 		}
 
-		runningAverageVelocity /= previousFrameVelocities.Count;
+		runningAverageVelocity /= 50;
 		previousPosition = followTarget.position.x;
 
-		float velocityUsedForForecast = previousFrameVelocities.Count >= 50 ?
-			runningAverageVelocity : 0f;
+		float velocityUsedForForecast = //previousFrameVelocities.Count >= 50 ?
+			runningAverageVelocity /*: 0f*/;
 		Vector3 forecastedPosition = followTarget.position + Vector3.right * velocityUsedForForecast * lookaheadTime;
 		float rightEdgeForecast = followTarget.position.x + velocityUsedForForecast * rightEdgeMinLookaheadTime;
 
