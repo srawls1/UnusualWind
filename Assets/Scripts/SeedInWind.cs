@@ -29,6 +29,7 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float horizontalSpeedDecayRate = 2f;
 	[SerializeField] private float maxHorizontalSpeed = 15f;
 	[SerializeField] private float maxBosstedHorizontalSpeed = 25f;
+	[SerializeField] private float minimumReboundDistance = 5f;
 	[SerializeField] private GameObject speedBoost;
 
 	private float normalVelocity = 15f;
@@ -156,20 +157,16 @@ public class SeedInWind : MonoBehaviour
 
 	public void SpeedUp(float speedUpFactor)
 	{
-		if (state == SeedMovementState.Diving)
-		{
-			return;
-		}
-
 		horizontalSpeed *= speedUpFactor;
 
 		if (state == SeedMovementState.Rising)
 		{
+			Vector2 velocity = rigidbody.velocity;
 			rigidbody.velocity *= speedUpFactor;
 
 			float remainingRiseDistance = reboundTopAltitude - transform.position.y;
 			remainingRiseDistance *= speedUpFactor * speedUpFactor;
-			reboundTopAltitude += transform.position.y + remainingRiseDistance;
+			reboundTopAltitude = transform.position.y + remainingRiseDistance;
 			reboundTopAltitude = Mathf.Min(topAltitude, reboundTopAltitude);
 			reboundDuration *= speedUpFactor;
 		}
@@ -203,6 +200,10 @@ public class SeedInWind : MonoBehaviour
 		rigidbody.gravityScale = fallGravityScale;
 		yield return new WaitForSeconds(duration);
 
+		Vector2 vel = rigidbody.velocity;
+		vel.y = 0f;
+		rigidbody.velocity = vel;
+
 		IEnumerator returnToEquilibriumEnumerator = ReturnToEquilibriumRoutine();
 		while (returnToEquilibriumEnumerator.MoveNext())
 		{
@@ -232,20 +233,18 @@ public class SeedInWind : MonoBehaviour
 		yield return new WaitForFixedUpdate();
 
 		float distanceFallen = fallStartAltitude - transform.position.y;
-		if (distanceFallen > 0)
+		float reboundDistance = fullReboundDistanceMultiplier * distanceFallen;
+		reboundDistance = Mathf.Max(reboundDistance, minimumReboundDistance);
+		reboundTopAltitude = Mathf.Min(topAltitude, transform.position.y + reboundDistance);
+		reboundDistance = reboundTopAltitude - transform.position.y;
+		reboundDuration = Mathf.Sqrt(reboundDistance / fullReboundDistance) * fullReboundDuration;
+		IEnumerator reboundEnumerator = ReboundRoutine();
+		
+		while (reboundEnumerator.MoveNext())
 		{
-			// d / t = df / tf
-			// d * tf = t * df
-			// t = d * tf / df
-			reboundDuration = Mathf.Sqrt(distanceFallen / fullReboundDistance) * fullReboundDuration;
-			float reboundDistance = fullReboundDistanceMultiplier * distanceFallen;
-			reboundTopAltitude = Mathf.Min(topAltitude, transform.position.y + reboundDistance);
-			IEnumerator reboundEnumerator = ReboundRoutine();
-			while (reboundEnumerator.MoveNext())
-			{
-				yield return reboundEnumerator.Current;
-			}
+			yield return reboundEnumerator.Current;
 		}
+
 
 		IEnumerator returnToEquilibriumEnumerator = ReturnToEquilibriumRoutine();
 		while (returnToEquilibriumEnumerator.MoveNext())
@@ -264,6 +263,9 @@ public class SeedInWind : MonoBehaviour
 		seedAnimator.SetBool("Normal", false);
 		seedAnimator.SetBool("Dive", false);
 
+		Vector2 vel = rigidbody.velocity;
+		vel.y = 0f;
+		rigidbody.velocity = vel;
 		rigidbody.gravityScale = 0f;
 
 		for (; reboundDuration > 0; reboundDuration -= Time.fixedDeltaTime)
@@ -293,6 +295,8 @@ public class SeedInWind : MonoBehaviour
 	private IEnumerator ReturnToEquilibriumRoutine()
 	{
 		state = SeedMovementState.FallingToEquilibrium;
+		rigidbody.gravityScale = 0f;
+
 		seedAnimator.SetBool("Normal", true);
 		seedAnimator.SetBool("Dive", false);
 		seedAnimator.SetBool("Rise", false);
@@ -303,10 +307,7 @@ public class SeedInWind : MonoBehaviour
 				equilibriumOscillationAmplitude);
 		float fallDistance = transform.position.y - dampDestination;
 		float maxFallDistance = topAltitude - dampDestination;
-		// dy/dt = v_avg
-		// v_avg = v_start / 2
-		// dy/dt = v_start / 2
-		// dt = 2dy / v_start
+		
 		float dampTime = Mathf.Sqrt(Mathf.Abs(fallDistance) / maxFallDistance) *
 			maxFallToEquilibriumDuration;
 		for (float dt = 0f; dt < dampTime; dt += Time.fixedDeltaTime)
@@ -317,8 +318,10 @@ public class SeedInWind : MonoBehaviour
 				dampDestination, ref velocity, dampTime - dt);
 			transform.position = new Vector3(transform.position.x, newPosition);
 			rigidbody.velocity = new Vector2(horizontalSpeed, velocity);
-			Debug.DrawLine(transform.position, new Vector3(transform.position.x, dampDestination));
+			Debug.DrawLine(transform.position, new Vector3(transform.position.x, dampDestination), Color.red);
 			yield return new WaitForFixedUpdate();
 		}
+
+		Debug.Log($"Finished return to equilibrium: y velocity={rigidbody.velocity.y}");
 	}
 }
