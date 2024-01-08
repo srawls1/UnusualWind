@@ -24,6 +24,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private Vector3 menuTextOffset = new Vector3(0, 0, 0);
 	[SerializeField] private float menuTextAlpha = 1f;
 	[SerializeField] private float menuTextAlphaTutorial = 1f;
+	[SerializeField] private float textAppearDelay = 1.5f;
 
 
 	private bool anyKeyPreviouslyHeld;
@@ -31,6 +32,13 @@ public class StartMenu : MonoBehaviour
 	private bool anyKeyReleased;
 	private bool previouslyUnderTime;
     private float timeHeld;
+
+	private IEnumerator Start()
+	{
+		menuText.color = new Color(1, 1, 1, 0);
+		yield return new WaitForSeconds(textAppearDelay);
+		yield return StartCoroutine(FadeInText());
+	}
 
 	private void Update()
 	{
