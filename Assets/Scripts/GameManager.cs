@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour
         }
         else if (!areaCheck.ocean && previouslyInOcean)
         {
-			seed.LongTermChangeSpeed(oceanMovementParameters.baseSpeed, oceanMovementParameters.maxSpeed,
-				oceanMovementParameters.maxBoostedSpeed, oceanMovementParameters.speedDecayRate);
+			seed.LongTermChangeSpeed(baseMovementParameters.baseSpeed, baseMovementParameters.maxSpeed,
+				baseMovementParameters.maxBoostedSpeed, baseMovementParameters.speedDecayRate);
 		}
 
         previouslyInOcean = areaCheck.ocean;
