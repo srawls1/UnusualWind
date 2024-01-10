@@ -8,11 +8,10 @@ public class SeedHouseTrigger : MonoBehaviour
     private SeedInWind seedInWind;
     private RotationController rotationController;
     private Transform impactStartPoint;
-    private float impactDistance = .2f;
+    [SerializeField] private float impactDistance = .1f;
     [SerializeField] private GameObject houseAnimator;
     private Animator mainAnimator;
     private Rigidbody2D rig;
-    private bool isHouse = false;
     public static bool isHouseTriggered = false;
     [SerializeField] private float duration = 5f;
 
@@ -32,33 +31,17 @@ public class SeedHouseTrigger : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isHouseTriggered)
-        {
-            //Lower y position to impact point position only using movetowards
-            //transform.position = Vector3.Lerp(impactStartPoint.position, impactPoint.transform.position, time/duration);
-            //time += Time.deltaTime;
-            
-            rig.velocity = new Vector2(0, 0);
-
+        {            
             rig.isKinematic = true;
             GetComponent<Collider2D>().enabled = false;
 
-            if (Vector3.Distance(transform.position, impactPoint.transform.position) < impactDistance * 4) {
-                mainAnimator.SetBool("Resting", true);
-            }
-
-            //If distance between impact point and seed is less than 0.1, call house function
+            //If distance between impact point and seed is less than 0.1
             if (Vector3.Distance(transform.position, impactPoint.transform.position) < impactDistance)
             {        
                 SwapAnimator();
-            }
-
-            if (isHouse)
-            {
-                transform.position = houseAnimator.transform.position;
-                transform.rotation = houseAnimator.transform.rotation;
             }
         }
     }
@@ -69,12 +52,14 @@ public class SeedHouseTrigger : MonoBehaviour
 
         seedInWind.enabled = false;
 
+        mainAnimator.SetBool("Resting", true);
+
         StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        //If collision is called house, call house function
+        //If collision is called house, call house functionz
         if (collider.gameObject.name == "HouseTrigger")
         {
             HouseStart();
@@ -88,10 +73,14 @@ public class SeedHouseTrigger : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
         mainAnimator.enabled = false;
-        isHouse = true;
         
         houseAnimator.SetActive(true);
         transform.parent = houseAnimator.transform;
+
+        transform.position = houseAnimator.transform.position;
+        transform.rotation = houseAnimator.transform.rotation;
+
+        gameObject.SetActive(false);
     }
 
     IEnumerator LerpPosition(Vector3 targetPosition, float duration)
@@ -101,7 +90,9 @@ public class SeedHouseTrigger : MonoBehaviour
 
         while (time < duration)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            Vector2 velocity = rig.velocity;
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, duration - time);
+            rig.velocity = velocity;
             time += Time.deltaTime;
             yield return null;
         }

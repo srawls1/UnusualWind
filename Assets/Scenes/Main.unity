@@ -56371,7 +56371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656472236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1208.1, y: 4.5902166, z: 0.20789337}
+  m_LocalPosition: {x: 1250, y: 4.5902166, z: 0.20789337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56391,7 +56391,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.1}
+  m_Offset: {x: 0, y: 2.1000023}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56402,7 +56402,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.43, y: 88.83}
+  m_Size: {x: 13.43, y: 212.12244}
   m_EdgeRadius: 0
 --- !u!1 &1659726787
 GameObject:
@@ -60358,6 +60358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactPoint: {fileID: 1927646884}
+  impactDistance: 0.2
   houseAnimator: {fileID: 7041291000055074754}
   duration: 5
 --- !u!1001 &1768950954
@@ -71984,8 +71985,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forest1: 0
   wheat: 0
-  ocean: 1
-  forest2: 0
+  ocean: 0
+  forest2: 1
 --- !u!95 &1651863800525494590
 Animator:
   serializedVersion: 5
