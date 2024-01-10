@@ -30144,8 +30144,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -105107209
-  m_SortingLayer: 3
+  m_SortingLayerID: -1077940549
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6b2d0b26ff06a4a429918bde40fb85f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -45288,8 +45288,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -105107209
-  m_SortingLayer: 3
+  m_SortingLayerID: -1077940549
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c1d627ea08f19ad4986d02322410a41f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -54630,6 +54630,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1034770801}
     m_Modifications:
+    - target: {fileID: 2183210996956222869, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5953612779220541888, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -54697,6 +54701,14 @@ PrefabInstance:
     - target: {fileID: 5953612779220541917, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
       propertyPath: m_Name
       value: Tree 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077850441259402038, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
+      propertyPath: layerName
+      value: Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077850441259402038, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
+      propertyPath: orderInLayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843a3442ba2127c4884c80d42760a432, type: 3}
@@ -72388,7 +72400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7835608336522308071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2069.6, y: -4.25, z: 0}
+  m_LocalPosition: {x: -1746.9, y: -4.25, z: 0}
   m_LocalScale: {x: 0.30000013, y: 0.30000013, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
