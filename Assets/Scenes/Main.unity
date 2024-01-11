@@ -72216,8 +72216,8 @@ MonoBehaviour:
   topAltitude: 25.54
   equilibriumOscillationPeriod: 3
   equilibriumOscillationAmplitude: 0.5
-  fallDuration: 1.2
-  fullReboundDuration: 2
+  fallDuration: 0.9
+  fullReboundDuration: 1.1
   fullReboundDistanceMultiplier: 2.1
   maxFallToEquilibriumDuration: 3
   fullReboundSpeedBoost: 3
