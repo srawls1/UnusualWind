@@ -91,10 +91,14 @@ public class SeedHouseTrigger : MonoBehaviour
         while (time < duration)
         {
             Vector2 velocity = rig.velocity;
-            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, duration - time);
+            float yVel = velocity.y;
+            float finalYPos = targetPosition.y;
+            float finalXPos = targetPosition.x;
+            transform.position = new Vector2(Mathf.Lerp(startPosition.x, finalXPos, time/duration), Mathf.SmoothDamp(transform.position.y, finalYPos, ref yVel, duration - time));
+            velocity.y = yVel;
             rig.velocity = velocity;
             time += Time.deltaTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         transform.position = targetPosition;
     }
