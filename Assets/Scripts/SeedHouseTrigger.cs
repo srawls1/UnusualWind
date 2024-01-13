@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SeedHouseTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject impactPoint;
     private SeedInWind seedInWind;
     private RotationController rotationController;
-    private Transform impactStartPoint;
-    [SerializeField] private float impactDistance = .1f;
-    [SerializeField] private GameObject houseAnimator;
     private Animator mainAnimator;
     private Rigidbody2D rig;
-    public static bool isHouseTriggered = false;
     [SerializeField] private float duration = 5f;
+    [SerializeField] private PlayableDirector timelineController;
 
     private void Start()
     {
@@ -31,28 +29,14 @@ public class SeedHouseTrigger : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-        if (isHouseTriggered)
-        {            
-            rig.isKinematic = true;
-            GetComponent<Collider2D>().enabled = false;
-
-            //If distance between impact point and seed is less than 0.1
-            if (Vector3.Distance(transform.position, impactPoint.transform.position) < impactDistance)
-            {        
-                SwapAnimator();
-            }
-        }
-    }
-
     public void HouseStart()
     {
-        isHouseTriggered = true;
-
+        rotationController.enabled = false;
         seedInWind.enabled = false;
+		rig.isKinematic = true;
+		GetComponent<Collider2D>().enabled = false;
 
-        mainAnimator.SetBool("Resting", true);
+		mainAnimator.SetBool("Resting", true);
 
         StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
     }
@@ -64,23 +48,6 @@ public class SeedHouseTrigger : MonoBehaviour
         {
             HouseStart();
         }
-    }
-
-    void SwapAnimator()
-    {
-        //Turn off rotation controller script
-        rotationController.enabled = false;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        mainAnimator.enabled = false;
-        
-        houseAnimator.SetActive(true);
-        transform.parent = houseAnimator.transform;
-
-        transform.position = houseAnimator.transform.position;
-        transform.rotation = houseAnimator.transform.rotation;
-
-        gameObject.SetActive(false);
     }
 
     IEnumerator LerpPosition(Vector3 targetPosition, float duration)
@@ -101,5 +68,7 @@ public class SeedHouseTrigger : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         transform.position = targetPosition;
-    }
+
+		timelineController.Play();
+	}
 }

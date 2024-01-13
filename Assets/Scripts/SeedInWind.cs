@@ -335,6 +335,5 @@ public class SeedInWind : MonoBehaviour
 			yield return new WaitForFixedUpdate();
 		}
 
-		Debug.Log($"Finished return to equilibrium: y velocity={rigidbody.velocity.y}");
 	}
 }
