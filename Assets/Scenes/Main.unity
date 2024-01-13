@@ -72106,10 +72106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbf8e23c79e2ec4a931eb0ed0b91e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forest1: 0
+  forest1: 1
   wheat: 0
   ocean: 0
-  forest2: 1
+  forest2: 0
 --- !u!95 &1651863800525494590
 Animator:
   serializedVersion: 5
