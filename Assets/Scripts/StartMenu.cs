@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class StartMenu : MonoBehaviour
 {
@@ -156,11 +157,6 @@ public class StartMenu : MonoBehaviour
 
 	private IEnumerator DisableMenu()
 	{
-		float startingMinTopY = cameraMovement.currentTopY;
-		float endingMinTopY = cameraMovement.minTopY;
-		cameraMovement.minTopY = startingMinTopY;
-		cameraMovement.enabled = true;
-
 		timeToStart = timeToStartTutorial;
 		menuTextAlpha = menuTextAlphaTutorial;
 		menuTextAlphaTutorial -= .05f;
@@ -172,14 +168,11 @@ public class StartMenu : MonoBehaviour
 			seed.enabled = true;
 			upDownCount++;
 
-			for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
-			{
-				cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
-				yield return StartCoroutine(RevertText());
-			}
+			Coroutine expandCoroutine = cameraMovement.StartCoroutine(ExpandMinTopY());
+			Coroutine revertTextCoroutine = StartCoroutine(RevertText());
 
-			cameraMovement.minTopY = endingMinTopY;
-			yield return StartCoroutine(RevertText());
+			yield return expandCoroutine;
+			yield return revertTextCoroutine;
 		}
 		
 		if (upDownCount <= 5) {
@@ -190,6 +183,22 @@ public class StartMenu : MonoBehaviour
 		}
 		
 		upDownCount++;
+	}
+
+	private IEnumerator ExpandMinTopY()
+	{
+		float startingMinTopY = cameraMovement.currentTopY;
+		float endingMinTopY = cameraMovement.minTopY;
+		cameraMovement.minTopY = startingMinTopY;
+		cameraMovement.enabled = true;
+
+		for (float dt = 0f; dt < cameraExpansionTime; dt += Time.deltaTime)
+		{
+			cameraMovement.minTopY = Mathf.Lerp(startingMinTopY, endingMinTopY, dt / cameraExpansionTime);
+			yield return null;
+		}
+
+		cameraMovement.minTopY = endingMinTopY;
 	}
 
 	void CoroutineStopper() {
