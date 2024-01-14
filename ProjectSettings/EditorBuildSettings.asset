@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: d7f99c154736e8d42b85484848a49a0a
+  - enabled: 1
+    path: Assets/Scenes/SecondLoop.unity
+    guid: d1d09e5668dbd8e4f9abd6e04e373c2e
   m_configObjects: {}

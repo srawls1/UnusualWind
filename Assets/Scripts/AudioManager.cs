@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -10,7 +9,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource intro, layer1, layer2, layer3, layer4;
     [SerializeField] private AudioSource wind1, wind2, wind3;
     [SerializeField] private AudioSource oceanAudio, collectSfx, riseSfx;
+    [SerializeField] private float fadeOutDuration;
+
     private bool introCanPlay = false;
+    private bool shouldKeepPlaying = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,10 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!shouldKeepPlaying)
+        {
+            return;
+        }
         if (Input.anyKey && !Input.GetButton("Pause") && !rotationController.startScene)
         {
             wind3.volume = Mathf.Lerp(wind3.volume, 1f, Time.deltaTime);
@@ -49,7 +55,39 @@ public class AudioManager : MonoBehaviour
         } 
     }
 
-    private void MusicLoopCheck()
+    public void FadeOutMusic()
+    {
+        StartCoroutine(FadeOutVolume(intro));
+        StartCoroutine(FadeOutVolume(layer1));
+        StartCoroutine(FadeOutVolume(layer2));
+        StartCoroutine(FadeOutVolume(layer3));
+        StartCoroutine(FadeOutVolume(layer4));
+        StartCoroutine(FadeOutVolume(wind1));
+        StartCoroutine(FadeOutVolume(wind2));
+        StartCoroutine(FadeOutVolume(wind3));
+        shouldKeepPlaying = false;
+    }
+
+	private IEnumerator FadeOutVolume(AudioSource source)
+	{
+        if (!source.isPlaying)
+        {
+            yield break;
+        }
+
+        float startingVolume = source.volume;
+        float endingVolume = 0f;
+
+        for (float dt = 0f; dt < fadeOutDuration; dt += Time.deltaTime)
+        {
+            source.volume = Mathf.Lerp(startingVolume, endingVolume, dt / fadeOutDuration);
+        }
+
+        source.volume = 0f;
+        source.Stop();
+	}
+
+	private void MusicLoopCheck()
     {
         if (!introCanPlay)
         {

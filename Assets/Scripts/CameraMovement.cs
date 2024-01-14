@@ -23,6 +23,10 @@ public class CameraMovement : MonoBehaviour
 	private float previousPosition;
 	private float runningAverageVelocity;
 
+	private bool overrideSet;
+	private float overrideSize;
+	private Vector3 overridePosition;
+
 	public float minTopY
 	{
 		get { return m_minTopY; }
@@ -66,6 +70,14 @@ public class CameraMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (overrideSet)
+		{
+			camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, overrideSize, sizeDamping * Time.deltaTime);
+			transform.position = Vector3.Lerp(transform.position, overridePosition, positionDamping * Time.deltaTime);
+
+			return;
+		}
+
 		float diff = followTarget.position.x - previousPosition;
 		float velocityLastFrame = diff / Time.deltaTime;
 		runningAverageVelocity *= 50;
@@ -148,6 +160,13 @@ public class CameraMovement : MonoBehaviour
 		);
 
 		transform.position = nextPosition;
+	}
+
+	public void MatchOtherCamera(Camera otherCamera)
+	{
+		overrideSet = true;
+		overrideSize = otherCamera.orthographicSize;
+		overridePosition = otherCamera.transform.position;
 	}
 
 	private void OnDrawGizmosSelected()
