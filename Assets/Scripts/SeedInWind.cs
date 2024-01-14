@@ -30,6 +30,8 @@ public class SeedInWind : MonoBehaviour
 	[SerializeField] private float minimumReboundDistance = 5f;
 	[SerializeField] private GameObject speedBoost;
 
+	[SerializeField] private AudioManager audioManager;
+
 	private float normalVelocity = 15f;
 	private float fallGravityScale;
 	private float fullReboundDistance;
@@ -271,6 +273,8 @@ public class SeedInWind : MonoBehaviour
 		seedAnimator.SetBool("Rise", true);
 		seedAnimator.SetBool("Normal", false);
 		seedAnimator.SetBool("Dive", false);
+
+		audioManager.RiseSfx();
 
 		Vector2 vel = rigidbody.velocity;
 		vel.y = 0f;

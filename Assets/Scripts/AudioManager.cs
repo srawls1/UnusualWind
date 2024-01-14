@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AreaCheck areaCheck;
     [SerializeField] private AudioSource intro, layer1, layer2, layer3, layer4;
     [SerializeField] private AudioSource wind1, wind2, wind3;
-    [SerializeField] private AudioSource oceanAudio, collectSfx;
+    [SerializeField] private AudioSource oceanAudio, collectSfx, riseSfx;
     private bool introCanPlay = false;
 
     // Start is called before the first frame update
@@ -145,6 +145,15 @@ public class AudioManager : MonoBehaviour
         if (!collectSfx.isPlaying)
         {
             collectSfx.Play();
+        }
+    }
+
+    public void RiseSfx()
+    {
+        if (!riseSfx.isPlaying) {
+            //randomize pitch
+            riseSfx.pitch = Random.Range(0.8f, 1.2f);
+            riseSfx.Play();
         }
     }
 }
