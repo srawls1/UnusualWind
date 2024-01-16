@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class SeedHouseTrigger : MonoBehaviour
 {
@@ -11,9 +9,9 @@ public class SeedHouseTrigger : MonoBehaviour
     private Animator mainAnimator;
     private Rigidbody2D rig;
     [SerializeField] private float duration = 5f;
-    [SerializeField] private PlayableDirector timelineController;
+    [SerializeField] private GameObject houseAnimation;
 
-    private void Start()
+	private void Start()
     {
         seedInWind = GetComponent<SeedInWind>();
         if (seedInWind == null)
@@ -69,6 +67,9 @@ public class SeedHouseTrigger : MonoBehaviour
         }
         transform.position = targetPosition;
 
-		timelineController.Play();
+        houseAnimation.SetActive(true);
+        gameObject.SetActive(false);
+        transform.SetParent(houseAnimation.transform, false);
+        transform.localPosition = Vector3.zero;
 	}
 }

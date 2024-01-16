@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class AudioManager : MonoBehaviour
 {
@@ -62,11 +63,15 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeOutVolume(layer2));
         StartCoroutine(FadeOutVolume(layer3));
         StartCoroutine(FadeOutVolume(layer4));
-        StartCoroutine(FadeOutVolume(wind1));
-        StartCoroutine(FadeOutVolume(wind2));
-        StartCoroutine(FadeOutVolume(wind3));
         shouldKeepPlaying = false;
     }
+
+    public void FadeOutWind()
+    {
+		StartCoroutine(FadeOutVolume(wind1));
+		StartCoroutine(FadeOutVolume(wind2));
+		StartCoroutine(FadeOutVolume(wind3));
+	}
 
 	private IEnumerator FadeOutVolume(AudioSource source)
 	{
