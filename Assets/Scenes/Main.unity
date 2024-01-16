@@ -72691,7 +72691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad:
-    sceneAsset: {fileID: 102900000, guid: d1d09e5668dbd8e4f9abd6e04e373c2e, type: 3}
+    sceneAsset: {fileID: 102900000, guid: 31b14ad6cc0f96849a596b39571db437, type: 3}
     scenePath: Assets/Scenes/SecondLoop.unity
 --- !u!114 &7041291000055074758
 MonoBehaviour:

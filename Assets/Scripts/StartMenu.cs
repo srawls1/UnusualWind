@@ -139,7 +139,7 @@ public class StartMenu : MonoBehaviour
 	{
 		Color startTextColor = menuText.color;
 		Color endTextColor = startTextColor;
-		endTextColor.a = menuTextAlpha;
+		endTextColor.a = 1;
 
 		return FadeText(menuText, startTextColor, endTextColor);
 	}
