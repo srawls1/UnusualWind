@@ -2464,6 +2464,8 @@ GameObject:
   m_Component:
   - component: {fileID: 79859037}
   - component: {fileID: 79859036}
+  - component: {fileID: 79859038}
+  - component: {fileID: 79859039}
   m_Layer: 0
   m_Name: GroundCollider
   m_TagString: Untagged
@@ -2484,7 +2486,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -1075, y: -3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2495,7 +2497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4179.61, y: 1}
+  m_Size: {x: 2000, y: 7.27}
   m_EdgeRadius: 0
 --- !u!4 &79859037
 Transform:
@@ -2512,6 +2514,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &79859038
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79859035}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1957.1, y: -3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2000, y: 7.27}
+  m_EdgeRadius: 0
+--- !u!61 &79859039
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79859035}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -4.13}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2000, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &80039042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 441833626047348963, guid: 5fb65d55e4b3ca84eab9722a3890f4fc, type: 3}
@@ -6947,6 +7001,10 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
       objectReference: {fileID: 0}
@@ -9345,6 +9403,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
       propertyPath: distanceToPlayer
       value: 30
       objectReference: {fileID: 0}
@@ -11160,10 +11222,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 313781063}
-  - component: {fileID: 313781066}
   - component: {fileID: 313781065}
   - component: {fileID: 313781064}
   - component: {fileID: 313781067}
+  - component: {fileID: 313781068}
   m_Layer: 0
   m_Name: OceanHolder
   m_TagString: Untagged
@@ -11243,7 +11305,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7df08b5a68bb5e44fb94b1c51a37a2f3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.08
+  m_Volume: 0.25
   m_Pitch: 0.8
   Loop: 0
   Mute: 0
@@ -11340,19 +11402,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splashSound: {fileID: 313781064}
---- !u!65 &313781066
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313781062}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 687.75916, y: 5.2069674, z: 1}
-  m_Center: {x: 337.5286, y: -3.699228, z: 0}
 --- !u!114 &313781067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11367,8 +11416,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowDownFactor: 0.5
   destroyWaitTime: 0.5
-  sfx: []
+  sfx:
+  - {fileID: 313781064}
   constantSlow: 1
+--- !u!61 &313781068
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313781062}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 337.48355, y: -3.7464619}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 687.72394, y: 5.2639284}
+  m_EdgeRadius: 0
 --- !u!1001 &321806451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12578,6 +12654,10 @@ PrefabInstance:
       propertyPath: arcHeight
       value: 0.09
       objectReference: {fileID: 0}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
@@ -19778,6 +19858,10 @@ PrefabInstance:
       value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
       objectReference: {fileID: 0}
@@ -21994,6 +22078,10 @@ PrefabInstance:
       propertyPath: speed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 340309600778283776, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -22165,6 +22253,10 @@ PrefabInstance:
       propertyPath: speed
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
       propertyPath: distanceToPlayer
       value: 30
@@ -29083,6 +29175,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
       objectReference: {fileID: 0}
@@ -29722,6 +29818,10 @@ PrefabInstance:
       propertyPath: arcHeight
       value: 0.04
       objectReference: {fileID: 0}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
@@ -30653,6 +30753,10 @@ PrefabInstance:
       value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
       objectReference: {fileID: 0}
@@ -31336,7 +31440,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4fcd49511df78db4082c8c13b687e650, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5da373c969a8b1f469365c9a1f21a333, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -31432,7 +31536,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5f7c0c9b9dee6d64bb03bdb035946419, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2f8d967b0eb9caa43b80c949a961bc3a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -31528,7 +31632,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3f71cdbb865f1e141862daf4b0f11c59, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1bd454179a83600488a371addbef1a6d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -31624,7 +31728,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 24f55f30da724624dbb420682fd80c96, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 83f5d7a7bd9d14b47b70c81c87377715, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
@@ -31720,7 +31824,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 624d5012bebdf754eba32f23e17ffcfc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b83d8033b4a83e5489b29562abce2dc2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -32553,6 +32657,10 @@ PrefabInstance:
       propertyPath: arcHeight
       value: 0.09
       objectReference: {fileID: 0}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
@@ -33657,6 +33765,10 @@ PrefabInstance:
       propertyPath: arcHeight
       value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
@@ -36725,6 +36837,10 @@ PrefabInstance:
       propertyPath: speed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 1043372164690508766, guid: a8c2aa61940f67045acba40ef2f2d7fc, type: 3}
       propertyPath: distanceToPlayer
       value: 30
@@ -42726,9 +42842,33 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8300877344334227377, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 02776309c5bff924b9b8a3ec2eea86bc, type: 3}
+    - target: {fileID: 8300877344334227378, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d8e8e03ef6fa2c4fad30e5bab701efd, type: 3}
     - target: {fileID: 8300877344334227379, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
       propertyPath: m_Volume
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300877344334227379, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a53f0778ff483504cac6a33aa5c1c6b5, type: 3}
+    - target: {fileID: 8300877344334227380, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f9f1e9cf232673348bed98f7da150954, type: 3}
+    - target: {fileID: 8300877344334227381, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a5a6936e0b86a164387ca28175c628b4, type: 3}
+    - target: {fileID: 8300877344334227381, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
+      propertyPath: DopplerLevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8300877344334227382, guid: ea0c3a89efb068a4994b5c7aa605ec1f, type: 3}
       propertyPath: wind1
@@ -42833,7 +42973,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f8d4cefe66948f845ad0a0591a8e8265, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5e712b32cbfb24c46a52ea0d36d4e388, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -44035,6 +44175,10 @@ PrefabInstance:
       propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 340309600778283776, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -44218,6 +44362,10 @@ PrefabInstance:
       propertyPath: arcHeight
       value: 0.04
       objectReference: {fileID: 0}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
@@ -57341,6 +57489,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
       propertyPath: distanceToPlayer
       value: 50
       objectReference: {fileID: 0}
@@ -59335,6 +59487,10 @@ PrefabInstance:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -2409754164448585716, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: 340309600778283776, guid: 8707b32fc6eb2c84694e31be5ffa8a81, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -61519,6 +61675,10 @@ PrefabInstance:
       propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -4117472409655364743, guid: 2020bfbe86068034c89edfe74bac9cb8, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
     - target: {fileID: -4117472409655364743, guid: 2020bfbe86068034c89edfe74bac9cb8, type: 3}
       propertyPath: distanceToPlayer
       value: 50
@@ -66884,6 +67044,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4117472409655364743, guid: 2020bfbe86068034c89edfe74bac9cb8, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: -4117472409655364743, guid: 2020bfbe86068034c89edfe74bac9cb8, type: 3}
       propertyPath: distanceToPlayer
       value: 50
       objectReference: {fileID: 0}
@@ -70961,6 +71125,10 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1536542656}
+    - target: {fileID: 7456821505562409514, guid: 12ab932ec51cd294dad5b32b787149a1, type: 3}
       propertyPath: distanceToPlayer
       value: 10
       objectReference: {fileID: 0}
@@ -72616,7 +72784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7835608336522308071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2070, y: -4.25, z: 0}
+  m_LocalPosition: {x: 0, y: -4.25, z: 0}
   m_LocalScale: {x: 0.30000013, y: 0.30000013, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:

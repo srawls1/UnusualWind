@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AnimalMovement : MonoBehaviour
 {
+    [SerializeField] private Camera mainCamera;
+
+    [SerializeField] private float timer;
     public bool isFish; //If true, object will move in an arc
     public float arcHeight; //How high the arc is
     public float speed; //How fast the object moves
@@ -48,6 +51,18 @@ public class AnimalMovement : MonoBehaviour
         if (transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x < -passedAmount)
         {
             Destroy(gameObject);
+        }
+
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
+
+        if (movementSpeed == speed) {
+            if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height) {
+                timer += Time.deltaTime;
+
+                if (timer > 10f) {
+                    Destroy(gameObject);
+                }
+            } else { timer = 0f; }
         }
     }
 

@@ -8,16 +8,19 @@ public class OceanAudioCheck : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!splashSound.isPlaying)
-        {
-            splashSound.Play();
-        }
+        PlaySound();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        PlaySound();
+    }
+
+    private void PlaySound(){
         if (!splashSound.isPlaying)
         {
+            //randomize pitch
+            splashSound.pitch = Random.Range(0.8f, 1.2f);
             splashSound.Play();
         }
     }
