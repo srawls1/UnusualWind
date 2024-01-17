@@ -42870,7 +42870,7 @@ MonoBehaviour:
   titleLight: {fileID: 2083564591}
   textDisappearDuration: 0.5
   timeToStart: 2
-  timeToStartTutorial: 0.25
+  timeToStartTutorial: 0.15
   titleDisappearDuration: 1.5
   cameraExpansionTime: 1
   fart: 1
@@ -49892,7 +49892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -118}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1429963991 stripped

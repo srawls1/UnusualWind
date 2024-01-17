@@ -17,7 +17,7 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private Light2D titleLight;
 	[SerializeField] private float textDisappearDuration;
 	[SerializeField] private float timeToStart;
-	[SerializeField] private float timeToStartTutorial = .5f;
+	[SerializeField] private float timeToStartTutorial = .15f;
 	[SerializeField] private float titleDisappearDuration;
 	[SerializeField] private float cameraExpansionTime = 0.3f;
 	[SerializeField] private bool fart;
@@ -160,7 +160,7 @@ public class StartMenu : MonoBehaviour
 		timeToStart = timeToStartTutorial;
 		menuTextAlpha = menuTextAlphaTutorial;
 		menuTextAlphaTutorial -= .05f;
-		CoroutineStopper();
+		//CoroutineStopper();
 
 
 		if (upDownCount == 0) {
