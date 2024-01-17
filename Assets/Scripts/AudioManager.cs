@@ -86,6 +86,7 @@ public class AudioManager : MonoBehaviour
         for (float dt = 0f; dt < fadeOutDuration; dt += Time.deltaTime)
         {
             source.volume = Mathf.Lerp(startingVolume, endingVolume, dt / fadeOutDuration);
+            yield return null;
         }
 
         source.volume = 0f;
