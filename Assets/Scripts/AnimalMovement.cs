@@ -5,8 +5,9 @@ using UnityEngine;
 public class AnimalMovement : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-
+    [SerializeField] private GameObject player;
     [SerializeField] private float timer;
+    [SerializeField] private GameObject nextMarker;
     public bool isFish; //If true, object will move in an arc
     public float arcHeight; //How high the arc is
     public float speed; //How fast the object moves
@@ -32,27 +33,22 @@ public class AnimalMovement : MonoBehaviour
         }
 
         ActivateMovement();
-        CheckIfPassed();
+        CheckOnScreen();
+        SpeedSlowDown();
     }
 
     private void ActivateMovement()
     {
         //If player is within a certain distance of the object, activate the prefab
-        if (Mathf.Abs(transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x) < distanceToPlayer)
+        if (Mathf.Abs(transform.position.x - player.transform.position.x) < distanceToPlayer)
         {
             //Activate the speed
             movementSpeed = speed;
         }
     }
 
-    private void CheckIfPassed()
+    private void CheckOnScreen()
     {
-        //If the object has passed the player, destroy it
-        if (transform.position.x - GameObject.FindGameObjectWithTag("Player").transform.position.x < -passedAmount)
-        {
-            Destroy(gameObject);
-        }
-
         Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
 
         if (movementSpeed == speed) {
@@ -90,5 +86,21 @@ public class AnimalMovement : MonoBehaviour
 
         // Check if the object is outside the viewport (not on the screen)
         return viewportPoint.x > 1 || viewportPoint.x < 0 || viewportPoint.y > 1 || viewportPoint.y < 0;
+    }
+
+    void SpeedSlowDown()
+    {
+        //As object gets closer to marker, slow speed accordingly
+        if (nextMarker != null)
+        {
+            float distance = Vector3.Distance(transform.position, nextMarker.transform.position);
+            float distanceToSlow = 25f;
+            float slowAmount = 0.05f;
+
+            if (distance < distanceToSlow)
+            {
+                movementSpeed = speed * (distance / distanceToSlow) * slowAmount;
+            }
+        }
     }
 }
