@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: d7f99c154736e8d42b85484848a49a0a
   - enabled: 1
-    path: Assets/Scenes/SecondLoop.unity
+    path: 
     guid: d1d09e5668dbd8e4f9abd6e04e373c2e
+  - enabled: 1
+    path: Assets/Scenes/SecondLoop.unity
+    guid: 31b14ad6cc0f96849a596b39571db437
   m_configObjects: {}
