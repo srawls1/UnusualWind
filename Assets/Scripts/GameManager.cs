@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     //light color variables
     private Color sunriseEndColor = Color.white, sunsetEndColor = Color.red, moonEndColor = new Color(129f, 217f, 255f);
     private Color sunriseStartColor = Color.yellow, sunsetStartColor = Color.white, moonStartColor = Color.white;
-    public float sunsetColorSpeed = 10f, sunriseColorSpeed = .04f, moonColorSpeed = .03f;
+    //public float sunsetColorSpeed = 10f, sunriseColorSpeed = .04f, moonColorSpeed = .03f;
 
     //celestial position variables
     private float moonSpeed = 0.01f;
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         sunsetEndPosition = new Vector3(playerTransform.position.x, -15f, playerTransform.position.z);
         sunriseStartPosition = sunrise.position;
         sunriseMidpoint = new Vector3(playerTransform.position.x, -17f, playerTransform.position.z);
-        sunriseEndPosition = new Vector3(playerTransform.position.x, 16f, playerTransform.position.z);
+		sunriseEndPosition = new Vector3(playerTransform.position.x, 31.5f, playerTransform.position.z);
         moonStartPosition = moon.position;
         moonEndPosition = new Vector3(playerTransform.position.x, 12f, playerTransform.position.z);
     }
@@ -175,14 +175,14 @@ public class GameManager : MonoBehaviour
 
             sunrise.position = Vector3.Lerp(sunriseMidpoint, sunriseEndPosition, p);
 
-            //make sky gradually more white
-            sunriseLight.color = Color.Lerp(sunriseStartColor, sunriseEndColor, p);
+			//make sky gradually more white
+			sunriseLight.color = Color.Lerp(sunriseStartColor, sunriseEndColor, p);
             sunriseLight.intensity = Mathf.Lerp(sunriseMinIntensity, sunriseMaxIntensity, p);
 
             //raise global sky light intensity to .7f using lerp
-            //globalSkyLight.intensity = Mathf.Lerp(skyLightMidPoint, skyLightMaxIntensity, p);
+            globalSkyLight.intensity = Mathf.Lerp(skyLightMidPoint, skyLightMaxIntensity, p);
 
-            moon.position -= new Vector3(0, moonSpeed, 0);
+			moon.position -= new Vector3(0, moonSpeed, 0);
         }
     }
 
@@ -190,6 +190,6 @@ public class GameManager : MonoBehaviour
     {
         sunset.position = new Vector3(playerTransform.position.x - 5, sunset.position.y, sunset.position.z);
         moon.position = new Vector3(playerTransform.position.x - 1, moon.position.y, moon.position.z);
-        sunrise.position = new Vector3(playerTransform.position.x + 5, sunrise.position.y, sunrise.position.z);
+        sunrise.position = new Vector3(playerTransform.position.x - 5, sunrise.position.y, sunrise.position.z);
     }
 }
