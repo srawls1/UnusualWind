@@ -10,7 +10,8 @@ public class SeedHouseTrigger : MonoBehaviour
     private RotationController rotationController;
     private Animator mainAnimator;
     private Rigidbody2D rig;
-    [SerializeField] private float duration = 5f;
+    [SerializeField] private float duration;
+    [SerializeField] private AnimationCurve endPositionCurve;
     [SerializeField] private GameObject houseAnimation;
     [SerializeField] private Image[] letterboxes;
     [SerializeField] private float letterboxFadeDuration;
@@ -33,19 +34,12 @@ public class SeedHouseTrigger : MonoBehaviour
 
     public void HouseStart()
     {
-        rotationController.enabled = false;
-        seedInWind.enabled = false;
-		rig.isKinematic = true;
-		GetComponent<Collider2D>().enabled = false;
-
-		mainAnimator.SetBool("Resting", true);
-
         for (int i = 0; i < letterboxes.Length; i++)
         {
             StartCoroutine(FadeInLetterbox(letterboxes[i]));
 
 		}
-		StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
+		StartCoroutine(LerpPosition(impactPoint.transform.position));
     }
 
 	private IEnumerator FadeInLetterbox(Image letterbox)
@@ -72,23 +66,33 @@ public class SeedHouseTrigger : MonoBehaviour
         }
     }
 
-    IEnumerator LerpPosition(Vector3 targetPosition, float duration)
+    IEnumerator LerpPosition(Vector3 targetPosition)
     {
-        float time = 0;
-        Vector3 startPosition = transform.position;
+        float startTime = Time.time;
+        yield return seedInWind.ReturnToEquilibrium();
+        float equilibriumTime = Time.time;
+        float timePassed = equilibriumTime - startTime;
 
-        while (time < duration)
+		Vector3 startPosition = transform.position;
+        float remainingXDistance = targetPosition.x - startPosition.x;
+        float timeRemaining = remainingXDistance / rig.velocity.x * 0.75f;
+
+		rotationController.enabled = false;
+		seedInWind.enabled = false;
+		Vector2 velocity = rig.velocity;
+		rig.isKinematic = true;
+		GetComponent<Collider2D>().enabled = false;
+
+
+		for (float time = 0f; time < timeRemaining; time += Time.fixedDeltaTime)
         {
-            Vector2 velocity = rig.velocity;
-            float yVel = velocity.y;
-            float finalYPos = targetPosition.y;
-            float finalXPos = targetPosition.x;
-            transform.position = new Vector2(Mathf.Lerp(startPosition.x, finalXPos, time/duration), Mathf.SmoothDamp(transform.position.y, finalYPos, ref yVel, duration - time));
-            velocity.y = yVel;
-            rig.velocity = velocity;
-            time += Time.deltaTime;
+            //transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, timeRemaining - time);
+            float t = endPositionCurve.Evaluate(time / timeRemaining);
+            transform.position = Vector2.Lerp(startPosition, targetPosition, t);
             yield return new WaitForFixedUpdate();
         }
+
+		mainAnimator.SetBool("Resting", true);
         transform.position = targetPosition;
 
         houseAnimation.SetActive(true);

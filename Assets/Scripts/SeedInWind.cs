@@ -50,6 +50,7 @@ public class SeedInWind : MonoBehaviour
 	private bool anyKeyPreviouslyHeld;
 	private bool anyKeyHeld;
 	private bool anyKeyPressed;
+	private bool inputDisabled;
 
 	private RotationController rotationController;
 
@@ -193,8 +194,26 @@ public class SeedInWind : MonoBehaviour
 		currentDive = StartCoroutine(DropRoutine(duration));
 	}
 
+	public Coroutine ReturnToEquilibrium()
+	{
+		inputDisabled = true;
+		if (currentDive != null)
+		{
+			StopCoroutine(currentDive);
+		}
+
+		return currentDive = StartCoroutine(ReturnToEquilibriumRoutine());
+	}
+
 	private void UpdateInput()
 	{
+		if (inputDisabled)
+		{
+			anyKeyHeld = false;
+			anyKeyPressed = false;
+			anyKeyPreviouslyHeld = false;
+			return;
+		}
 		bool anyKeyCurrentlyPressed = Input.anyKey && !Input.GetButton("Pause");
 		anyKeyHeld = anyKeyCurrentlyPressed;
 		anyKeyPressed = anyKeyHeld && !anyKeyPreviouslyHeld;
