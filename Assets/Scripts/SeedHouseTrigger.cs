@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SeedHouseTrigger : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class SeedHouseTrigger : MonoBehaviour
     private Rigidbody2D rig;
     [SerializeField] private float duration = 5f;
     [SerializeField] private GameObject houseAnimation;
+    [SerializeField] private Image[] letterboxes;
+    [SerializeField] private float letterboxFadeDuration;
 
 	private void Start()
     {
@@ -36,10 +40,30 @@ public class SeedHouseTrigger : MonoBehaviour
 
 		mainAnimator.SetBool("Resting", true);
 
-        StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
+        for (int i = 0; i < letterboxes.Length; i++)
+        {
+            StartCoroutine(FadeInLetterbox(letterboxes[i]));
+
+		}
+		StartCoroutine(LerpPosition(impactPoint.transform.position, duration));
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+	private IEnumerator FadeInLetterbox(Image letterbox)
+	{
+        Color startColor = Color.clear;
+        Color endColor = Color.black;
+        letterbox.gameObject.SetActive(true);
+
+        for (float dt = 0f; dt < letterboxFadeDuration; dt += Time.deltaTime)
+        {
+            letterbox.color = Color.Lerp(startColor, endColor, dt / letterboxFadeDuration);
+            yield return null;
+        }
+
+        letterbox.color = endColor;
+	}
+
+	void OnTriggerEnter2D(Collider2D collider)
     {
         //If collision is called house, call house functionz
         if (collider.gameObject.name == "HouseTrigger")
