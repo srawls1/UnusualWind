@@ -5,7 +5,6 @@ using TMPro;
 
 public class RotationController : MonoBehaviour
 {
-    public bool startScene = false;
     public float timeToStart = 2f;
     public float timer;
     [SerializeField] private Transform pivot;
@@ -18,6 +17,21 @@ public class RotationController : MonoBehaviour
 	private bool anyKeyPreviouslyHeld;
 	private bool anyKeyHeld;
 	private bool anyKeyReleased;
+
+    private bool m_startScene;
+    public bool startScene
+    {
+        get { return m_startScene; }
+        set
+        {
+            m_startScene = value;
+            if (value)
+            {
+				animator.SetBool("Resting", false);
+				animator.SetBool("Normal", true);
+			}
+        }
+    }
 
 	// Start is called before the first frame update
 	void Start()
@@ -61,8 +75,6 @@ public class RotationController : MonoBehaviour
             //If any key is held for 3 seconds, set startScene to true
             if (timer > timeToStart && !startScene)
             {
-                animator.SetBool("Resting", false);
-                animator.SetBool("Normal", true);
                 startScene = true;
             }
         }

@@ -36,9 +36,9 @@ public class SlowDownVolume : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (sfx == null)
-		{
-			return;
+        if (!enabled || sfx.Length == 0)
+        {
+            return;
         }
 
         //if (sfx[0].isPlaying), return (don't play sfx)
@@ -49,13 +49,10 @@ public class SlowDownVolume : MonoBehaviour
                 return;
             }
         }
-        
-        if (enabled)
-        {
-            //random range between length of sfx array
-            int randomSfx = Random.Range(0, sfx.Length - 1);
-            sfx[randomSfx].Play();
-        }
+
+        //random range between length of sfx array
+        int randomSfx = Random.Range(0, sfx.Length - 1);
+        sfx[randomSfx].Play();
     }
 
 	private IEnumerator destroyVolume(float destroyWaitTime)
