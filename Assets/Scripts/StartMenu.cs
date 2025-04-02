@@ -20,7 +20,6 @@ public class StartMenu : MonoBehaviour
 	[SerializeField] private float timeToStartTutorial = .15f;
 	[SerializeField] private float titleDisappearDuration;
 	[SerializeField] private float cameraExpansionTime = 0.3f;
-	[SerializeField] private bool fart;
 	[SerializeField] private int upDownCount = 0;
 	[SerializeField] private Vector3 menuTextOffset = new Vector3(0, 0, 0);
 	[SerializeField] private float menuTextAlpha = 1f;
